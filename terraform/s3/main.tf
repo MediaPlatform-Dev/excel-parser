@@ -1,16 +1,18 @@
 module "kms" {
-  source = "terraform-aws-kms"
+  source  = "app.terraform.io/thkim0022/kms/aws"
+  version = "1.0.3"
 
-  kms_deletion_window_in_days = var.kms_deletion_window_in_days
-  kms_alias_name              = var.s3_bucket_name
+  deletion_window_in_days = var.kms_deletion_window_in_days
+  alias_name              = var.s3_bucket_name
 
   tags = var.tags
 }
 
 module "s3" {
-  source = "terraform-aws-s3"
+  source  = "app.terraform.io/thkim0022/s3/aws"
+  version = "1.0.1"
 
-  s3_bucket_name = var.s3_bucket_name
+  bucket_name = var.s3_bucket_name
   kms_key_id     = module.kms.kms_key_id
   kms_alias_id   = module.kms.kms_alias_id
 
