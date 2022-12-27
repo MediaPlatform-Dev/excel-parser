@@ -14,7 +14,6 @@ module "s3" {
 
   bucket_name = var.s3_bucket_name
   kms_key_id     = module.kms.key_id
-  kms_alias_id   = module.kms.alias_id
 
   tags = var.tags
 }
