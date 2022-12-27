@@ -1,5 +1,5 @@
 # General
-region      = "ap-northeast-2"
+region = "ap-northeast-2"
 
 # kms
 kms_deletion_window_in_days = 7
