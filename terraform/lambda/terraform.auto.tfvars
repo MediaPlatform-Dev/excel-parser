@@ -1,5 +1,5 @@
 # General
-region      = "ap-northeast-2"
+region = "ap-northeast-2"
 
 # s3
 s3_bucket_name = "excel-parser"
