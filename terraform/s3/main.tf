@@ -13,8 +13,8 @@ module "s3" {
   version = "1.0.1"
 
   bucket_name = var.s3_bucket_name
-  kms_key_id     = module.kms.kms_key_id
-  kms_alias_id   = module.kms.kms_alias_id
+  kms_key_id     = module.kms.key_id
+  kms_alias_id   = module.kms.alias_id
 
   tags = var.tags
 }
