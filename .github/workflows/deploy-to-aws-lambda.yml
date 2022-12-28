@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: excel-to-mysql CI
+name: Deploy to AWS Lambda
 
 # Controls when the workflow will run
 on:
@@ -20,12 +20,19 @@ jobs:
     env:
       AWS_REGION: ap-northeast-2 # Seoul
 
+    # Skip running release workflow on forks
     if: github.repository_owner == 'thkim0022'
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout
         uses: actions/checkout@v3
+
+      # Set up Python 3.9
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
 
       # Configure AWS credentials
       - name: Configure AWS Credentials
@@ -50,7 +57,7 @@ jobs:
 
       # Deploy to AWS Lambda
       - name: Deploy to AWS Lambda
-        working-directory: ./${{ github.event.repository.name }}
+        working-directory: ./python/
         run: |
           aws lambda update-function-code \
           --function-name ${{ github.event.repository.name }} \
