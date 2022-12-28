@@ -47,10 +47,13 @@ jobs:
         working-directory: ./python/
         run: zip -rq ${{ github.event.repository.name }}.zip .
 
-      # Upload to S3 Bucket
-      - name: Upload to S3 Bucket
-        working-directory: ./python/
-        run: aws s3 cp ${{ github.event.repository.name }}.zip s3://${{ github.event.repository.name }}
+      # Deploy to AWS Lambda
+      - name: Deploy to AWS Lambda
+        working-directory: ./${{ github.event.repository.name }}
+        run: |
+          aws lambda update-function-code \
+          --function-name ${{ github.event.repository.name }} \
+          --zip-file fileb://${{ github.event.repository.name }}.zip
 
       # Remove a Zip File
       - name: Remove a Zip File
