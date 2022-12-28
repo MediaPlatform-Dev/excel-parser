@@ -1,15 +1,16 @@
-module "s3" {
-  source  = "./_module/s3"
+module "iam" {
+  source = "./_module/iam"
 
-  bucket_name = var.function_name
+  lambda_function_name = var.function_name
 
   tags = var.tags
 }
 
-module "iam" {
-  source = "./_module/iam"
+module "s3" {
+  source  = "./_module/s3"
 
-  function_name = var.function_name
+  bucket_name = var.function_name
+  lambda_function_arn = module.lambda.arn
 
   tags = var.tags
 }
@@ -21,6 +22,8 @@ module "lambda" {
   iam_role_arn = module.iam.arn
   handler = var.handler
   runtime = var.runtime
+  timeout = var.timeout
+  s3_bucket_arn = module.s3.arn
 
   tags = var.tags
 }

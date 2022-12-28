@@ -1,5 +1,5 @@
 resource "aws_iam_role" "this" {
-  name = "iam-role-${var.function_name}"
+  name = "iam-role-${var.lambda_function_name}"
 
   assume_role_policy = jsonencode(
     {
@@ -19,7 +19,7 @@ resource "aws_iam_role" "this" {
   tags = merge(
     var.tags,
     {
-      "Name": "iam-role-${var.function_name}",
+      "Name": "iam-role-${var.lambda_function_name}",
       "Type": "role"
     }
   )
