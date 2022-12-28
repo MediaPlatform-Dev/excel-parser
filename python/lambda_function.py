@@ -5,17 +5,21 @@ import boto3
 # Thirdparty Libraries
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'packages'))
 
-import pandas as pd
 
+class Excel:
+    def __init__(self, event):
+        self.bucket_name = event['Records'][0]['s3']['bucket']['name']
+        self.file_name = event['Records'][0]['s3']['object']['key']
 
-def parse_excel():
-    return ''
+    def get_s3_object(self):
+        return boto3.client('s3').get_object(self.bucket_name, self.file_name)
+
 
 def lambda_handler(event, _context):
-    parse_excel()
+    excel = Excel(event)
 
+    print(excel.bucket_name)
+    print(excel.file_name)
 
-if __name__ == '__main__':
-    event = ''
-    _context = ''
-    lambda_handler(event, _context)
+    data = excel.get_s3_object()
+    print(data)
