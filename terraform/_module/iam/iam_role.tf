@@ -24,3 +24,9 @@ resource "aws_iam_role" "this" {
     }
   )
 }
+
+resource "aws_iam_policy_attachment" "this" {
+  name       = "iam-policy-attachment-${data.aws_iam_policy.AWSLambdaBasicExecutionRole.name}"
+  roles      = [aws_iam_role.this.name]
+  policy_arn = data.aws_iam_policy.AWSLambdaBasicExecutionRole.arn
+}

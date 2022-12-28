@@ -27,3 +27,11 @@ module "lambda" {
 
   tags = var.tags
 }
+
+module "cloudwatch" {
+  source = "./_module/cloudwatch"
+
+  lambda_function_name = var.function_name
+
+  tags = var.tags
+}
