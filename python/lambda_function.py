@@ -15,12 +15,15 @@ def lambda_handler(event, _context):
     obj = boto3.client('s3').get_object(Bucket=bucket_name, Key=file_name)
     print(obj)
 
-    if obj['ContentType'] == 'text/csv':
-        df = pd.read_csv(obj['Body'])
+    try:
+        if obj['ContentType'] == 'text/csv':
+            df = pd.read_csv(obj['Body'])
+        elif obj['ContentType'] == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+            df = pd.read_excel(io.BytesIO(obj['Body'].read()))
+
         print(df.iloc[:5, :])
-    elif obj['ContentType'] == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-        df = pd.read_excel(io.BytesIO(obj['Body'].read()))
-        print(df.iloc[:5, :])
+    except Exception as e:
+        print(e)
 
     print('finish')
 
