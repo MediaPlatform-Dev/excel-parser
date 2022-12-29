@@ -1,11 +1,11 @@
 import os
 import sys
-import json
 import boto3
 
 # Thirdparty Libraries
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'packages'))
 
+import pandas as pd
 
 class Excel:
     def __init__(self, event):
@@ -23,4 +23,5 @@ def lambda_handler(event, _context):
     print(excel.file_name)
 
     data = excel.get_s3_object()
-    print(data)
+    df = pd.DataFrame(data)
+    print(df[:5, :])
