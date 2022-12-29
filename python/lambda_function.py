@@ -19,7 +19,7 @@ def lambda_handler(event, _context):
         df = pd.read_csv(obj['Body'])
         print(df.iloc[:5, :])
     elif obj['ContentType'] == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-        df = pd.read_excel(obj['Body'])
+        df = pd.read_excel(io.BytesIO(obj['Body'].read()))
         print(df.iloc[:5, :])
 
     print('finish')
