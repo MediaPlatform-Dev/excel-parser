@@ -13,7 +13,7 @@ class Excel:
         self.file_name = event['Records'][0]['s3']['object']['key']
 
     def get_s3_object(self):
-        return boto3.client('s3').get_object(Bucket=self.bucket_name, Key=self.file_name)['Body'].read().decode('utf-8')
+        return boto3.client('s3').get_object(Bucket=self.bucket_name, Key=self.file_name)
 
 
 def lambda_handler(event, _context):
@@ -22,9 +22,7 @@ def lambda_handler(event, _context):
     print(excel.bucket_name)
     print(excel.file_name)
 
-    data = excel.get_s3_object()
-    for line in data:
-        print(line)
-        print(list(line))
-        print(len(list(line)))
-        print('-' * 50)
+    obj = excel.get_s3_object()
+    df = pd.read_csv(obj['Body'])
+
+    print(df.iloc[:5, :])
