@@ -23,4 +23,8 @@ def lambda_handler(event, _context):
     print(excel.file_name)
 
     data = excel.get_s3_object()
-    print(len(list(data)))
+    for line in data:
+        print(line)
+        print(list(line))
+        print(len(list(line)))
+        print('-' * 50)
