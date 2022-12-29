@@ -1,5 +1,5 @@
 resource "aws_iam_role" "this" {
-  name = "iam-role-${var.lambda_function_name}"
+  name = var.name
 
   assume_role_policy = jsonencode(
     {
@@ -16,17 +16,13 @@ resource "aws_iam_role" "this" {
     }
   )
 
+  managed_policy_arns = var.policy_arns
+
   tags = merge(
     var.tags,
     {
-      "Name": "iam-role-${var.lambda_function_name}",
+      "Name": var.name,
       "Type": "role"
     }
   )
-}
-
-resource "aws_iam_policy_attachment" "this" {
-  name       = "iam-policy-attachment-${data.aws_iam_policy.AWSLambdaBasicExecutionRole.name}"
-  roles      = [aws_iam_role.this.name]
-  policy_arn = data.aws_iam_policy.AWSLambdaBasicExecutionRole.arn
 }
