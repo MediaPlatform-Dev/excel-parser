@@ -3,6 +3,7 @@ variable "region" {
   type        = string
 }
 
+variable "iam_policy" {}
 variable "function_name" {}
 variable "handler" {}
 variable "runtime" {}
