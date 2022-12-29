@@ -17,9 +17,10 @@ def lambda_handler(event, _context):
 
     if obj['ContentType'] == 'text/csv':
         df = pd.read_csv(obj['Body'])
+        print(df.iloc[:5, :])
     elif obj['ContentType'] == ('application/vnd.ms-excel' or 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'):
-        df = pd.read_excel(io.BytesIO(obj['Body'].read()), encoding='utf-8')
-    else:
-        df = None
+        df = pd.read_excel(obj['Body'])
+        print(df.iloc[:5, :])
 
-    print(df.iloc[:5, :])
+    print('finish')
+
