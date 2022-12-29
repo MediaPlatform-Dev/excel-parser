@@ -7,22 +7,15 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'packages'))
 
 import pandas as pd
 
-class Excel:
-    def __init__(self, event):
-        self.bucket_name = event['Records'][0]['s3']['bucket']['name']
-        self.file_name = event['Records'][0]['s3']['object']['key']
-
-    def get_s3_object(self):
-        return boto3.client('s3').get_object(Bucket=self.bucket_name, Key=self.file_name)
-
-
 def lambda_handler(event, _context):
-    excel = Excel(event)
+    bucket_name = event['Records'][0]['s3']['bucket']['name']
+    file_name = event['Records'][0]['s3']['object']['key']
 
-    print(excel.bucket_name)
-    print(excel.file_name)
+    obj = boto3.client('s3').get_object(Bucket=bucket_name, Key=file_name)
 
-    obj = excel.get_s3_object()
-    df = pd.read_csv(obj['Body'])
+    if obj['ContentType'] == 'text/csv':
+        df = pd.read_csv(obj['Body'])
+    else:
+        df = pd.read_excel(obj['Body'])
 
     print(df.iloc[:5, :])
