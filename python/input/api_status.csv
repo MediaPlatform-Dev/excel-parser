@@ -1,0 +1,1632 @@
+,LGU+ 미디어플랫폼 MSA전환 개발항목 검토,,,,,,,,, ,,,,,,, ,,,,,,,,,,,,,,,,,
+,구분,,,,대상구분,,,,,,,,,,,,,개발 정보,,,,,,,,,,,,,,,,
+,요구사항ID,상태,시스템,기능,세부반영구분,Phase 구분,오픈일정,재조정 0708,주차별 오픈일정,대메뉴,중메뉴,소메뉴,Domain,서비스/운영 구분,요구사항명,API,설명,CUD 여부,CUD 여부 검증,NAS 사용,실시간,캐시필요,개발 난이도,UI,통계,내부연동,외부연동,DB,캐시,배치,아이들나라 대상,"시험자동화
+대상",사용정보,비고
+,IMCS_IPTV_001,반영완료,IMCS,IPTV,,2차,2022-06-30,2차,,API,IPTV,편성,VodLookup,서비스,VOD 전체 카테고리 리스트와 카테고리에 포함된 모든 단편 컨텐츠 정보를 제공함,getI30List,"임대근
+푸시 기능 선 오픈 필요",R,전환완료,,,,상,,,,,,캐시,,,,"Home, 유플릭스",
+,IMCS_IPTV_002,제외,IMCS,IPTV,,2차,,,,API,IPTV,편성,VodLookup,서비스,전체 카테고리 리스트와 편성된 단편 컨텐츠 정보 제공 (CG백업용),getUXFullList,,R,,,,,상,,,,,,캐시,,,,Home,
+,IMCS_IPTV_003,반영완료,IMCS,IPTV,,2차,2022-06-30,2차,,API,IPTV,편성,VodLookup,서비스,UHD 전용 카테고리 편성 정보 제공 (HDR 전용관 서비스 추가),getUXUHDLists,윤용진,R,전환완료,,,,상,,,,,,캐시,,,,Home,
+,IMCS_IPTV_004,,IMCS,IPTV,,4차,2023-01-18,4차,2023-01-18,API,IPTV,편성,VodLookup,서비스,KIDS Home 정보 제공,getNXKidsHome,,R,,,,,중,,,,,,,,아이들나라,,아이들나라,
+,IMCS_IPTV_005,,IMCS,IPTV,,4차,2023-01-18,4차,2023-01-18,API,IPTV,편성,VodLookup,서비스,KIDS 서비스별 메뉴 정보 제공 및 키즈 전용 카테고리/컨텐츠 편성 정보 제공,getNXKidsMenu,,R,,,,,상,,,,,DB,캐시,,아이들나라,,아이들나라,
+,IMCS_IPTV_006,반영완료,IMCS,IPTV,1차,1차,2022-04-21,1차,,API,IPTV,컨텐츠,VodLookup,서비스,컨텐츠 상세 정보 가져오기,getNXContInfo,,R,전환완료,,,,상,,,,,,,,아이들나라,,"Home, 유플릭스, 아이들나라",
+,IMCS_IPTV_007,반영완료,IMCS,IPTV,1차,1차,2022-04-21,1차,,API,IPTV,컨텐츠,VodLookup,서비스,IPTV UX 개편 컨텐츠 추가 정보 제공 (홈화면 호출),getNXContSub,,R,전환완료,,,,하,,,,,,,,,,Home,
+,IMCS_IPTV_008,반영완료,IMCS,IPTV,1차,1차,2022-04-21,1차,,API,IPTV,컨텐츠,VodLookup,서비스,I30 시리즈 컨텐츠 전체 리스트 가져오기,getNXSeriesList,,R,전환완료,,,,상,,,,,,,,아이들나라,,"Home, 유플릭스, 아이들나라",
+,IMCS_IPTV_009,,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,상품,Product,서비스,컨텐츠 구매 정보 가져오기 (연동규격 작성중…),getNXContStat,,R,,,,,상,,,,,,,,아이들나라,,"Home, 유플릭스, 아이들나라",
+,IMCS_IPTV_010,,IMCS,IPTV,,4차,2023-02-15,4차,2023-02-15,API,IPTV,컨텐츠,Watching,서비스,아이들나라 앨범에 대한 가입자별 유/무료 정보 제공,getNXAlbumStat,,R,,,,,중,,,,,,,,아이들나라,,아이들나라,
+,IMCS_IPTV_011,반영완료,IMCS,IPTV,,2차,2022-05-24,2차,,API,IPTV,컨텐츠,VodLookup,서비스,앨범 인덱스 정보 제공,getNXAlbumIndex,윤용진,R,전환완료,,,,하,,,,,,,,,,Home,
+,IMCS_IPTV_012,반영완료,IMCS,IPTV,,4차,2022-10-26,3차,2022-10-2차,API,IPTV,편성,VodLookup,서비스,아이들나라 부가 상품 목록 및 정보 가져오기,getNXGoodsList,,R,전환완료,,,,중,,,,,,,,아이들나라,,아이들나라,
+,IMCS_IPTV_013,반영완료,IMCS,IPTV,,2차,2022-05-24,2차,,API,IPTV,상품,Product,서비스,앨범이 포함된 패키지 상품 리스트 및 패키지상품에 포함된 컨텐츠 정보 제공,getNXPPSList,김부연1,R,전환완료,,,,중,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_014,반영완료,IMCS,IPTV,,2차,2022-05-24,2차,,API,IPTV,상품,Product,서비스,앨범이 포함된 월정액 상품 리스트 및 상품에 포함된 인기 컨텐츠 정보 제공,getNXPPMList,김부연2,R,전환완료,,,,중,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_015,반영완료,IMCS,IPTV,,3차 → 2차,2022-06-30,2차,,API,IPTV,상품,Product,서비스,월정액 가입에 필요한 정보를 가져온다,getUXPPMInfo,이경재,R,전환완료,,,,중,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_016,,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,시청,Watching,서비스,VOD 시청 인증정보 및 시청 URL 정보 제공,authorizeUXView,,"CU,M,P",,,,,상,,,,,,,,아이들나라,,"Home, 유플릭스, 아이들나라",
+,IMCS_IPTV_017,,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,시청,Watching,서비스,SVOD 시청 인증정보 및 시청 URL 정보 제공,authorizeUXSView,,"CU,M,P",,,,,상,,,,,,,,아이들나라,,"Home, 유플릭스, 아이들나라",
+,IMCS_IPTV_018,,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,시청,Watching,서비스,본편 영상 미리보기용 시청 URL 정보 제공,authorizeNXPVew,,CU,,,,,중,,,,,,,,아이들나라,,아이들나라,
+,IMCS_IPTV_019,,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,시청,Watching,서비스,VOD 이어보기 및 시청정보 저장,setUXPassedTime,,"CU,M,P",,,,,상,,,,,,,,아이들나라,,"Home, 유플릭스, 아이들나라",
+,IMCS_IPTV_020,반영완료,IMCS,IPTV,,2차,2022-05-24,2차,,API,IPTV,시청,Watching,서비스,가입자별 VOD 재생을 위한 CDN PLAY IP 정보 제공,getNXVodPlayIP,권형도1,R,전환완료,,,,하,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_021,,IMCS,IPTV,,3차,2023-03-22,5차,2023-03-22,API,IPTV,시청,Watching,서비스,IPTV UX 개편 이후 신규 시청목록/이어보기 목록,getNXWatchList,,R,,,,,상,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_022,,IMCS,IPTV,3차,2차 → 3차,2023-03-29,5차,2023-03-29,API,IPTV,시청,Watching,서비스,시청목록에서 선택한 컨텐츠 삭제,rmUXWatchHist,임대근5,"U,M,P",,,,,하,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_023,,IMCS,IPTV,3차,2차 → 3차,2023-03-29,5차,2023-03-29,API,IPTV,시청,Watching,서비스,시청목록 전체 삭제,rmUXAllWatchHis,임대근6,"U,M,P",,,,,하,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_024,,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,구매,Pruchasing,서비스,VOD 구매전 오류 체크 (MIMS에서 호출) (유효성 검증),chkBuyUXPG,"구매처리 유효성 검증(결제, 할인)
+MIMS에서만 호출함.
+
+MIMS에서 결제 승인을못하기 때문에 
+구매사전에 
+결제, 할인이 가능한지 체크한다. ",R,,,,,중,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_025,,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,구매,Pruchasing,서비스,VOD 구매전 오류 체크 (DRM에서 호출),chkBuyUXConts,"DRM 복호화를 위해 
+시청권한을 정상적으로 가지고 있는 고객인지 여부 확인.",R,,,,,중,,,,,,,,아이들나라,,"Home, 유플릭스, 아이들나라",
+,IMCS_IPTV_026,,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,구매,Pruchasing,서비스,VOD 구매요청에 대해 인증을 수행하고 성공여부를 제공,buyUXContent,구매정보 저장,"CU,M,P",,,,,상,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_027,,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,구매,Pruchasing,서비스,VOD 구매요청에 대해 인증을 수행하고 성공여부를 제공 (쿠폰구매에만 사용),buyUXContsCp,구매정보 저장,"CU,M,P",,,,,상,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_028,,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,구매,Pruchasing,서비스,VOD 할인 수단 복합결제 구매,buyUXDMConts,"구매정보 저장(최근사용 권장)
+복합결제 지원","CU,M,P",,,,,상,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_029,,IMCS,IPTV,,3차,2023-03-22,5차,2023-03-22,API,IPTV,구매,Pruchasing,서비스,I30/키즈 구매 목록 가져오기,getI30Purchased,고객이 구매한 구매목록을 가져옴,R,,,,,상,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_030,,IMCS,IPTV,,3차,2023-03-22,5차,2023-03-22,API,IPTV,구매,Pruchasing,서비스,할인수단 복합결제 상세 정보 제공,getUXDMPurDtl,구매한 결제 및 할인 수단에 대하여 개별 상세 내역을 전달함. ,R,,,,,하,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_031,,IMCS,IPTV,,5차,2023-03-29,5차,2023-03-29,API,IPTV,구매,Pruchasing,서비스,구매 목록 삭제,rmNXPurchased,구매목록 삭제,"U,M,P",,,,,하,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_032,,IMCS,IPTV,,3차,2023-01-26,4차,2023-01-26,API,IPTV,상품,Product,서비스,가입자의 가입 상품 목록 제공,getUXProductList,,R,,,,,중,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_033,반영완료,IMCS,IPTV,,2차,2022-05-24,2차,,API,IPTV,상품,Subscriber,서비스,쿠폰 목록 조회,getUXCouponList,,R,전환완료,,,,하,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_034,,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,시청,Watching,서비스,엔스크린 VOD이어보기 정보 제공,getUXViewInfo,,R,,,,,중,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_035,반영완료,IMCS,IPTV,,4차,2022-12-12,4차,2022-11-30,API,IPTV,컨텐츠,VodLookup,서비스,"멀티앨범에 대한 이미지 및 I30 편성경로, 추가정보 제공 (I30 편성 기준)",getI30MapInfo,윤용진2 (1차 개발 완료 : 아이들나라 변경 건 적용 후 반영),R,,,,,하,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_036,반영완료,IMCS,IPTV,,2차,2022-05-25,2차,,API,IPTV,컨텐츠,VodLookup,서비스,왓차/씨네21 리뷰 제공,getUXContReview,차승민,R,전환완료,,,,하,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_037,,IMCS,IPTV,,4차,2023-02-15,4차,2023-02-15,API,IPTV,시청,Watching,서비스,아이들나라 시청관리 및 독서관리 정보 제공,getI30KidsWatch,,"R,M",,,,,하,,,,,,,,아이들나라,,아이들나라,
+,IMCS_IPTV_038,,IMCS,IPTV,,4차,2023-02-15,4차,2023-02-15,API,IPTV,시청,Watching,서비스,아이들나라 영어 학습 관리 정보 제공,getNXKidsEStudy,,"R,M",,,,,하,,,,,,,,아이들나라,,아이들나라,
+,IMCS_IPTV_039,,IMCS,IPTV,,4차,2023-03-08,4차,2023-03-08,API,IPTV,시청,Watching,서비스,특정 카테고리 내 마지막 시청한 앨범 ID,getNXLastWatch,,R,,,,,하,,,,,,,,아이들나라,,아이들나라,
+,IMCS_IPTV_040,반영완료,IMCS,IPTV,,4차,2022-10-05,3차,2022-10-1차,API,IPTV,컨텐츠,VodLookup,서비스,아이들나라 소리펜 nProj 파일 리스트 제공,getNXKidPenList,,R,전환완료,,,,하,,,,,,,,아이들나라,,아이들나라,
+,IMCS_IPTV_041,반영완료,IMCS,IPTV,,4차,2022-10-05,3차,2022-10-1차,API,IPTV,컨텐츠,VodLookup,서비스,아이들나라 소리펜 액션 정보 제공 (도서별),getNXKidPenBook,,R,전환완료,,,,하,,,,,,,,아이들나라,,아이들나라,
+,IMCS_IPTV_042,반영완료,IMCS,IPTV,,3차,2022-10-05,3차,2022-10-1차,API,IPTV,EPG,Product,서비스,실시간 채널 정보 제공,getI30UseChList,,R,전환완료,,,,하,,,,,,,,,,Home,
+,IMCS_IPTV_043,반영완료,IMCS,IPTV,,2차,2022-05-24,2차,,API,IPTV,컨텐츠,VodLookup,서비스,비슷한 영화(왓챠) 정보 제공,getUXSimilarList,이광재,R,전환완료,,,,하,,,,,,,,,,"Home, 유플릭스",
+,IMCS_IPTV_044,반영완료,IMCS,IPTV,,2차,2022-05-24,2차,,API,IPTV,컨텐츠,Watching,서비스,컨텐츠 시청정보 제공 (멀티앨범),getUXMultiConts,김도혜,R,전환완료,,,,하,,,,,,,,,,Home,
+,IMCS_IPTV_045,반영완료,IMCS,IPTV,,2차,2022-05-24,2차,,API,IPTV,컨텐츠,VodLookup,서비스,대기영상 정보 제공,getUXContVod,이정수1,R,전환완료,,,,하,,,,,,,,,,Home,
+,IMCS_IPTV_046,반영완료,IMCS,IPTV,,2차,2022-05-25,2차,,API,IPTV,컨텐츠,VodLookup,서비스,상위 전체 카테고리 리스트 가져오기 (광고노출용),getUXCatDepthIDs,이정수2,R,전환완료,,,,하,,,,,,,,,,Home,
+,IMCS_IPTV_047,반영완료,IMCS,IPTV,,2차,2022-05-24,2차,,API,IPTV,컨텐츠,VodLookup,서비스,Smart UX 리스트 업데이트 주기 제공,getUXPeriod,U+1,R,전환완료,,,,하,,,,,,,,,,Home,
+,IMCS_IPTV_048,반영완료,IMCS,IPTV,,2차,2022-05-25,2차,,API,IPTV,컨텐츠,VodLookup,서비스,단축 채널 번호 정보,getUXInfoByDCA,권형도2,R,전환완료,,,,하,,,,,,,,,,Home,
+,IMCS_IPTV_049,,IMCS,IPTV,,3차,2023-01-16,3차,2023-01-16,API,IPTV,컨텐츠,Product,서비스,미가입채널 업셀링 가입정보 제공,getUXUpsellingCH,,R,,,,,중,,,,,,,,,,Home,
+,IMCS_IPTV_050,제외,IMCS,IPTV,,2차,,,,API,IPTV,컨텐츠,,서비스,추천 VOD 목록 제공 (영화월정액 앱에서만 사용),getUXSuggestVOD,,R,,,,,하,,,,,,,,,,"Home, 유플릭스",
+,IMCS_IPTV_051,제외,IMCS,IPTV,,2차,,,,API,IPTV,컨텐츠,,서비스,I30 리스트 업데이트 주기 제공,getI30Period,,R,,,,,하,,,,,,,,,,Home,
+,IMCS_IPTV_052,반영완료,IMCS,IPTV,,2차,2022-05-24,2차,,API,IPTV,상품,Product,서비스,유플릭스 연관컨텐츠 목록 제공,getFXRelation,이광재,R,전환완료,,,,중,,,,,,,,,,유플릭스,
+,IMCS_IPTV_053,,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,상품,Product,서비스,"PC 유플릭스에서 구매를 하기 위해 컨텐츠 정보, 구매 정보, 상품 정보, 쿠폰정보를 제공",getFXContStat,,R,,,,,중,,,,,,,,,,유플릭스,
+,IMCS_IPTV_054,,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,상품,Product,서비스,"Smart UX UFLIX컨텐츠 정보, 구매 정보, 쿠폰 정보 제공",getUFContStat,,R,,,,,중,,,,,,,,,,유플릭스,
+,IMCS_IPTV_055,,IMCS,IPTV,,3차,2023-02-15,4차,2023-02-15,API,IPTV,상품,Product,서비스,유플릭스 요금제 가입정보 제공,getFXProdInfo,,R,,,,,하,,,,,,,,,,유플릭스,
+,IMCS_IPTV_056,,IMCS,IPTV,3차,2차 → 3차,2023-01-26,3차,2023-01-26,API,IPTV,컨텐츠,Subscriber,서비스,유플릭스 관심장르 리스트 제공,getFXFavorGenre,모바일과 같이 사용 모바일 전환시 같이 전환,R,,,,,하,,,,,,,,,,유플릭스,
+,IMCS_IPTV_057,,IMCS,IPTV,3차,2차 → 3차,2023-01-26,3차,2023-01-26,API,IPTV,컨텐츠,Subscriber,서비스,유플릭스 관심장르 설정,setFXFavorGenre,모바일과 같이 사용 모바일 전환시 같이 전환,CU,,,,,하,,,,,,,,,,유플릭스,
+,IMCS_IPTV_058,,IMCS,IPTV,,3차,2023-03-22,5차,2023-03-22,API,IPTV,시청,Watching,서비스,유플릭스 시청목록 제공,getFXReposited,,R,,,,,상,,,,,,,,,,유플릭스,
+,IMCS_IPTV_059,,IMCS,IPTV,3차,2차 → 3차,2023-03-29,5차,2023-03-29,API,IPTV,시청,Watching,서비스,유플릭스 시청목록에서 선택한 앨범 삭제,rmFXWatchHis,임대근3,"U,M,P",,,,,하,,,,,,,,,,유플릭스,
+,IMCS_IPTV_060,,IMCS,IPTV,3차,2차 → 3차,2023-03-29,5차,2023-03-29,API,IPTV,시청,Watching,서비스,유플릭스 시청목록 전체 앨범 삭제,rmFXAllWatchHis,임대근4,"U,M,P",,,,,하,,,,,,,,,,유플릭스,
+,IMCS_IPTV_061,,IMCS,IPTV,,3차,2023-01-26,4차,2023-01-26,API,IPTV,시청,Watching,서비스,월정액 청약철회시 해지 문구 제공,chkSubProdInfo,시청이력 기반의 상품 해지 정보 제공,R,,,,,하,,,,,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_062,,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,구매,Product,서비스,구매한도액 및 잔액 정보 제공,chkLimitAmountC,"구매 한도액을 확인하는 기능
+유큐브 인터페이스를 통해 한도액을 가져옴. 
+(구매한도액은 고객센터를 통해서 등록)",R,,,,,상,,,,유큐브,,,,아이들나라,,"Home, 아이들나라",
+,IMCS_IPTV_063,반영완료,IMCS,IPTV,,2차 → 3차,2022-10-05,3차,2022-10-1차,API,IPTV,컨텐츠,VodLookup,서비스,IMDb 인물 및 출연작 정보 제공,getNXIMDbList,,R,전환완료,,,,하,,,,,,,,,,Home,
+,IMCS_IPTV_064,반영완료,IMCS,IPTV,,2차,2022-06-30,2차,,API,IPTV,컨텐츠,VodLookup,서비스,가나다 검색,searchByUXList,,R,전환완료,,,,상,,,,,,,,,,Home,
+,IMCS_IPTV_065,,IMCS,IPTV,,3차,2023-03-22,5차,2023-03-22,API,IPTV,컨텐츠,Subscriber,서비스,긴급 공지,getCenterStatus,,R,,,,,하,,,,,,,,,,Home,
+,IMCS_IPTV_066,"제외→개발
+반영완료",IMCS,IPTV,,,2022-10-26,3차,2022-10-2차,API,IPTV,,VodLookup,서비스,전체 카테고리 리스트와 편성된 단편 컨텐츠 정보 제공,getUXLists,페이드아웃 대상 (TVG(I20) 임시사용),R,전환완료,,,,,,,,,,,,,,,
+,IMCS_IPTV_067,제외,IMCS,IPTV,,,,,,API,IPTV,,,서비스,전체 카테고리 리스트 제공 (카테고리만),getUXMenuList,페이드아웃 대상 (TVG(I20) 임시사용),,,,,,,,,,,,,,,,,
+,IMCS_IPTV_068,"제외→개발
+반영완료",IMCS,IPTV,,,2022-10-05,3차,2022-10-1차,API,IPTV,,VodLookup,서비스,특정 카테고리 내 컨텐츠 목록 제공 (단편 카테고리),getUXAlbumList,페이드아웃 대상 (TVG(I20) 임시사용),R,전환완료,,,,,,,,,,,,,,,
+,IMCS_IPTV_069,제외→개발,IMCS,IPTV,,,2023-03-08,4차,2023-03-08,API,IPTV,,VodLookup,서비스,KIDS Home 전용 카테고리 및 컨텐츠 정보 제공,getI30KidsList,페이드아웃 대상 (아이들나라 4.0 이후),,,,,,,,,,,,,,,,,
+,IMCS_IPTV_070,"제외→개발
+반영완료",IMCS,IPTV,,,2022-10-05,3차,2022-10-1차,API,IPTV,,VodLookup,서비스,하위 카테고리에 편성된 전체 컨텐츠 수 가져오기,getNXSubCount,페이드아웃 대상 (아이들나라 4.0 이후),R,전환완료,,,,,,,,,,,,,,,
+,IMCS_IPTV_071,"제외→개발
+반영완료",IMCS,IPTV,,,2022-12-12,3차,2022-11-30,API,IPTV,,VodLookup,서비스,Smart UX/NEXTUI 컨텐트 상세 정보 가져오기,getUXContDtl,페이드아웃 대상 (TVG(I20) 임시사용),R,,,,,,,,,,,,,,,,
+,IMCS_IPTV_072,"제외→개발
+반영완료",IMCS,IPTV,,,2022-10-05,3차,2022-10-1차,API,IPTV,,VodLookup,서비스,상세 줄거리/예고편/스틸이미지 제공,getUXMoreInfo,페이드아웃 대상 (TVG(I20) 임시사용),R,전환완료,,,,,,,,,,,,,,,
+,IMCS_IPTV_073,"제외→개발
+반영완료",IMCS,IPTV,,,2022-10-26,3차,2022-10-2차,API,IPTV,,VodLookup,서비스,I30 시리즈 컨텐츠 전체 리스트 가져오기,getI30ContList,페이드아웃 대상,R,전환완료,,,,,,,,,,,,,,,
+,IMCS_IPTV_074,"제외→개발
+반영완료",IMCS,IPTV,,,2022-10-26,3차,2022-10-2차,API,IPTV,,VodLookup,서비스,Smart UX 시리즈 컨텐츠 전체 리스트 가져오기,getUXContList,페이드아웃 대상 (TVG(I20) 임시사용),R,전환완료,,,,,,,,,,,,,,,
+,IMCS_IPTV_075,,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,상품,Product,서비스,Smart UX/NEXTUI 컨텐츠 타입 조회(쿠폰연동),getUXContStatCp,페이드아웃 대상 (TVG(I20) 임시사용),R,,,,,상,,,,,,,,,,,
+,IMCS_IPTV_076,제외→개발,IMCS,IPTV,,,2023-03-29,5차,2023-03-29,API,IPTV,,Product,서비스,Smart UX 컨텐츠 타입 조회,getUXContStat,페이드아웃 대상 (사용금지),,,,,,,,,,,,,,,,,
+,IMCS_IPTV_077,제외,IMCS,IPTV,,,,,,API,IPTV,,,서비스,패키지 상품에 포함된 컨텐츠의 상세 정보 제공,getI30PKGList,페이드아웃 대상,,,,,,,,,,,,,,,,,
+,IMCS_IPTV_078,제외,IMCS,IPTV,,,,,,API,IPTV,,,서비스,해달 앨범이 포함된 전체 PPS 목록 제공,getUXMultiPPS,페이드아웃 대상,,,,,,,,,,,,,,,,,
+,IMCS_IPTV_079,제외→개발,IMCS,IPTV,,,2023-03-22,5차,2023-03-22,API,IPTV,,Watching,서비스,I30/키즈 시청 목록 가져오기,getI30Reposited,페이드아웃 대상,,,,,,,,,,,,,,,,,
+,IMCS_IPTV_080,제외→개발,IMCS,IPTV,,,2023-03-22,5차,2023-03-22,API,IPTV,,Watching,서비스,STB 시청 목록 가져오기,getUXReposited,페이드아웃 대상 (TVG(I20) 임시사용),,,,,,,,,,,,,,,,,
+,IMCS_IPTV_081,제외→개발,IMCS,IPTV,,,2023-03-22,5차,2023-03-22,API,IPTV,,Watching,서비스,Smart UX 시청 목록 제공,getUXWatchHis,페이드아웃 대상 (TVG(I20) 임시사용),,,,,,,,,,,,,,,,,
+,IMCS_IPTV_082,제외→개발,IMCS,IPTV,,,2023-03-22,5차,2023-03-22,API,IPTV,,Purchasing,서비스,Smart UX 구매 목록 가져오기,getUXPurchased,페이드아웃 대상 (TVG(I20) 임시사용),,,,,,,,,,,,,,,,,
+,IMCS_IPTV_083,제외,IMCS,IPTV,,,,,,API,IPTV,,,서비스,2NDTV 미가입채널 업셀링 가입정보 제공,get2ndUpsellCH,페이드아웃 대상 (미사용 : 2nd TV 서비스 종료),,,,,,,,,,,,,,,,,
+,IMCS_IPTV_084,제외,IMCS,IPTV,,,,,,API,IPTV,,,서비스,2NDTV 앨범 내 컨텐츠 리스트 제공,getUXContentID,페이드아웃 대상 (미사용 : 2nd TV 서비스 종료),,,,,,,,,,,,,,,,,
+,IMCS_IPTV_085,"제외→개발
+반영완료",IMCS,IPTV,,,2022-10-05,3차,2022-10-1차,API,IPTV,,Subscriber,서비스,평점 설정,setUXPoint,페이드아웃 대상 (미사용),R,전환완료,,,,,,,,,,,,,,,
+,IMCS_IPTV_086,제외(확인중),IMCS,IPTV,,,2023-03-08,TBD,2023-03-08,API,IPTV,,Subscriber,서비스,고객이 찜한 찜목록 정보 제공,getI30FavorList,페이드아웃 대상 (미사용 : MIMS 이관),,,,,,,,,,,,,,,,,
+,IMCS_IPTV_087,제외(확인중),IMCS,IPTV,,,2023-03-08,TBD,2023-03-08,API,IPTV,,Subscriber,서비스,Wish List 등록,addUXFavorite,페이드아웃 대상 (미사용 : MIMS 이관),,,,,,,,,,,,,,,,,
+,IMCS_IPTV_088,제외(확인중),IMCS,IPTV,,,2023-03-08,TBD,2023-03-08,API,IPTV,,Subscriber,서비스,Wish List 선택한 컨텐츠 삭제,removeUXFavor,페이드아웃 대상 (미사용 : MIMS 이관),,,,,,,,,,,,,,,,,
+,IMCS_IPTV_089,제외(확인중),IMCS,IPTV,,,2023-03-08,TBD,2023-03-08,API,IPTV,,Subscriber,서비스,유플릭스 찜목록 제공,getFXFavorList,페이드아웃 대상 (미사용 : MIMS 이관),,,,,,,,,,,,,,,,,
+,IMCS_IPTV_090,제외(확인중),IMCS,IPTV,,,2023-03-08,TBD,2023-03-08,API,IPTV,,Subscriber,서비스,유플릭스 찜목록 등록,addFXFavorite,페이드아웃 대상 (미사용 : MIMS 이관),,,,,,,,,,,,,,,,,
+,IMCS_IPTV_091,제외(확인중),IMCS,IPTV,,,2023-03-08,TBD,2023-03-08,API,IPTV,,Subscriber,서비스,유플릭스 찜목록에서 선택한 앨범 삭제,rmFXFavorite,페이드아웃 대상 (미사용 : MIMS 이관),,,,,,,,,,,,,,,,,
+,IMCS_IPTV_092,제외(확인중),IMCS,IPTV,,,2023-03-08,TBD,2023-03-08,API,IPTV,,Subscriber,서비스,유플릭스 찜목록 전체 앨범 삭제,rmFXAllFavor,페이드아웃 대상 (미사용 : MIMS 이관),,,,,,,,,,,,,,,,,
+,IMCS_IPTV_093,제외,IMCS,IPTV,,,,,,API,IPTV,,,서비스,특정 월정액 가입여부 확인,getUXSubscripti,페이드아웃 대상 (사용여부확인),,,,,,,,,,,,,,,,,
+,IMCS_IPTV_094,반영완료(추가),IMCS,IPTV,,2차,2022-05-24,2차,,API,IPTV,컨텐츠,VodLookup,서비스,실시간 시청 중 VOD 바로가기를 위한 컨텐츠 정보 제공,getNXChnlByVOD,,R,전환완료,,,,중,,,,,,,,,,Home,
+,IMCS_IPTV_095,"추가
+반영완료",IMCS,IPTV,,4차,2022-12-12,4차,2022-11-30,API,IPTV,아이들나라,VodLookup,서비스,아이들나라 흘려듣기 영상 전체 목록 제공,getNXKidsGuide,,R,,,,,중,,,,,,,,아이들나라,,아이들나라,
+,IMCS_IPTV_096,"추가
+반영완료",IMCS,IPTV,,4차,2022-12-12,4차,2022-11-30,API,IPTV,아이들나라,VodLookup,서비스,아이들나라 생생댄스 메뉴 및 컨텐츠 목록 제공,getNXKidsDance,,R,,,,,중,,,,,,,,아이들나라,,아이들나라,
+,IMCS_IPTV_097,"추가
+반영완료",IMCS,IPTV,,4차,2022-12-12,4차,2022-11-30,API,IPTV,아이들나라,VodLookup,서비스,아이들나라 컴패니언봇 목록 및 노출 정보 제공,getNXCombotList,,R,,,,,중,,,,,,,,아이들나라,,아이들나라,
+,IMCS_IPTV_098,"추가
+반영완료",IMCS,IPTV,,4차,2022-12-12,4차,2022-11-30,API,IPTV,아이들나라,VodLookup,서비스,아이들나라 전용 모아보기 채널 목록 제공,getNXKidCTVChnl,,R,,,,,하,,,,,,,,아이들나라,,아이들나라,
+,IMCS_IPTV_101,"SRM
+반영완료",IMCS,IPTV,,3차,2022-10-26,3차,2022-10-2차,API,IPTV,컨텐츠,VodLookup,서비스,OTT Aggregation 메뉴 정보 제공,getNXOTTMenu,,R,전환완료,,,,중,,,,,,,,,,Home,
+,IMCS_IPTV_102,SRM,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,상품 및 권한,Product,서비스,언택트 공연 상품 정보 제공 및 상품별 권한 정보 제공,getNXLiveStat,,R,,,,,상,,,,,,,,,,Home,
+,IMCS_IPTV_103,SRM,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,시청,Watching,서비스,언텍트 공연 실시간채널 시청이력 저장하기,setNXCHWatchTm,,"CU,M,P",,,,,하,,,,,,,,,,Home,
+,IMCS_IPTV_104,"SRM
+반영완료",IMCS,IPTV,,4차,2022-10-26,3차,2022-10-2차,API,IPTV,아이들나라,VodLookup,서비스,아이들나라 컨텐츠 상세 정보 가져오기,getNXKidsConts,,R,전환완료,,,,상,,,,,,,,아이들나라,,아이들나라,
+,IMCS_IPTV_105,"SRM
+반영완료",IMCS,IPTV,,4차,2022-10-26,3차,2022-10-2차,API,IPTV,아이들나라,VodLookup,서비스,아이들나라 시리즈 상세 정보 가져오기,getNXKidsSeries,,R,전환완료,,,,상,,,,,,,,아이들나라,,아이들나라,
+,IMCS_IPTV_106,SRM,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,시청,Watching,서비스,IPTV 시청권한 컨텐츠의 이어보기 시간 정보 제공 (모바일TV 호출),getNXLinkTime,구매연동 추가,R,,,,,,,,,,,,,,,,
+,IMCS_IPTV_107,SRM,IMCS,IPTV,,4차,2023-03-29,5차,2023-03-29,API,IPTV,아이들나라,Watching,서비스,아이들나라 시청인증 / 시청 URL 정보 제공 및 시청이력 저장 (구매형 컨텐츠),authorizKDNView,아이들나라 프로필 추가,"CU,M,P",,,,,,,,,,,,,,,,
+,IMCS_IPTV_108,SRM,IMCS,IPTV,,4차,2023-03-29,5차,2023-03-29,API,IPTV,아이들나라,Watching,서비스,아이들나라 시청인증 / 시청 URL 정보 제공 및 시청이력 저장 (가입형 컨텐츠),authorizKDSView,아이들나라 프로필 추가,"CU,M,P",,,,,,,,,,,,,,,,
+,IMCS_IPTV_109,SRM,IMCS,IPTV,,4차,2023-03-29,5차,2023-03-29,API,IPTV,아이들나라,Watching,서비스,아이들나라 프로필별 이어보기 시간 정보 저장,setKDPassedTime,아이들나라 프로필 추가,"CU,M,P",,,,,,,,,,,,,,,,
+,IMCS_IPTV_110,SRM,IMCS,IPTV,,4차,2023-03-29,5차,2023-03-29,API,IPTV,아이들나라,Watching,서비스,아이들나라 프로필별 시청이력 삭제,rmKDWatchHis,아이들나라 프로필 추가,"CU,M,P",,,,,,,,,,,,,,,,
+,IMCS_IPTV_111,SRM,IMCS,IPTV,,4차,2023-03-29,5차,2023-03-29,API,IPTV,아이들나라,Watching,서비스,아이들나라 프로필별 시청이력 전체 삭제,rmKDAllWatchHis,아이들나라 프로필 추가,"CU,M,P",,,,,,,,,,,,,,,,
+,IMCS_IPTV_112,SRM,IMCS,IPTV,,4차,2023-03-08,5차,,API,IPTV,아이들나라,Watching,서비스,아이들나라 프로필별 시청목록 제공,getKDWatchList,아이들나라 프로필 추가,R,,,,,,,,,,,,,,,,
+,IMCS_IPTV_113,SRM,IMCS,IPTV,,4차,2023-01-26,4차,2023-01-26,API,IPTV,컨텐츠,VodLookup,서비스,스스로해결가이드 메뉴 정보 제공,getNXGuideMenu,스스로해결가이드 추가,R,,,,,,,,,,,,,,,,
+,IMCS_IPTV_114,SRM,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,,Purchasing,서비스,언택트 공연 구매 취소,setNXCancelBuy,,"U,M,P",,,,,,,,,,,,,,,,
+,IMCS_IPTV_115,SRM,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,,Purchasing,서비스,언택트 공연 구매 취소 전 취소 가능 여부 확인,chkNXCancelBuy,,R,,,,,,,,,,,,,,,,
+,IMCS_IPTV_116,SRM,IMCS,IPTV,,3차,2023-03-29,5차,2023-03-29,API,IPTV,,Purchasing,서비스,DML 연동 API,DMLAPIIPTV,,CUD,,,,,,,,,,,,,,,,
+,IMCS_IPTV_117,SRM,IMCS,IPTV,,3차,2023-01-26,4차,2023-01-26,API,IPTV,,Watching,서비스,아이들나라 분석 데이터 정보 제공,getNXKDAnalysis,,"R,M",,,,,,,,,,,,,,,,
+,IMCS_IPTV_118,"SRM
+반영완료",IMCS,IPTV,,3차,2022-10-25,4차,2022-10-2차,API,IPTV,,VodLookup,서비스,키노라이츠 정보 제공,getNXKinolights,,CUD,전환완료,,,,,,,,,,,,,,,
+,IMCS_MOBILE_001,,IMCS,MOBILE,,4차,2023-01-18,4차,2023-01-18,API,모바일,EPG,Channel,서비스,"모바일TV 채널 리스트 제공 (실시간채널 + 가상채널, 공연앱인 경우 방송일정 포함)",getNSChList,,R,,,,,상,,,,,,캐시 + 캐시에이전트,,아이들나라,,"모바일, 프로야구, 골프, 아이돌라이브, 아이들나라, VR",
+,IMCS_MOBILE_002,,IMCS,MOBILE,,4차,2023-01-18,4차,2023-01-18,API,모바일,EPG,Channel,서비스,"모바일TV 실시간채널, 가상채널, 스케줄 정보 및 공연/방송 정보 제공",getNSChPGM,,R,,,,,상,,,,,,캐시 + 캐시에이전트,,아이들나라,,"모바일, 프로야구, 골프, 아이돌라이브, 아이들나라, VR",
+,IMCS_MOBILE_003,,IMCS,MOBILE,,4차,2023-01-18,4차,2023-01-18,API,모바일,EPG,Channel,서비스,실시간 인기채널 목록 / 전체 채널의 방영 중 또는 또는 실시간 인기채널 프로그램을 제공,getNSCHRank,,R,,,,,하,,,,,,,,,,모바일,
+,IMCS_MOBILE_004,,IMCS,MOBILE,,4차,2023-01-18,4차,2023-01-18,API,모바일,EPG,Channel,서비스,"방송중인 전체인기, 지상파, 케이블, 스포츠 인기채널등에 대한 시청률을 포함한 채널정보 제공",getNSCHRatings,,R,,,,,하,,,,,,,,,,모바일,
+,IMCS_MOBILE_005,,IMCS,MOBILE,,4차,2023-01-26,3차,2023-01-26,API,모바일,편성,VodLookup,서비스,비디오포털 카테고리 및 컨텐츠 편성 정보 제공,getNSMnuList,,"R,M",,,,,상,,,,,,캐시,,아이들나라,,"모바일, 프로야구, 골프, 아이돌라이브, 아이들나라, VR",
+,IMCS_MOBILE_006,,IMCS,MOBILE,,4차,2023-01-26,3차,2023-01-26,API,모바일,편성,VodLookup,서비스,클립 재생 화면,getNSMnuListDtl,,R,,,,,상,,,,,,캐시,,,,모바일,
+,IMCS_MOBILE_007,,IMCS,MOBILE,,4차,2023-01-18,3차,2023-01-18,API,모바일,컨텐츠,VodLookup,서비스,비디오포털 컨텐츠 상세 정보 제공,getNSContInfo,,R,,,,,상,,,,,,,,아이들나라,,"모바일, 프로야구, 골프, 아이돌라이브, 아이들나라, VR",
+,IMCS_MOBILE_008,,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,상품,Product,서비스,비디오포털 컨텐츠 구매 정보 제공,getNSContStat,,R,,,,,상,,,,,,,,아이들나라,,"모바일, 프로야구, 골프, 아이돌라이브, 아이들나라, VR",
+,IMCS_MOBILE_009,,IMCS,MOBILE,,4차,2023-01-18,3차,2023-01-18,API,모바일,컨텐츠,VodLookup,서비스,비디오포털 시리즈 카테고리 편성 정보 제공,getNSSeriesList,,R,,,,,상,,,,,,,,아이들나라,,"모바일, 프로야구, 골프, 아이돌라이브, 아이들나라, VR",
+,IMCS_MOBILE_010,,IMCS,MOBILE,,4차,2023-03-29,5차,2023-03-29,API,모바일,상품,Product,서비스,비디오포털 시리즈 카테고리내 구매 및 시청정보 제공,getNSSeriesStat,,R,,,,,중,,,,,,,,아이들나라,,"모바일, 아이들나라",
+,IMCS_MOBILE_011,,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,시청,Watching,서비스,PPV/FVOD 시청 인증 정보 및 파일 정보 제공,authorizeNView,,"CU,M,P",,,,,상,,,,,,,,아이들나라,,"모바일, 프로야구, 골프, 아이돌라이브, 아이들나라, VR",
+,IMCS_MOBILE_012,,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,시청,Watching,서비스,SVOD 시청 인증 정보 및 파일 정보 제공,authorizeNSView,,"CU,M,P",,,,,상,,,,,,,,아이들나라,,"모바일, 아이들나라",
+,IMCS_MOBILE_013,,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,시청,Watching,서비스,가상채널 VOD시청 인증 정보 및 파일 정보 제공,authorizeVView,,"CU,M,P",,,,,상,,,,,,,,아이들나라,,"모바일, 아이돌라이브, 아이들나라",
+,IMCS_MOBILE_014,,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,시청,Watching,서비스,예고편 및 미리보기 VOD시청 인증 정보 및 파일 정보 제공,authorizePView,,CU,,,,,하,,,,,,,,아이들나라,,"모바일, 아이들나라",
+,IMCS_MOBILE_015,,IMCS,MOBILE,,5차,2023-03-29,TBD,2023-03-29,API,모바일,컨텐츠,VodLookup,서비스,뮤직앱 공연 리스트 정보 제공,getNSMusicList,,R,,,,,하,,,,,,,,,,아이돌라이브,
+,IMCS_MOBILE_016,,IMCS,MOBILE,,5차,2023-03-29,TBD,2023-03-29,API,모바일,컨텐츠,VodLookup,서비스,뮤직앱 공연/방송 큐시트 정보 제공,getNSMusicCue,,R,,,,,중,,,,,,,,,,아이돌라이브,
+,IMCS_MOBILE_017,,IMCS,MOBILE,,5차,2023-03-22,5차,2023-03-22,API,모바일,시청,Watching,서비스,시청목록 가져오기,getNSWatchList,,R,,,,,상,,,,,,,,아이들나라,,"모바일, 프로야구, 골프, 아이돌라이브, 아이들나라, VR",
+,IMCS_MOBILE_018,,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,시청,Watching,서비스,이어보기 시간 설정,setNSPassedTime,,"CU,M,P",,,,,상,,,,,,,,아이들나라,,"모바일, 프로야구, 골프, 아이돌라이브, 아이들나라, VR",
+,IMCS_MOBILE_019,,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,시청,Watching,서비스,시청목록 삭제 (앨범ID 요청),rmNSWatchHis,,"U,M,P",,,,,하,,,,,,,,아이들나라,,"모바일, 프로야구, 골프, 아이돌라이브, 아이들나라, VR",
+,IMCS_MOBILE_020,,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,시청,Watching,서비스,시청목록 전체 삭제,rmNSAllWatchHis,,"U,M,P",,,,,하,,,,,,,,아이들나라,,"모바일, 프로야구, 골프, 아이돌라이브, 아이들나라, VR",
+,IMCS_MOBILE_021,,IMCS,MOBILE,,5차,2023-03-22,5차,2023-03-22,API,모바일,구매,Purchasing,서비스,구매목록 가져오기,getNSBuyList,,R,,,,,상,,,,,,,,아이들나라,,"모바일, 아이돌라이브 아이들나라, VR",
+,IMCS_MOBILE_022,,IMCS,MOBILE,,5차,2023-03-22,5차,2023-03-22,API,모바일,구매,Purchasing,서비스,할인수단 복합결제 상세 정보 가져오기,getNSDMPurDtl,,R,,,,,하,,,,,,,,아이들나라,,"모바일, 아이돌라이브 아이들나라, VR",
+,IMCS_MOBILE_023,,IMCS,MOBILE,,4차,2023-01-26,4차,2023-01-26,API,모바일,상품,Product,서비스,모바일 가입 상품 목록 조회,getNSProdinfo,,R,,,,,중,,,,,,,,아이들나라,,"모바일, 아이들나라",
+,IMCS_MOBILE_024,,IMCS,MOBILE,,4차,2023-01-18,3차,2023-01-18,API,모바일,시청,Watching,서비스,MIMS/WebUI 제공용 전체 노드 리스트,getNSNodeList,,R,,,,,상,,,,,,,,아이들나라,,"모바일, 아이들나라",
+,IMCS_MOBILE_025,,IMCS,MOBILE,,4차,2023-01-26,3차,2023-01-26,API,모바일,시청,Watching,서비스,모바일 실시간 채널 CDN Play IP 정보 전달,getNSChnlPlayIP,,R,,,,,하,,,,,,,,아이들나라,,"모바일, 프로야구, 골프, 아이돌라이브, 아이들나라, VR",
+,IMCS_MOBILE_026,,IMCS,MOBILE,,4차,2023-01-26,3차,2023-01-26,API,모바일,시청,Watching,서비스,모바일 VOD CDN Play IP 정보 전달,getNSVodPlayIP,,R,,,,,하,,,,,,,,아이들나라,,"모바일, 프로야구, 골프, 아이돌라이브, 아이들나라, VR",
+,IMCS_MOBILE_027,,IMCS,MOBILE,,4차,2023-01-16,3차,2023-01-16,API,모바일,컨텐츠,VodLookup,서비스,왓챠 댓글 정보 제공,getNSContReview,,R,,,,,중,,,,,,,,아이들나라,,"모바일,아이들나라",
+,IMCS_MOBILE_028,,IMCS,MOBILE,,4차,2023-01-16,3차,2023-01-16,API,모바일,개인정보,Subscriber,서비스,검수 사용자 여부 전달,getNSCustInfo,,R,,,,,하,,,,,,,,,,모바일,
+,IMCS_MOBILE_029,,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,구매,Purchasing,서비스,모바일TV VOD 구매 (청구서결제),buyNSConts,,"CU,M,P",,,,,중,,,,,,,,아이들나라,,"모바일, 아이돌라이브, 아이들나라, VR",
+,IMCS_MOBILE_030,,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,구매,Purchasing,서비스,모바일TV VOD 할인 수단 복합결제 구매,buyNSDMConts,,"CU,M,P",,,,,상,,,,,,,,아이들나라,,"모바일, 아이돌라이브, 아이들나라, VR",
+,IMCS_MOBILE_031,,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,구매,Purchasing,서비스,모바일TV VOD 구매전 오류체크,chkBuyNSPG,,R,,,,,중,,,,,,,,아이들나라,,"모바일, 아이돌라이브, 아이들나라, VR",
+,IMCS_MOBILE_032,,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,구매,Purchasing,서비스,컨텐츠의 적법절차 구매여부 제공,chkBuyNSConts,,R,,,,,중,,,,,,,,아이들나라,,"모바일, 아이돌라이브, 아이들나라, VR",
+,IMCS_MOBILE_033,,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,구매,Purchasing,서비스,모바일TV VOD 구매 / 요금제를 구매한다.,buyNSProduct,,"CU,M,P",,,,,상,,,,,,,,아이들나라,,"모바일, 아이돌라이브, 아이들나라, VR",
+,IMCS_MOBILE_034,,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,시청,Watching,서비스,이어보기 연결 정보 확인,getNSViewInfo,,R,,,,,중,,,,,,,,아이들나라,,"모바일, 프로야구, 골프, 아이돌라이브, 아이들나라",
+,IMCS_MOBILE_035,,IMCS,MOBILE,,5차,2023-01-16,TBD,2023-01-16,API,모바일,컨텐츠,VodLookup,서비스,투표 연관 앨범 정보 제공,getNSVoteAlbum,,R,,,,,하,,,,,,,,,,아이돌라이브,
+,IMCS_MOBILE_036,,IMCS,MOBILE,,4차,2023-01-18,4차,2023-01-18,API,모바일,컨텐츠,VodLookup,서비스,KIDS 서비스별 메뉴 정보 제공 및 키즈 전용 카테고리/컨텐츠 편성 정보 제공,getNSKidsMenu,,R,,,,,상,,,,,DB,캐시,,아이들나라,,아이들나라,
+,IMCS_MOBILE_037,,IMCS,MOBILE,,4차,2023-01-18,4차,2023-01-18,API,모바일,컨텐츠,VodLookup,서비스,아이들나라 홈 정보 제공,getNSKidsHome,,R,,,,,중,,,,,,,,아이들나라,,아이들나라,
+,IMCS_MOBILE_038,,IMCS,MOBILE,,4차,2023-01-16,3차,2023-01-16,API,모바일,컨텐츠,VodLookup,서비스,아이들나라 부가 상품 목록 및 정보 가져오기,getNSGoodsList,,R,,,,,하,,,,,,,,아이들나라,,아이들나라,
+,IMCS_MOBILE_039,,IMCS,MOBILE,,4차,2023-01-16,4차,2023-01-16,API,모바일,컨텐츠,Watching,서비스,해당 카테고리 내 마지막 시청한 앨범정보 제공,getNSLastWatch,,R,,,,,하,,,,,,,,아이들나라,,아이들나라,
+,IMCS_MOBILE_040,,IMCS,MOBILE,,4차,2023-01-16,4차,2023-01-16,API,모바일,컨텐츠,VodLookup,서비스,독서코디 추천 앨범 ID에 해당하는 앨범 기본 정보 및 이미지 정보 제공,getNSMapInfo,,R,,,,,하,,,,,,,,아이들나라,,"모바일,아이들나라",
+,IMCS_MOBILE_041,,IMCS,MOBILE,,4차,2023-02-15,4차,2023-02-15,API,모바일,컨텐츠,Watching,서비스,아이들나라 앨범별 구매/가입/시청횟수 정보 제공,getNSAlbumStat,,"R,M",,,,,중,,,,,,,,아이들나라,,아이들나라,
+,IMCS_MOBILE_042,,IMCS,MOBILE,,4차,2023-02-15,4차,2023-02-15,API,모바일,시청,Watching,서비스,아이들나라 시청 및 독서 통계 정보 제공,getNSKidsWatch,,"R,M",,,,,하,,,,,,,,아이들나라,,아이들나라,
+,IMCS_MOBILE_043,,IMCS,MOBILE,,4차,2023-02-15,4차,2023-02-15,API,모바일,시청,Watching,서비스,아이들나라 영어학습 통계 정보 제공,getNSKidsEStudy,,"R,M",,,,,하,,,,,,,,아이들나라,,아이들나라,
+,IMCS_MOBILE_044,,IMCS,MOBILE,,5차,2023-03-29,TBD,2023-03-29,API,모바일,컨텐츠,VodLookup,서비스,아이돌라이브 속성그룹 리스트 정보 제공,getNSPropertyList,,R,,,,,중,,,,,,,,,,아이돌라이브,
+,IMCS_MOBILE_045,,IMCS,MOBILE,,5차,2023-02-15,4차,2023-02-15,API,모바일,컨텐츠,VodLookup,서비스,프로야구 인기 하이라이트 정보 제공,getNSHighLight,,R,,,,,상,,,,,,,,,,프로야구,
+,IMCS_MOBILE_046,,IMCS,MOBILE,,5차,2023-02-15,4차,2023-02-15,API,모바일,컨텐츠,VodLookup,서비스,추천VOD목록(Best VOD) / (Main 화면의 Best VOD),getNSVODRank,,R,,,,,하,,,,,,,,,,모바일,
+,IMCS_MOBILE_047,,IMCS,MOBILE,,4차,2023-03-08,,2023-03-08,API,모바일,컨텐츠,VodLookup,서비스,추천 VOD가져오기,getNSSuggestVod,,R,,,,,하,,,,,,,,,,모바일,
+,IMCS_MOBILE_048,,IMCS,MOBILE,,4차,2023-03-08,,2023-03-08,API,모바일,컨텐츠,VodLookup,서비스,유사한 영화 목록 제공,getNSSimilarList,,R,,,,,하,,,,,,,,,,모바일,
+,IMCS_MOBILE_049,,IMCS,MOBILE,,4차,2023-01-16,TBD,2023-01-16,API,모바일,컨텐츠,VodLookup,서비스,리스트 업데이트 주기 가져오기,getNSPeriod,,R,,,,,하,,,,,,,,,,모바일,
+,IMCS_MOBILE_050,,IMCS,MOBILE,,5차,2023-02-15,4차,2023-02-15,API,모바일,상품,Product,서비스,영화월정액 1개월 체험권 사용 전 상품 가입 가능 여부 체크 (MIMS에서 사용),chkSubscribeProd,,R,,,,,중,,,,,,,,,,모바일,
+,IMCS_MOBILE_051,제외,IMCS,MOBILE,,,,,,API,모바일,,,서비스,비디오포털 채널 리스트 제공 (사용금지),getNSVSI,페이드아웃 대상,,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_052,제외,IMCS,MOBILE,,,,,,API,모바일,,,서비스,"비디오포털 실시간채널, 가상채널 EPG 정보 제공 (사용금지)",getNSVPSI,페이드아웃 대상,,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_053,제외,IMCS,MOBILE,,,,,,API,모바일,,,서비스,비디오포털 카테고리 및 컨텐츠 편성 정보 제공 (사용금지),getNSList,페이드아웃 대상,,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_054,제외,IMCS,MOBILE,,,,,,API,모바일,,,서비스,비디오포털 컨텐츠 상세 정보 제공 (사용금지),getNSContDtl,페이드아웃 대상,,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_055,제외,IMCS,MOBILE,,,,,,API,모바일,,,서비스,비디오포털 시리즈 카테고리 편성 정보 제공 (사용금지),getNSPageList,페이드아웃 대상,,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_056,제외,IMCS,MOBILE,,,,,,API,모바일,,,서비스,비디오포털 시리즈 카테고리 편성 정보 제공 (사용금지),getNSContList,페이드아웃 대상,,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_057,제외,IMCS,MOBILE,,,,,,API,모바일,,,서비스,시청목록 가져오기 (사용금지),getNSReposited,페이드아웃 대상,,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_058,제외,IMCS,MOBILE,,,,,,API,모바일,,,서비스,구매목록 가져오기 (사용금지),getNSPurchased,페이드아웃 대상,,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_059,제외,IMCS,MOBILE,,,,,,API,모바일,,,서비스,아이들나라 서비스별 메뉴 정보 제공,getNSKidsList,페이드아웃 대상,,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_060,,IMCS,MOBILE,,,2023-01-16,3차,2023-01-16,API,모바일,,VodLookup,서비스,하위 카테고리에 편성된 전체 컨텐츠 수 가져오기,getNSSubCount,페이드아웃 대상,,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_061,제외,IMCS,MOBILE,,,,,,API,모바일,,,서비스,GUIDE VOD 정보 가져오기,getNSGuideVod,페이드아웃 대상,,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_062,제외,IMCS,MOBILE,,,,,,API,모바일,,,서비스,Nscreen 메인페이지 주요채널 목록 (사용금지),getNSCHLists,페이드아웃 대상 (미사용),,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_063,제외,IMCS,MOBILE,,,,,,API,모바일,,,서비스,리스트 업데이트 주기 가져오기 (사용금지),getNSVodInfo,페이드아웃 대상 (미사용),,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_064,제외,IMCS,MOBILE,,,,,,API,모바일,,,서비스,앨범들에 대한 총재생시간 정보와 가입자 시청여부 및 이어보기정보를 제공,getNSMultiConts,페이드아웃 대상 (미사용),,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_065,제외,IMCS,MOBILE,,,,,,API,모바일,,,서비스,컨텐츠에 대한 가입 여부/ 구매 여부 / 가격 정보/SVOD_Only 여부를 제공,getNSCatBillInfo,페이드아웃 대상 (미사용),,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_066,제외,IMCS,MOBILE,,,,,,API,모바일,,,서비스,콘텐츠에 대한 평점을 등록 (사용불가),setNSPoint,페이드아웃 대상 (미사용),,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_067,제외,IMCS,MOBILE,,,,,,API,모바일,,,서비스,채널목록 제공 (사용불가),getNSSI,페이드아웃 대상 (미사용),,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_068,제외,IMCS,MOBILE,,,,,,API,모바일,,,서비스,채널 EPG 정보 제공 (사용불가),getNSPSI,페이드아웃 대상 (미사용),,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_069,추가,IMCS,MOBILE,,4차,2023-01-16,4차,2023-01-16,API,모바일,상품,VodLookup,서비스,아이들나라 흘려듣기 영상 전체 목록 제공,getNSKidsGuide,,R,,,,,중,,,,,,,,아이들나라,,아이들나라,
+,IMCS_MOBILE_070,추가,IMCS,MOBILE,,4차,2023-01-16,4차,2023-01-16,API,모바일,상품,VodLookup,서비스,아이들나라 컴패니언봇 목록 및 노출 정보 제공,getNSCombotList,,R,,,,,중,,,,,,,,아이들나라,,아이들나라,
+,IMCS_MOBILE_101,SRM,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,상품,Product,서비스,언택트 공연 상품 정보 제공 및 상품별 권한 정보 제공,getNSLiveStat,,R,,,,,중,,,,,,,,,,"모바일, 아이돌라이브",
+,IMCS_MOBILE_102,SRM,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,상품,Watching,서비스,언텍트 공연 실시간채널 시청이력 저장하기,setNSCHWatchTime,,"CU,M,P",,,,,중,,,,,,,,,,"모바일, 아이돌라이브",
+,IMCS_MOBILE_103,SRM,IMCS,MOBILE,,5차,2023-03-22,5차,2023-03-22,API,모바일,상품,Watching,서비스,아이들나라 시청이력 정보 제공,getNSKidsWatchList,,R,,,,,중,,,,,,,,아이들나라,,아이들나라,
+,IMCS_MOBILE_104,SRM,IMCS,MOBILE,,4차,2023-01-26,3차,2023-01-26,API,모바일,상품,VodlLookup,서비스,아이돌라이브 컨텐츠별 배포 정보 가져오기,getNSAlbumDistr,,R,,,,,중,,,,,,,,,,아이돌라이브,
+,IMCS_MOBILE_105,SRM,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,상품,Purchasing,서비스,구매 취소전 체크 (MIMS 연동),chkNScancelBuyConts,,R,,,,,중,,,,,,,,,,"모바일, 아이돌라이브",
+,IMCS_MOBILE_106,SRM,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,상품,Purchasing,서비스,구매취소 정보 저장 (MIMS 연동),setNScancelBuyConts,,"U,M,P",,,,,중,,,,,,,,,,"모바일, 아이돌라이브",
+,IMCS_MOBILE_107,SRM,IMCS,MOBILE,,4차,2023-01-26,3차,2023-01-26,API,모바일,상품,VodLookup,서비스,아이들나라 컨텐츠 상세 정보 가져오기,getNSKidsConts,,R,,,,,중,,,,,,,,아이들나라,,아이들나라,
+,IMCS_MOBILE_108,SRM,IMCS,MOBILE,,4차,2023-01-26,3차,2023-01-26,API,모바일,상품,VodLookup,서비스,아이들나라 시리즈 상세 정보 가져오기,getNSKidsSeries,,R,,,,,중,,,,,,,,아이들나라,,아이들나라,
+,IMCS_MOBILE_110,SRM,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,상품,Watching,서비스,Seamless(IPTV) 권한으로 시청시 IPTV 이어보기 시간 정보 조회 API,getNSLinkTime,,R,,,,,,,,,,,,,아이들나라,,아이들나라,
+,IMCS_MOBILE_111,SRM,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,상품,Watching,서비스,아이들나라 프로필ID기준 시청 이력 저장 API,setNSKidsLinkTime,,R,,,,,,,,,,,,,아이들나라,,아이들나라,
+,IMCS_MOBILE_112,SRM,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,상품,Watching,서비스,PPV/FVOD 시청 인증 정보 및 파일 정보 제공,authorizeNSKidsNView,,R,,,,,,,,,,,,,아이들나라,,아이들나라,
+,IMCS_MOBILE_113,SRM,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,상품,Watching,서비스,SVOD 시청 인증 정보 및 파일 정보 제공,authorizeNSKidsSView,,R,,,,,,,,,,,,,아이들나라,,아이들나라,
+,IMCS_MOBILE_114,SRM,IMCS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,모바일,상품,Watching,서비스,이어보기 시간 설정,setNSKidsPassedTime,,R,,,,,,,,,,,,,아이들나라,,아이들나라,
+,IMCS_MOBILE_115,SRM,IMCS,MOBILE,,,2023-03-29,5차,2023-03-29,API,모바일,,Watching,서비스,시청목록 삭제 (앨범ID 요청),rmNSKidsWatchHis,,"U,M,P",,,,,,,,,,,,,,,,
+,IMCS_MOBILE_116,SRM,IMCS,MOBILE,,,2023-03-29,5차,2023-03-29,API,모바일,,Watching,서비스,시청목록 전체 삭제,rmNSAllKidsWatchHis,,"U,M,P",,,,,,,,,,,,,,,,
+,IMCS_MOBILE_117,SRM,IMCS,MOBILE,,,2023-01-26,4차,2023-01-26,API,모바일,,Watching,서비스,아이들나라 분석 데이터 정보 제공,getNSKidsAnalysis,,"R,M",,,,,,,,,,,,,,,,
+,IMCS_MOBILE_118,SRM,IMCS,MOBILE,,,2023-01-26,4차,2023-01-26,API,모바일,,Purchasing,서비스,구글 플레이 인앱 정보 캐시 생성 API,setNSInAppCreate,,,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_119,SRM,IMCS,MOBILE,,,2023-01-26,4차,2023-01-26,API,모바일,,Purchasing,서비스,구글 플레이 인앱 정보 조회 API,getNSInAppInfo,,,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_120,SRM,IMCS,MOBILE,,,2023-01-18,4차,2023-01-18,API,모바일,,Watching,서비스,메뉴별 또래 상위 Top랭킹 콘텐츠 정보 제공,getNSKidsTopRank,,"R,M",,,,,,,,,,,,,,,,
+,IMCS_MOBILE_121,SRM,IMCS,MOBILE,,,2023-01-18,3차,2023-01-18,API,모바일,,Subscriber,서비스,캐릭터 좋아요 설정/해지,setNSKIdsLike,,,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_122,SRM,IMCS,MOBILE,,,2023-01-18,3차,2023-01-18,API,모바일,,VodLookup,서비스,캐릭터 좋아요 및 추천 정보 제공,getNSKidsRecmMenu,,,,,,,,,,,,,,,,,,
+,IMCS_MOBILE_123,IPTV통합,IMCS,MOBILE,3차,3차,2023-01-26,3차,2023-01-26,API,IPTV,컨텐츠,Subscriber,서비스,유플릭스 관심장르 리스트 제공,getFXFavorGenre,,R,,,,,하,,,,,,,,,,유플릭스,
+,IMCS_MOBILE_124,IPTV통합,IMCS,MOBILE,3차,3차,2023-01-26,3차,2023-01-26,API,IPTV,컨텐츠,Subscriber,서비스,유플릭스 관심장르 설정,setFXFavorGenre,,CU,,,,,하,,,,,,,,,,유플릭스,
+,IMCS_ADMIN_001,,IMCS,ADMIN,,4차,,2차,,BPAS,메인,메인(로그인),BPAS_관리,운영,메인 > 메인(로그인),,,,,,,,하,UI,,,,,,,,,공통,
+,IMCS_ADMIN_002,,IMCS,ADMIN,,4차,,2차,,BPAS,메인,탑메뉴,BPAS_관리,운영,메인 > 탑메뉴,,,,,,,,하,UI,,,,,,,,,공통,
+,IMCS_ADMIN_003,,IMCS,ADMIN,,4차,,2차,,BPAS,메인,세션관리,BPAS_관리,운영,메인 > 세션관리,,,,,,,,중,UI,,,,,,,,,공통,
+,IMCS_ADMIN_004,,IMCS,ADMIN,,4차,,2차,,BPAS,모니터링,공정,컨텐츠 입수,운영,모니터링 > 공정,,,,,,,,상,UI,,,,,,,,,공통,
+,IMCS_ADMIN_005,,IMCS,ADMIN,,4차,,2차,,BPAS,모니터링,컨텐츠,컨텐츠 입수,운영,모니터링 > 컨텐츠,,,,,,,,상,UI,,,,,,,,,공통,
+,IMCS_ADMIN_006,,IMCS,ADMIN,,4차,,2차,,BPAS,모니터링,배포진행,컨텐츠 입수,운영,모니터링 > 배포진행,,,,,,,,상,UI,,,,,,,,,공통,
+,IMCS_ADMIN_007,,IMCS,ADMIN,,4차,,2차,,BPAS,모니터링,배포 모니터링,컨텐츠 입수,운영,모니터링 > 배포 모니터링,,,,,,,,상,UI,,,,,,,,,공통,
+,IMCS_ADMIN_008,,IMCS,ADMIN,,4차,,2차,,BPAS,모니터링,임계치관리,컨텐츠 입수,운영,모니터링 > 임계치관리,,,,,,,,하,UI,,,,,,,,,공통,
+,IMCS_ADMIN_009,,IMCS,ADMIN,,4차,,2차,,BPAS,모니터링,유무료전환,컨텐츠 입수,운영,모니터링 > 유무료전환,,,,,,,,하,UI,,,,,,,,,공통,
+,IMCS_ADMIN_010,,IMCS,ADMIN,,4차,,2차,,BPAS,모니터링,배포현황,컨텐츠 입수,운영,모니터링 > 배포현황,,,,,,,,상,UI,,,,,,,,,공통,
+,IMCS_ADMIN_011,,IMCS,ADMIN,,4차,,2차,,BPAS,모니터링,입수데이터 관리,컨텐츠 입수,운영,모니터링 > 입수데이터 관리,,,,,,,,상,UI,,,,,,,,,공통,
+,IMCS_ADMIN_012,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,스케줄,신규,스케줄,운영,스케줄 > 신규,,,,,,,,상,UI,,,,,,,,,공통,
+,IMCS_ADMIN_013,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,스케줄,변경,스케줄,운영,스케줄 > 변경,,,,,,,,상,UI,,,,,,,,,공통,
+,IMCS_ADMIN_014,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,스케줄,큐시트,VOD_컨텐츠,운영,스케줄 > 큐시트,,,,,,,,상,UI,,,,,,,,,아이돌라이브,
+,IMCS_ADMIN_015,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,스케줄,신규(4D VOD),스케줄,운영,스케줄 > 신규(4D VOD),,,,,,,,중,UI,,,,,,,,,프로야구,
+,IMCS_ADMIN_016,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,스케줄,PPS 상품변경,스케줄,운영,스케줄 > PPS 상품 변경,,,,,,,,중,UI,,,,,,,,,,
+,IMCS_ADMIN_017,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,편성,편성관리,VOD_편성,운영,편성 > 편성관리,,,,,,,,상,UI,,,,,,,,,공통,
+,IMCS_ADMIN_018,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,편성,컨텐츠관리,VOD_컨텐츠,운영,편성 > 컨텐츠관리,,,,,,,,상,UI,,,,,,,,,공통,
+,IMCS_ADMIN_019,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,편성,노출처리,스케줄,운영,편성 > 노출처리,,,,,,,,중,UI,,,,,,,,,공통,
+,IMCS_ADMIN_020,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,편성,비노출처리,스케줄,운영,편성 > 비노출처리,,,,,,,,중,UI,,,,,,,,,공통,
+,IMCS_ADMIN_021,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,편성,변경처리,스케줄,운영,편성 > 변경처리,,,,,,,,중,UI,,,,,,,,,공통,
+,IMCS_ADMIN_022,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,편성,슈퍼ID관리,VOD_컨텐츠,운영,편성 > 슈퍼ID관리,,,,,,,,중,UI,,,,,,,,,공통,
+,IMCS_ADMIN_023,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,편성,슈퍼시즌관리,VOD_컨텐츠,운영,편성 > 슈퍼시즌관리,,,,,,,,중,UI,,,,,,,,,공통,
+,IMCS_ADMIN_024,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,편성,시즌관리,VOD_컨텐츠,운영,편성 > 시즌관리,,,,,,,,하,UI,,,,,,,,,공통,
+,IMCS_ADMIN_025,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,편성,시리즈관리,VOD_컨텐츠,운영,편성 > 시리즈관리,,,,,,,,하,UI,,,,,,,,,공통,
+,IMCS_ADMIN_026,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,편성,스틸컷관리,VOD_컨텐츠,운영,편성 > 스틸컷관리,,,,,,,,하,UI,,,,,,,,,공통,
+,IMCS_ADMIN_027,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,편성,포스터관리,VOD_컨텐츠,운영,편성 > 포스터관리,,,,,,,,하,UI,,,,,,,,,공통,
+,IMCS_ADMIN_028,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,편성,연관컨텐츠관리,VOD_컨텐츠,운영,편성 > 연관컨텐츠관리,,,,,,,,하,UI,,,,,,,,,공통,
+,IMCS_ADMIN_029,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,편성,투표연관컨텐츠관리,VOD_컨텐츠,운영,편성 > 투표연관컨텐츠관리,,,,,,,,하,UI,,,,,,,,,아이돌라이브,
+,IMCS_ADMIN_030,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,편성,서비스중단/결방관리,VOD_편성,운영,편성 > 서비스중단/결방관리,,,,,,,,중,UI,,,,,,,,,IPTV,
+,IMCS_ADMIN_031,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,편성,PPS관리,상품,운영,편성 > PPS관리,,,,,,,,중,UI,,,,,,,,,IPTV,
+,IMCS_ADMIN_032,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,편성,인덱스 대상 앨범관리,VOD_컨텐츠,운영,편성 > 인덱스 대상 앨범관리,,,,,,,,하,UI,,,,,,,,,IPTV,
+,IMCS_ADMIN_162,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,편성,인물 정보 관리,VOD_컨텐츠,운영,편성 > 인물정보확인,,,,,,,,하,UI,통계,,,,,,,,IPTV,
+,IMCS_ADMIN_163,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,편성,EGP연관VOD 관리,VOD_컨텐츠,운영,편성 > EGP연관VOD관리,,,,,,,,하,UI,통계,,,,,,,,IPTV,
+,IMCS_ADMIN_033,,IMCS,ADMIN,,4차,,2차,,BPAS,통계,오류검사,스케줄,운영,통계 > 오류검사,,,,,,,,중,UI,,,,,,,,,공통,
+,IMCS_ADMIN_034,,IMCS,ADMIN,,4차,,2차,,BPAS,통계,스케줄,컨텐츠 입수,운영,통계 > 스케줄,,,,,,,,중,UI,,,,,,,,,공통,
+,IMCS_ADMIN_035,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,공통정책,카테고리연동,스케줄,운영,공통정책 > 카테고리연동,,,,,,,,상,UI,,,,,,,,,공통,
+,IMCS_ADMIN_036,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,공통정책,상품관리,상품,운영,공통정책 > 상품관리,,,,,,,,상,UI,,,,,,,,,공통,
+,IMCS_ADMIN_164,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,공통정책,월정액 상품 메뉴 관리,상품,운영,공통정책 > 상품메뉴관리,,,,,,,,상,UI,,,,,,,,,공통,
+,IMCS_ADMIN_037,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,공통정책,CP별가격정보,스케줄,운영,공통정책 > CP별가격정보,,,,,,,,하,UI,,,,,,,,,공통,
+,IMCS_ADMIN_038,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,공통정책,유/무료전환,스케줄,운영,공통정책 > 유/무료전환,,,,,,,,하,UI,,,,,,,,,공통,
+,IMCS_ADMIN_039,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,공통정책,인앱결제,구매,운영,공통정책 > 인앱결제,,,,,,,,하,UI,,,,,,,,,모바일,
+,IMCS_ADMIN_040,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,공통정책,퀵배포,스케줄,운영,공통정책 > 퀵배포,,,,,,,,하,UI,,,,,,,,,공통,
+,IMCS_ADMIN_041,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,공통정책,서비스별노드관리,스케줄,운영,공통정책 > 서비스별노드관리,,,,,,,,하,UI,,,,,,,,,공통,
+,IMCS_ADMIN_042,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,공동정책,컨텐츠 속성관리,VOD_컨텐츠,운영,공동정책 > 컨텐츠 속성관리,,,,,,,,상,UI,,,,,,,,,아이돌라이브,
+,IMCS_ADMIN_043,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,공통정책,인덱스 생성 정책관리,스케줄,운영,공통정책 > 인덱스 생성 정책관리,,,,,,,,하,UI,,,,,,,,,IPTV,
+,IMCS_ADMIN_165,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,공통정책,기기별차단대상 결제타입관리,구매,운영,공통정책 > 기기별차단대상 결제타입관리 (앱별 허용되지 않는 결제 수단 관리),,,,,,,,하,UI,,,,,,,,,모바일,
+,IMCS_ADMIN_044,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,개별정책,프리셋 (4D VOD),스케줄,운영,개별정책 > 프리셋 (4D VOD),,,,,,,,하,UI,,,,,,,,,모바일,
+,IMCS_ADMIN_045,,IMCS,ADMIN,,3차,,2차,,BPAS,채널관리,실시간채널,실시간채널,운영,채널관리 > 실시간채널,,,,,,,,상,UI,,,,,,,,,모바일,
+,IMCS_ADMIN_046,,IMCS,ADMIN,,3차,,2차,,BPAS,채널관리,실시간채널 배포,실시간채널,운영,채널관리 > 실시간채널 배포,,,,,,,,상,UI,,,,,,,,,모바일,
+,IMCS_ADMIN_047,,IMCS,ADMIN,,3차,,2차,,BPAS,채널관리,가상채널,실시간채널,운영,채널관리 > 가상채널,,,,,,,,상,UI,,,,,,,,,모바일,
+,IMCS_ADMIN_048,,IMCS,ADMIN,,3차,,2차,,BPAS,채널관리,가상채널편성,실시간채널,운영,채널관리 > 가상채널편성,,,,,,,,상,UI,,,,,,,,,모바일,
+,IMCS_ADMIN_049,,IMCS,ADMIN,,3차,,2차,,BPAS,채널관리,지역 노드 관련 서버,시청,운영,채널관리 > 지역 노드 관련 서버,,,,,,,,하,UI,,,,,,,,,공통,
+,IMCS_ADMIN_050,,IMCS,ADMIN,,3차,,2차,,BPAS,채널관리,노드별 기지국,실시간채널,운영,채널관리 > 노드별 기지국,,,,,,,,하,UI,,,,,,,,,공통,
+,IMCS_ADMIN_051,,IMCS,ADMIN,,3차,,2차,,BPAS,채널관리,노드별 동코드,시청,운영,채널관리 > 노드별 동코드,,,,,,,,하,UI,,,,,,,,,공통,
+,IMCS_ADMIN_052,,IMCS,ADMIN,,3차,,2차,,BPAS,아이들나라,추천메뉴관리,VOD_편성,운영,아이들나라 > 추천메뉴관리,,,,,,,,중,UI,,,,,,,아이들나라,,아이들나라,
+,IMCS_ADMIN_053,,IMCS,ADMIN,,3차,,2차,,BPAS,아이들나라,부가상품관리,VOD_컨텐츠,운영,아이들나라 > 부가상품관리,,,,,,,,하,UI,,,,,,,아이들나라,,아이들나라,
+,IMCS_ADMIN_054,,IMCS,ADMIN,,3차,,2차,,BPAS,아이들나라,소리펜관리,VOD_컨텐츠,운영,아이들나라 > 소리펜관리,,,,,,,,중,UI,,,,,,,아이들나라,,아이들나라,
+,IMCS_ADMIN_166,,IMCS,ADMIN,,3차,,2차,,BPAS,아이들나라,컴패니언봇관리,공통,운영,아이들나라 > 컴패니언봇관리,,,,,,,,중,UI,,,,,,,아이들나라,,아이들나라,
+,IMCS_ADMIN_057,,IMCS,ADMIN,,4차,,2차,,BPAS,관리자,공지사항,BPAS_관리,운영,관리자 > 공지사항,,,,,,,,하,UI,,연동,연동,,,,,,공통,
+,IMCS_ADMIN_058,,IMCS,ADMIN,,4차,,2차,,BPAS,관리자,계정관리,BPAS_관리,운영,관리자 > 계정관리,,,,,,,,하,UI,,연동,연동,,,,,,공통,
+,IMCS_ADMIN_059,,IMCS,ADMIN,,4차,,2차,,BPAS,관리자,그룹관리,BPAS_관리,운영,관리자 > 그룹관리,,,,,,,,하,UI,,연동,연동,,,,,,공통,
+,IMCS_ADMIN_060,,IMCS,ADMIN,,4차,,2차,,BPAS,관리자,메뉴관리,BPAS_관리,운영,관리자 > 메뉴관리,,,,,,,,하,UI,,연동,연동,,,,,,공통,
+,IMCS_ADMIN_061,,IMCS,ADMIN,,4차,,2차,,BPAS,관리자,IP관리,BPAS_관리,운영,관리자 > IP관리,,,,,,,,하,UI,,연동,연동,,,,,,공통,
+,IMCS_ADMIN_062,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,셋탑 검수 결과 전송,스케줄,운영,API > 셋탑 검수 결과 전송,API,,,,,,,하,,,연동,연동,,,,,,공통,
+,IMCS_ADMIN_063,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,오류 검수자 리스트 조회 요청,스케줄,운영,API > 오류 검수자 리스트 조회 요청,API,,,,,,,하,,,연동,연동,,,,,,공통,
+,IMCS_ADMIN_065,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,스틸컷 이미지 정보 전송,VOD_컨텐츠,운영,API > 스틸컷 이미지 정보 전송,API,,,,,,,하,,,연동,연동,,,,,,공통,
+,IMCS_ADMIN_066,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,오류검사 컨텐츠 편성 카테고리 조회 요청,스케줄,운영,API > 오류검사 컨텐츠 편성 카테고리 조회 요청,API,,,,,,,하,,,연동,연동,,,,,,공통,
+,IMCS_ADMIN_069,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,4D VOD 배포 공정 현황 정보 연동,컨텐츠 입수,운영,API > 4D VOD 배포 공정 현황 정보 연동,API,,,,,,,하,,,연동,연동,,,,,,모바일,
+,IMCS_ADMIN_075,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,공정감시,컨텐츠 입수,운영,공정감시 > 공정감시,,,,,,,,중,,,연동,,,,배치,,,공통,
+,IMCS_ADMIN_078,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,메타변경정보 전송,VOD_컨텐츠,운영,MeCS 연동 > 메타변경정보 전송,API,,,,,,,상,,,,,,,,,,공통,
+,IMCS_ADMIN_079,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,키워드 변경정보 전송,VOD_컨텐츠,운영,MeCS 연동 > 키워드 변경정보 전송,API,,,,,,,상,,,,,,,,,,공통,
+,IMCS_ADMIN_080,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,메타변경정보 전송,VOD_컨텐츠,운영,EMS 연동 > 메타변경정보 전송,API,,,,,,,상,,,,,,,,,,공통,
+,IMCS_ADMIN_081,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,메타일괄변경,VOD_컨텐츠,운영,메타스케줄 > 메타일괄변경,,,,,,,,상,,,,,,,배치,,,공통,
+,IMCS_ADMIN_082,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,키워드 일괄정보변경,VOD_컨텐츠,운영,메타구조화 > 키워드 일괄정보변경,,,,,,,,상,,,,,,,배치,,,공통,
+,IMCS_ADMIN_083,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,앨범 키워드 정보변경,VOD_컨텐츠,운영,메타구조화 > 앨범 키워드 정보변경,,,,,,,,상,,,,,,,배치,,,공통,
+,IMCS_ADMIN_084,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,예약노출,VOD_편성,운영,노출 > 예약노출,,,,,,,,중,,,,,,,배치,,,공통,
+,IMCS_ADMIN_085,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,상시 카테고리 복사,VOD_편성,운영,카테고리복사 > 상시 카테고리 복사,,,,,,,,중,,,,,,,배치,,,공통,
+,IMCS_ADMIN_086,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,일괄 카테고리 복사,VOD_편성,운영,카테고리복사 > 일괄 카테고리 복사,,,,,,,,중,,,,,,,배치,,,공통,
+,IMCS_ADMIN_087,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,편성만료,VOD_편성,운영,편성만료 > 편성만료,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_089,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,일반 카테고리 버전업,VOD_편성,운영,버전업 > 일반 카테고리 버전업,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_090,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,긴급 카테고리 버전업,VOD_편성,운영,버전업 > 긴급 카테고리 버전업,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_091,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,앨범서비스시작,VOD_편성,운영,앨범 > 앨범서비스시작,,,,,,,,중,,,,,,,배치,,,공통,
+,IMCS_ADMIN_092,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,앨범서비스종료,VOD_편성,운영,앨범 > 앨범서비스종료,,,,,,,,중,,,,,,,배치,,,공통,
+,IMCS_ADMIN_093,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,앨범서비스만료,VOD_편성,운영,앨범 > 앨범서비스만료,,,,,,,,중,,,,,,,배치,,,공통,
+,IMCS_ADMIN_094,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,UFLIX서비스시작,VOD_편성,운영,UFLIX > UFLIX서비스시작,,,,,,,,중,,,,,,,배치,,,공통,
+,IMCS_ADMIN_095,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,UFLIX서비스종료,VOD_편성,운영,UFLIX > UFLIX서비스종료,,,,,,,,중,,,,,,,배치,,,공통,
+,IMCS_ADMIN_099,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,옴니뷰 모니터링,VOD_컨텐츠,운영,큐시트 > 옴니뷰 모니터링,,,,,,,,하,,,,,,,배치,,,아이돌라이브,
+,IMCS_ADMIN_100,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,슈퍼ID 일괄등록,VOD_컨텐츠,운영,시리즈 > 슈퍼ID 일괄등록,,,,,,,,중,,,,,,,배치,,,공통,
+,IMCS_ADMIN_101,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,슈퍼ID 일괄삭제,VOD_컨텐츠,운영,시리즈 > 슈퍼ID 일괄삭제,,,,,,,,중,,,,,,,배치,,,공통,
+,IMCS_ADMIN_102,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,CP별 가격정책,VOD_컨텐츠,운영,과금 > CP별 가격정책,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_103,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,유무료 자동전환,상품,운영,과금 > 유무료 자동전환,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_167,,IMCS,ADMIN,,3차,,2차,,BPAS,배치 Agent,연관VOD 자동삭제,VOD_컨텐츠,운영,연관VOD > 연관VOD 자동삭제,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_104,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,앨범 배포완료 체크,VOD_편성,운영,신규스케줄 앨범 제어 > 앨범 배포완료 체크 (배포등록에서 변경함),,,,,,,,상,,,,,,,배치,,,공통,
+,IMCS_ADMIN_105,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,노출처리,VOD_편성,운영,신규스케줄 앨범 제어 > 노출처리,,,,,,,,상,,,,,,,배치,,,공통,
+,IMCS_ADMIN_106,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,비노출처리,VOD_편성,운영,신규스케줄 앨범 제어 > 비노출처리,,,,,,,,상,,,,,,,배치,,,공통,
+,IMCS_ADMIN_107,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,자동편성,VOD_편성,운영,신규 스케줄 카테고리 제어 > 자동편성,,,,,,,,상,,,,,,,배치,,,공통,
+,IMCS_ADMIN_108,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,상품등록,상품,운영,신규 스케줄 상품 제어 > 상품등록,,,,,,,,상,,,,,,,배치,,,공통,
+,IMCS_ADMIN_109,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,앨범매핑,VOD_컨텐츠,운영,신규 스케줄 어셋 제어 > 앨범매핑,,,,,,,,상,,,,,,,배치,,,공통,
+,IMCS_ADMIN_110,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,스케줄 매핑,스케줄,운영,신규 스케줄 어셋 제어 > 스케줄 매핑,,,,,,,,상,,,,,,,배치,,,공통,
+,IMCS_ADMIN_111,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,퀵배포 편성등록,VOD_편성,운영,신규 스케줄 퀵배포 제어 > 퀵배포 편성등록,,,,,,,,상,,,,,,,배치,,,공통,
+,IMCS_ADMIN_112,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,과금변경,VOD_컨텐츠,운영,변경 스케줄 상품 제어 > 과금변경,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_113,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,화질노출/비노출,VOD_컨텐츠,운영,변경 스케줄 상품 제어 > 화질노출/비노출,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_114,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,상품변경,상품,운영,변경 스케줄 상품 제어 > 상품변경,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_115,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,CP변경,VOD_컨텐츠,운영,변경 스케줄 상품 제어 > CP변경,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_116,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,시작일/종료일변경,VOD_컨텐츠,운영,변경 스케줄 앨범 제어 > 시작일/종료일변경,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_117,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,유효기간변경,VOD_컨텐츠,운영,변경 스케줄 앨범 제어 > 유효기간변경,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_118,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,자막변경,VOD_컨텐츠,운영,변경 스케줄 앨범 제어 > 자막변경,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_119,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,극장동시/최초상영,VOD_컨텐츠,운영,변경 스케줄 앨범 제어 > 극장동시/최초상영,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_120,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,줄거리노출,VOD_컨텐츠,운영,변경 스케줄 프로모션 제어 > 줄거리노출,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_121,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,포스터노출,VOD_컨텐츠,운영,변경 스케줄 프로모션 제어 > 포스터노출,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_122,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,아이콘노출,VOD_컨텐츠,운영,변경 스케줄 프로모션 제어 > 아이콘노출,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_126,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,앨범 즉시시작,VOD_편성,운영,변경 스케줄 후처리 > 앨범 즉시시작,,,,,,,,중,,,,,,,배치,,,공통,
+,IMCS_ADMIN_127,,IMCS,ADMIN,,3차,,2차,,BPAS,스케줄 Agent,앨범 즉시종료,VOD_편성,운영,변경 스케줄 후처리 > 앨범 즉시종료,,,,,,,,중,,,,,,,배치,,,공통,
+,IMCS_ADMIN_130,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,ADI 입수,컨텐츠 입수,운영,API > ADI 입수,API,,,,,,,하,,,,,,,,,,공통,
+,IMCS_ADMIN_131,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,포스터 파일 입수,컨텐츠 입수,운영,API > 포스터 파일 입수,API,,,,,,,하,,,,,,,,,,공통,
+,IMCS_ADMIN_132,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,ADI 입수,컨텐츠 입수,운영,메타입수 > ADI 입수,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_133,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,프로모션 ADI 입수,컨텐츠 입수,운영,메타입수 > 프로모션 ADI 입수,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_134,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,EMS 메타입수,컨텐츠 입수,운영,메타입수 > EMS 메타입수,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_135,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,앨범이미지 메타입수,컨텐츠 입수,운영,메타입수 > 앨범이미지 메타입수,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_136,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,자막 메타입수,컨텐츠 입수,운영,메타입수 > 자막 메타입수,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_137,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,프로모션 포스터 메타입수,컨텐츠 입수,운영,메타입수 > 프로모션 포스터 메타입수,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_138,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,영상물리파일 입수,컨텐츠 입수,운영,파일입수 > 영상물리파일 입수,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_139,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,포스터 파일 입수,컨텐츠 입수,운영,파일입수 > 포스터 파일 입수,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_168,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,포스터 파일 입수 AWS 업로드,입수,운영,파일입수 > 포스터 파일 입수 > AWS 업로드,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_140,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,자막 파일 입수,컨텐츠 입수,운영,파일입수 > 자막 파일 입수,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_141,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,프로모션 영상 입수,컨텐츠 입수,운영,파일입수 > 프로모션 영상 입수,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_142,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,앨범이미지 입수,컨텐츠 입수,운영,파일입수 > 앨범이미지 입수,,,,,,,,하,,,연동,연동,,,배치,,,공통,
+,IMCS_ADMIN_143,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,스틸컷 입수,컨텐츠 입수,운영,파일입수 > 스틸컷 입수,,,,,,,,하,,,연동,연동,,,배치,,,공통,
+,IMCS_ADMIN_144,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,광고 배포여부 관리,컨텐츠 입수,운영,상태등록 > 광고 배포여부 관리,,,,,,,,하,,,연동,연동,,,배치,,,공통,
+,IMCS_ADMIN_145,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,어셋 배포상태 재구성,컨텐츠 입수,운영,상태등록 > 어셋 배포상태 재구성,,,,,,,,하,,,연동,연동,,,배치,,,공통,
+,IMCS_ADMIN_146,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,퀵배포 인덱스 요청 등록,컨텐츠 입수,운영,인덱스 > 퀵배포 인덱스 요청 등록,,,,,,,,중,,,연동,연동,,,배치,,,공통,
+,IMCS_ADMIN_147,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,물리파일 배포여부 전송,컨텐츠 입수,운영,MeCS > 물리파일 배포여부 전송,,,,,,,,하,,,연동,연동,,,배치,,,공통,
+,IMCS_ADMIN_148,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,입수 Agent,노드정보 전송,컨텐츠 입수,운영,MeCS > 노드정보 전송,API,,,,,,,하,,,연동,연동,,,,,,공통,
+,IMCS_ADMIN_149,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,CMC Agent,통합 메타입수,컨텐츠 입수,운영,API > 통합 메타입수,API,,,,,,,하,,,연동,연동,,,,,,공통,
+,IMCS_ADMIN_150,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,CMC Agent,메타변경입수,컨텐츠 입수,운영,메타입수 > 메타변경입수,API,,,,,,,하,,,연동,연동,,,,,,공통,
+,IMCS_ADMIN_151,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,CMC Agent,CP변경입수,컨텐츠 입수,운영,메타입수 > CP변경입수,,,,,,,,하,,,연동,연동,,,배치,,,공통,
+,IMCS_ADMIN_152,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,CMC Agent,CODE정보입수,컨텐츠 입수,운영,메타입수 > CODE정보입수,,,,,,,,하,,,연동,연동,,,배치,,,공통,
+,IMCS_ADMIN_153,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,CMC Agent,인물정보입수,컨텐츠 입수,운영,메타입수 > 인물정보입수,,,,,,,,하,,,연동,연동,,,배치,,,공통,
+,IMCS_ADMIN_154,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,CMC Agent,인물그룹정보입수,컨텐츠 입수,운영,메타입수 > 인물그룹정보입수,,,,,,,,하,,,연동,연동,,,배치,,,공통,
+,IMCS_ADMIN_155,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,CMC Agent,VOD인물정보입수,컨텐츠 입수,운영,메타입수 > VOD인물정보입수,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_156,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,CMC Agent,VOD인물매핑입수,컨텐츠 입수,운영,메타입수 > VOD인물매핑입수,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_157,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,CMC Agent,씨네21리뷰입수,컨텐츠 입수,운영,메타입수 > 씨네21리뷰입수,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_158,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,CMC Agent,IMDB리뷰입수,컨텐츠 입수,운영,메타입수 > IMDB리뷰입수,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_159,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,CMC Agent,영진위메타,컨텐츠 입수,운영,메타입수 > 영진위메타,,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_160,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,AI Meta Agent,음원 메타 수집,컨텐츠 입수,운영,AI 메타 수집 > 음원 메타 수집,API,,,,,,,하,,,,,,,,,,IPTV,
+,IMCS_ADMIN_161,,IMCS,ADMIN,,2차 → 3차,,2차,,BPAS,AI Meta Agent,코너 메타 수집,컨텐츠 입수,운영,AI 메타 수집 > 코너 메타 수집,API,,,,,,,하,,,,,,,,,,IPTV,
+,IMCS_ADMIN_201,추가,IMCS,ADMIN,,3차,,2차,,BPAS,,,컨텐츠 입수,운영,OTT 메타 관리 페이지,,,,,,,,,,,,,,,,,,IPTV,
+,IMCS_ADMIN_202,추가,IMCS,ADMIN,,3차,,2차,,BPAS,,,컨텐츠 입수,운영,OTT 마스터/정책 정보 관리,,,,,,,,,,,,,,,,,,IPTV,
+,IMCS_ADMIN_203,추가,IMCS,ADMIN,,3차,,2차,,BPAS,,,컨텐츠 입수,운영,OTT 편성 관리,,,,,,,,,,,,,,,,,,IPTV,
+,IMCS_ADMIN_204,추가,IMCS,ADMIN,,3차,,2차,,BPAS,,,컨텐츠 입수,운영,유치원 특화 콘텐츠 리스트 관리,,,,,,,,,,,,,,,,,,IPTV,
+,IMCS_ADMIN_205,추가,IMCS,ADMIN,,3차,,2차,,BPAS,,,컨텐츠 입수,운영,유치원특화 콘텐츠 앨범별 상세 정보 관리,,,,,,,,,,,,,,,,,,IPTV,
+,IMCS_ADMIN_206,추가,IMCS,ADMIN,,3차,,2차,,BPAS,,,컨텐츠 입수,운영,확장메타 관리 기능 수정,,,,,,,,,,,,,,,,,,IPTV,
+,IMCS_ADMIN_207,추가,IMCS,ADMIN,,3차,,2차,,BPAS,,,컨텐츠 입수,운영,유치원 특화 메타 태깅 일괄 처리 (배치 Agent),,,,,,,,,,,,,,,,,,IPTV,
+,IMCS_ADMIN_016,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,스케줄,상품등록,N/A,N/A,스케줄 > 상품등록,,,,,,,,중,UI,,,,,,,,,,
+,IMCS_ADMIN_055,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,아이들나라,퀴즈메뉴관리,N/A,N/A,아이들나라 > 퀴즈메뉴관리 (업무 오기재),,,,,,,,하,UI,,,,,,,아이들나라,,아이들나라,
+,IMCS_ADMIN_056,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,아이들나라,퀴즈효과관리,N/A,N/A,아이들나라 > 퀴즈효과관리 (업무 오기재),,,,,,,,하,UI,,,,,,,아이들나라,,아이들나라,
+,IMCS_ADMIN_064,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,배치 Agent,EMS스케줄연동,N/A,N/A,API > EMS스케줄연동 (외부업무 오기재),API,,,,,,,중,,,연동,연동,,,,,,공통,
+,IMCS_ADMIN_067,중복 or 제외,IMCS,ADMIN,3차,3차,,,,BPAS,배치 Agent,MeCS 스케줄 공정 현황 정보 변동,컨텐츠 입수,운영,API > MeCS 스케줄 공정 현황 정보 변동 (미시영압므),API,,,,,,,하,,,연동,연동,,,,,,공통,
+,IMCS_ADMIN_068,중복 or 제외,IMCS,ADMIN,3차,3차,,,,BPAS,배치 Agent,EMS 스케줄 공정 현황 정보 연동,컨텐츠 입수,운영,API > EMS 스케줄 공정 현황 정보 연동 (미사용업무),API,,,,,,,하,,,연동,연동,,,,,,공통,
+,IMCS_ADMIN_070,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,배치 Agent,MeCS스케줄연동,N/A,N/A,API > MeCS스케줄연동 (외부업무 오기재),API,,,,,,,중,,,,,,,,,,공통,
+,IMCS_ADMIN_071,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,배치 Agent,재배포 스케줄 정보 전송,N/A,N/A,MeCS 연동 > 재배포 스케줄 정보 전송 (증복 : API > MeCS 스케줄 공정 현황 정보 변동),API,,,,,,,중,,,연동,,,,,,,공통,
+,IMCS_ADMIN_072,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,배치 Agent,스케줄 정보 전송,N/A,N/A,EMS 연동 > 스케줄 정보 전송 (중복 : EMS 스케줄 공정 현황 정보 연동),API,,,,,,,중,,,연동,,,,,,,공통,
+,IMCS_ADMIN_073,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,배치 Agent,자막 재배포 요청,N/A,N/A,EMS 연동 > 자막 재배포 요청 (외부업무 오기재),API,,,,,,,하,,,연동,,,,,,,공통,
+,IMCS_ADMIN_074,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,배치 Agent,셋탑 검수 리스트 전송,N/A,N/A,오류검사 > 셋탑 검수 리스트 전송 (외부업무 오기재),API,,,,,,,하,,,연동,,,,,,,공통,
+,IMCS_ADMIN_076,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,배치 Agent,스케줄 정보 공정 조회 및 Lock 처리 요청 전송 (MeCS),N/A,N/A,외부연동 > 스케줄 정보 공정 조회 및 Lock 처리 요청 전송 (MeCS) (외부업무 오기재),API,,,,,,,상,,,,,,,,,,공통,
+,IMCS_ADMIN_077,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,배치 Agent,스케줄 정보 공정 조회 및 Lock 처리 요청 전송 (EMS),N/A,N/A,외부연동 > 스케줄 정보 공정 조회 및 Lock 처리 요청 전송 (EMS) (외부업무 오기재),API,,,,,,,상,,,,,,,,,,공통,
+,IMCS_ADMIN_088,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,배치 Agent,CMC 자동편성,N/A,N/A,자동편성 > CMC 자동편성 (현재 미사용 업무),,,,,,,,상,,,,,,,배치,,,공통,
+,IMCS_ADMIN_096,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,배치 Agent,PPS 서비스 시작,N/A,N/A,PPS > PPS 서비스 시작 (현재 미사용 업무),,,,,,,,중,,,,,,,배치,,,,
+,IMCS_ADMIN_097,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,배치 Agent,PPS 서비스 종료,N/A,N/A,PPS > PPS 서비스 종료 (현재 미사용 업무),,,,,,,,중,,,,,,,배치,,,,
+,IMCS_ADMIN_098,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,배치 Agent,PPS 만료,N/A,N/A,PPS > PPS 만료 (현재 미사용 업무),,,,,,,,중,,,,,,,배치,,,,
+,IMCS_ADMIN_123,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,스케줄 Agent,가격변경,N/A,N/A,변경 스케줄 PPS 제어 > 가격변경 (현재 미사용 업무),,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_124,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,스케줄 Agent,시작일/종료일변경,N/A,N/A,변경 스케줄 PPS 제어 > 시작일/종료일변경 (현재 미사용 업무),,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_125,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,스케줄 Agent,유효기간변경,N/A,N/A,변경 스케줄 PPS 제어 > 유효기간변경 (현재 미사용 업무),,,,,,,,하,,,,,,,배치,,,공통,
+,IMCS_ADMIN_128,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,스케줄 Agent,PPS 즉시시작,N/A,N/A,변경 스케줄 후처리 > PPS 즉시시작 (현재 미사용 업무),,,,,,,,중,,,,,,,배치,,,공통,
+,IMCS_ADMIN_129,중복 or 제외,IMCS,ADMIN,,5차,,,,BPAS,스케줄 Agent,PPS 즉시종료,N/A,N/A,변경 스케줄 후처리 > PPS 즉시종료 (현재 미사용 업무),,,,,,,,중,,,,,,,배치,,,공통,
+,MIMS_IPTV_001,,MIMS,IPTV,1차,2차 → 3차,2023-02-15,4차,2023-02-15,API,IPTV 서비스,시청,개인화,서비스,시청 예약 추가,/smartux/addReservedProgram,"푸시(Inner API+ Outer 연동 필요)  기능 선 오픈 필요
+IPTV에 등록되면 Mobile에 푸쉬 되어야 함. ",C,RC,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_002,,MIMS,IPTV,1차,2차 → 3차,2023-02-15,4차,2023-02-15,API,IPTV 서비스,시청,개인화,서비스,시청 예약 삭제,/smartux/removeReservedProgram,"푸시(Inner API+ Outer 연동 필요)  기능 선 오픈 필요
+IPTV에 등록되면 Mobile에 푸쉬 되어야 함. ",D,D,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_003,,MIMS,IPTV,1차,2차 → 3차,2023-02-15,4차,2023-02-15,API,IPTV 서비스,시청,개인화,서비스,시청 예약 목록 전체 삭제,/smartux/removeAllReservedProgram,"푸시(Inner API+ Outer 연동 필요)  기능 선 오픈 필요
+IPTV에 등록되면 Mobile에 푸쉬 되어야 함. ",D,D,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_004,,MIMS,IPTV,1차,2차 → 3차,2023-02-15,4차,2023-02-15,API,IPTV 서비스,시청,개인화,서비스,시청 예약 목록 조회,/smartux/getReservedProgramList,"푸시(Inner API+ Outer 연동 필요)  기능 선 오픈 필요
+IPTV에 등록되면 Mobile에 푸쉬 되어야 함. ",R,R,,실시간,1,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_005,반영완료,MIMS,IPTV,1차,2차,2022-05-25,2차,,API,IPTV 서비스,테마,설정,서비스,테마 목록 조회,/smartux/getThemeInfo,,R,R,,,1,중,,,,,,,,,,미호출,
+,MIMS_IPTV_006,반영완료,MIMS,IPTV,1차,1차,2022-04-21,1차,,API,IPTV 서비스,시청,편성,서비스,실시간 시청률 정보 조회,/smartux/getRealRating,,R,R,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_007,,MIMS,IPTV,1차,2차 → 3차,2023-02-15,4차,2023-02-15,API,IPTV 서비스,컨텐츠,개인화,서비스,WishList 목록 가져오기,/smartux/getWishList,MSA/On-Premise 간 API를 통한 연동 필요,R,R,,실시간,1,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_008,반영완료,MIMS,IPTV,1차,2차,2022-05-25,2차,,API,IPTV 서비스,컨텐츠,편성,서비스,Smart Start 항목 가져오기,/smartux/getSmartStartItemList,,R,R,,,1,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_009,반영완료,MIMS,IPTV,1차,1차,2022-04-21,1차,,API,IPTV 서비스,컨텐츠,편성,서비스,BestVOD 정보 목록 가져오기,/smartux/getGenreVodBestList,,R,R,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_010,반영완료,MIMS,IPTV,1차,1차,2022-04-21,1차,,API,IPTV 서비스,패널,편성,서비스,Main Panel 버전 정보 조회,/smartux/getMainPanelVersionInfo,,R,R,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 브라보라이프, 포터블IPTV",
+,MIMS_IPTV_011,반영완료,MIMS,IPTV,1차,1차,2022-04-21,1차,,API,IPTV 서비스,패널,편성,서비스,Main Panel 연동 정보 조회,/smartux/getMainPanelInterlockingInfo,,R,R,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 브라보라이프, 포터블IPTV",
+,MIMS_IPTV_012,반영완료,MIMS,IPTV,1차,2차 → 3차,2022-10-26,4차,2022-10-1차,API,IPTV 서비스,설정,설정,서비스,Configuration설정정보 조회,/smartux/getConfiguration,"어드민 편성기능 동시 오픈 필요
+어드민에서 NAS 쓰는 기능을 DB로 변경 개발 필요. ",R,R,NAS,,1,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 브라보라이프",
+,MIMS_IPTV_013,반영완료,MIMS,IPTV,1차,1차,2022-04-21,1차,,API,IPTV 서비스,컨텐츠,편성,서비스,SUXM 자체편성 목록 가져오기,/smartux/getSUXMAlbumList,,R,R,,,,중,,,,,,,,,,"IPTV, 브라보라이프",
+,MIMS_IPTV_014,,MIMS,IPTV,1차,2차 → 3차,2023-02-15,4차,2023-02-15,API,IPTV 서비스,인증,개인화,서비스,RegistrationID 등록,/smartux/addRegistrationID,MSA/On-Premise 간 API를 통한 연동 필요,CU,RCU,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_015,,MIMS,IPTV,1차,2차 → 3차,2023-02-15,4차,2023-02-15,API,IPTV 서비스,인증,개인화,서비스,RegistrationID 삭제,/smartux/removeRegistrationID,MSA/On-Premise 간 API를 통한 연동 필요,D,D,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_016,반영완료,MIMS,IPTV,1차,1차,2022-04-21,1차,,API,IPTV 서비스,컨텐츠,편성,서비스,I20 편성앨범 조회,/smartux/getI20AlbumList,,R,R,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 브라보라이프",
+,MIMS_IPTV_017,반영완료,MIMS,IPTV,2차,2차,2022-05-25,2차,,API,IPTV 서비스,,검색어,서비스,youtube 초기 검색어 조회,/smartux/getYoutubeSearchKey,,R,R,,,1,중,,,,,,,,,,,
+,MIMS_IPTV_018,반영완료,MIMS,IPTV,2차,2차,2022-06-14,2차,,API,IPTV 서비스,공지,공지,서비스,공지 혹은 이미지 정보 가져오기,/smartux/getNoticeInfo,,R,R,,,1,중,,,,,,,,아이들나라,,"IPTV, 아이들나라",
+,MIMS_IPTV_019,반영완료,MIMS,IPTV,2차,2차,2022-06-14,2차,,API,IPTV 서비스,공지,공지,서비스,공지목록 조회,/smartux/comm/notice/{게시판ID},,R,-,,,1,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 포터블IPTV, 세컨드TV",
+,MIMS_IPTV_020,반영완료,MIMS,IPTV,2차,2차,2022-06-14,2차,,API,IPTV 서비스,공지,공지,서비스,공지내용 조회,/smartux/comm/notice/{게시판ID}/{글ID},,R,R,,,1,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 포터블IPTV, 세컨드TV",
+,MIMS_IPTV_021,,MIMS,IPTV,2차,2차 → 3차,2023-01-18,4차,2023-01-18,API,IPTV 서비스,공지,공지,서비스,긴급(비상)/팝업공지,/smartux/comm/startup/noti,"어드민 편성기능 동시 오픈 필요
+어드민에서 NAS 쓰는 기능을 DB로 변경 개발 필요. ","R, M",R,NAS,,1,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 포터블IPTV",
+,MIMS_IPTV_022,,MIMS,IPTV,2차,2차 → 3차,2023-02-01,4차,2023-02-01,API,IPTV 서비스,알림,알림,서비스,최신회 알림 등록,/smartux/latest,"푸시(Inner API+ Outer 연동 필요)  기능 선 오픈 필요
+IPTV에 등록되면 Mobile에 푸쉬 되어야 함. ",RC,RC,,,,중,,,,,,,,,,세컨드TV,
+,MIMS_IPTV_023,,MIMS,IPTV,2차,2차 → 3차,2023-02-01,4차,2023-02-01,API,IPTV 서비스,알림,알림,서비스,최신회 알림 조회,/smartux/latest,"푸시(Inner API+ Outer 연동 필요)  기능 선 오픈 필요
+IPTV에 등록되면 Mobile에 푸쉬 되어야 함. ",R,R,,,,중,,,,,,,,,,세컨드TV,
+,MIMS_IPTV_024,,MIMS,IPTV,2차,2차 → 3차,2023-02-01,4차,2023-02-01,API,IPTV 서비스,알림,알림,서비스,최신회 알림 삭제,/smartux/latest,"푸시(Inner API+ Outer 연동 필요)  기능 선 오픈 필요
+IPTV에 등록되면 Mobile에 푸쉬 되어야 함. ",D,D,,,,중,,,,,,,,,,세컨드TV,
+,MIMS_IPTV_025,,MIMS,IPTV,2차,2차 → 3차,2023-01-18,4차,2023-01-18,API,IPTV 서비스,SMS,알림,서비스,tvG 유플릭스 간편 가입 안내 SMS 요청,/smartux/UXSimpleJoin,,R,-,,,,중,,,,,,,,,,영화월정액,
+,MIMS_IPTV_026,비전환,MIMS,IPTV,2차,2차 → 3차,,4차,2022-11-1차,API,IPTV 서비스,이벤트,공지,서비스,이벤트 참여통계 등록,/smartux/comm/stat,"어드민 편성기능 동시 오픈 필요
+어드민에서 NAS 쓰는 기능을 DB로 변경 개발 필요. ",R,R,NAS,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 포터블IPTV, 세컨드TV",
+,MIMS_IPTV_027,비전환,MIMS,IPTV,1차,3차,,,,API,IPTV 서비스,컨텐츠,컨텐츠,서비스,컨텐츠 이어보기 정보 조회,/smartux/getContLinkTime,,R,R,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_028,,MIMS,IPTV,1차,2차 → 3차,2023-02-15,4차,2023-02-15,API,IPTV 서비스,약관,개인화,서비스,추천 정보제공동의 등록/철회,/smartux/registrationAhomeInfoAgree,"역동기화 기능 필요
+PT_UX_SBC_AGREE (CRU)","CU, P",U,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_029,,MIMS,IPTV,1차,2차 → 3차,2023-02-15,4차,2023-02-15,API,IPTV 서비스,약관,개인화,서비스,추천 정보제공동의 정보 조회,/smartux/getAhomeInfoAgree,MIMS_IPTV_028 (추천 정보제공동의 등록/철회) 와 같이 오픈 필요,"R, P",R,,,1,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_030,반영완료,MIMS,IPTV,1차,2차,2022-06-14,2차,,API,IPTV 서비스,약관,약관,서비스,추천 정보제공동의 이용약관 조회,/smartux/getAhomeInfoAgreeText,,R,R,,,1,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_031,비전환,MIMS,IPTV,1차,2차 → 3차,비전환,,,API,IPTV 서비스,약관,개인화,운영,추천 이용동의 로그데이터 전송,추천 이용동의 로그데이터 전송,,R,R,,,,중,,,내부연동,,,,배치,,,IPTV,
+,MIMS_IPTV_032,반영완료,MIMS,IPTV,1차,2차,2022-05-24,2차,,API,IPTV 서비스,컨텐츠,편성,서비스,시즌 조회,/smartux/getSeasonList,,R,R,,,1,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_033,반영완료,MIMS,IPTV,1차,2차,2022-07-05,2차,,API,IPTV 서비스,별점,개인화,서비스,별점목록 조회,/smartux/starRating,PT_VL_STAR_RATING_MST (R),R,R,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_034,완료(중복),MIMS,IPTV,1차,2차,2022-07-05,2차,,API,IPTV 서비스,별점,개인화,서비스,별점 등록,/smartux/starRating,PT_UX_STAR_RATING_HIS (CR),CU,RCU,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_035,반영완료,MIMS,IPTV,1차,2차,2022-07-05,2차,,API,IPTV 서비스,별점,개인화,운영,별점 평균 업데이트,별점 평균 업데이트,"PT_VL_STAR_RATING_MST (R)
+PT_UX_STAR_RATING_AVG (CRU)
+PT_UX_STAR_RATING_HIS (R)",U,RU,,,,중,,,내부연동,,,,배치,,,IPTV,
+,MIMS_IPTV_036,제외,MIMS,IPTV,1차,2차 → 3차,,,,API,IPTV 서비스,인증,개인화,서비스,RegistrationID 조회,/smartux/getRegistrationID,,,-,,실시간,1,중,,,,,,,,,,미호출,기능 제공하지 않음 (F/O)
+,MIMS_IPTV_037,,MIMS,IPTV,2차,2차 → 3차,2023-02-01,4차,2023-02-01,API,IPTV 서비스,SMS,알림,서비스,SMS발송요청,/mims/sendSms,,,-,,,,상,,,,,,,,,,IPTV,
+,MIMS_IPTV_038,반영완료,MIMS,IPTV,1차,2차,2022-07-05,2차,,API,IPTV 서비스,약관,약관,서비스,약관동의 리스트,/mims/access/getAccess,"PT_CM_ACCESS_GR (R)
+PT_CM_ACCESS_MST (R)
+PT_CM_ACCESS_INFO (R)
+PT_CM_ACCESS_DETAIL (R)
+PT_UX_ACCESS_LIST (R)",R,R,,실시간,1,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_039,,MIMS,IPTV,1차,2차 → 3차,2023-01-26,4차,2023-01-26,API,IPTV 서비스,약관,약관,서비스,약관동의 상세조회,/mims/access/getAccessDetail,"어드민 편성기능 동시 오픈 필요
+어드민에서 NAS 쓰는 기능을 DB로 변경 개발 필요. ",R. M,R,NAS,,1,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_040,반영완료,MIMS,IPTV,1차,2차,2022-07-05,2차,,API,IPTV 서비스,약관,약관,서비스,약관동의 정보 저장,/mims/access/setAccess,,CU,RCU,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_041,,MIMS,IPTV,1차,2차 → 3차,2023-01-26,4차,2023-01-26,API,IPTV 서비스,약관,약관,서비스,약관동의 목록리스트,/mims/access/getAccessList,"어드민 편성기능 동시 오픈 필요
+어드민에서 NAS 쓰는 기능을 DB로 변경 개발 필요. ","R, M",R,NAS,실시간,1,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_042,반영완료,MIMS,IPTV,1차,2차,2022-07-05,2차,,API,IPTV 서비스,약관,약관,서비스,약관동의여부 조회,/mims/access/getAccessAgree,"PT_CM_ACCESS_GR (R)
+PT_CM_ACCESS_MST (R)
+PT_CM_ACCESS_INFO (R)
+PT_UX_ACCESS_LIST (R)",R,R,,실시간,1,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_043,반영완료,MIMS,IPTV,2차,2차,2022-05-24,2차,,API,IPTV 서비스,광고,컨텐츠,서비스,광고 배너 리스트 조회,/smartux/comm/ad,,R,R,,,1,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 포터블TV",
+,MIMS_IPTV_044,,MIMS,IPTV,1차,2차 → 3차,2023-03-02,4차,2023-03-02,API,IPTV 서비스,찜/평가,개인화,서비스,평가하기,/smartux/setLike,"역동기화 기능 필요
+PT_UX_LIKE_POINT (CRUD)
+PT_UX_LIKE_POINT_EXT (CRUD)",CU,RCUD,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_045,,MIMS,IPTV,1차,2차 → 3차,2023-03-02,4차,2023-03-02,API,IPTV 서비스,찜/평가,개인화,서비스,찜/평가 여부 조회,/smartux/getLikeAndFavorite,MSA/On-Premise 간 API를 통한 연동 필요,R,R,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_046,,MIMS,IPTV,1차,2차 → 3차,2023-02-15,4차,2023-02-15,API,IPTV 서비스,찜/평가,개인화,서비스,찜하기,/smartux/setFavorite,"MSA/On-Premise 간 API를 통한 연동 필요
+역동기화 기능 필요",CUD,RCD,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_047,,MIMS,IPTV,1차,2차 → 3차,2023-03-02,4차,2023-03-02,API,IPTV 서비스,찜/평가,개인화,서비스,찜목록 조회,/smartux/getFavoriteList,MSA/On-Premise 간 API를 통한 연동 필요,R,R,,실시간,1,상,,,,IMCS,,,,,,IPTV,
+,MIMS_IPTV_048,반영완료,MIMS,IPTV,2차,2차,2022-06-14,2차,,API,IPTV 서비스,이미지,스토리텔링 / 시니어TV,서비스,갤러리 조회,/smartux/getGalleryList,,R,R,,,1,중,,,,,,,,,,브라보라이프,
+,MIMS_IPTV_049,비전환,MIMS,IPTV,1차,3차,,4차,,API,IPTV 서비스,생활,스토리텔링 / 시니어TV,서비스,생활지수 문구 조회,/smartux/getLifeMessage,,,-,,,,중,,,,,,,,,,브라보라이프,
+,MIMS_IPTV_050,비전환,MIMS,IPTV,1차,3차,,4차,,API,IPTV 서비스,생활,스토리텔링 / 시니어TV,서비스,가입 정보 기반 지역 코드 조회,/smartux/getAreaInfo,,,R,,,,중,,,,,,,,,,브라보라이프,
+,MIMS_IPTV_051,비전환,MIMS,IPTV,1차,3차,,4차,,API,IPTV 서비스,생활,스토리텔링 / 시니어TV,서비스,일별 정보 조회,/smartux/getDayInfo,,,R,,,,중,,,,,,,,,,브라보라이프,
+,MIMS_IPTV_052,비전환,MIMS,IPTV,1차,3차,,4차,,API,IPTV 서비스,시니어/생활,스토리텔링 / 시니어TV,서비스,인사말 정보 조회,/smartux/getGreetingInfo,,,-,,,,중,,,,,,,,,,브라보라이프,
+,MIMS_IPTV_053,비전환,MIMS,IPTV,1차,3차,,4차,,API,IPTV 서비스,시니어/생활,스토리텔링 / 시니어TV,서비스,배경영상 정보 조회,/smartux/getBackgroundImage,,,-,,,,중,,,,,,,,,,브라보라이프,
+,MIMS_IPTV_054,비전환,MIMS,IPTV,1차,3차,,4차,,API,IPTV 서비스,시니어/생활,스토리텔링 / 시니어TV,서비스,순간이동 가능 나라/도시 목록 조회,/smartux/getPaperAnchorList,,,-,,,,중,,,,,,,,,,브라보라이프,
+,MIMS_IPTV_055,비전환,MIMS,IPTV,1차,3차,,4차,,API,IPTV 서비스,시니어/생활,스토리텔링 / 시니어TV,서비스,순간이동 처리,/smartux/findPaperAnchor,,,-,,,,중,,,,,,,,,,브라보라이프,
+,MIMS_IPTV_056,,MIMS,IPTV,1차,2차 → 3차,2023-02-01,5차,2023-02-01,API,IPTV 서비스,컨텐츠,컨텐츠,서비스,화제 동영상 내역 조회,/smartux/hotvod,"어드민 편성기능 동시 오픈 필요
+어드민에서 NAS 쓰는 기능을 DB로 변경 개발 필요. ",R,R,NAS,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라",
+,MIMS_IPTV_057,,MIMS,IPTV,1차,2차 → 3차,2023-02-01,5차,2023-02-01,API,IPTV 서비스,컨텐츠,컨텐츠,서비스,화제 동영상 조회 수 저장,/smartux/hotvod,"MIMS_IPTV_056 (화제 동영상 내역 조회) 와 같이 오픈 필요
+역동기화 기능 필요",R,-,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_058,,MIMS,IPTV,2차,2차 → 3차,2023-02-01,4차,2023-02-01,API,IPTV 서비스,푸시,알림,서비스,Code를 통한 푸시발송 요청,/mims/sendPushCode,,,-,,,,중,,,내부연동,,,,,,,IPTV,3팀
+,MIMS_IPTV_059,,MIMS,IPTV,2차,2차 → 3차,2023-02-01,4차,2023-02-01,API,IPTV 서비스,SMS,알림,서비스,MMS발송요청,/mims/sendMms,,,-,,,,중,,,내부연동,,,,,,,IPTV,3팀
+,MIMS_IPTV_060,반영완료,MIMS,IPTV,1차,1차,2022-04-21,1차,,API,IPTV 서비스,키워드,검색어,서비스,발화어 조회,/smartux/getKeywordList,,R,R,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_061,,MIMS,IPTV,1차,2차 → 3차,2023-02-15,4차,2023-02-15,API,IPTV 서비스,인증,개인화,서비스,프로필 조회,/smartux/v1/profile,MSA/On-Premise 간 API를 통한 연동 필요,R,R,,,,중,,,,,,,,,,IPTV,3팀
+,MIMS_IPTV_062,,MIMS,IPTV,1차,2차 → 3차,2023-02-15,4차,2023-02-15,API,IPTV 서비스,인증,개인화,서비스,프로필 수정,/smartux/v1/profile,MSA/On-Premise 간 API를 통한 연동 필요,RCU,RCU,,,,중,,,,,,,,,,IPTV,3팀
+,MIMS_IPTV_063,반영완료,MIMS,IPTV,1차,2차,2022-05-24,2차,,API,IPTV 서비스,UI,편성,서비스,메뉴별노티정보조회(말풍선),/smartux/getMenuNoti,,R,R,,,1,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_064,,MIMS,IPTV,1차,2차 → 3차,2023-03-02,4차,2023-03-02,API,IPTV 서비스,플레이리스트,개인화,서비스,플레이리스트 폴더 조회,/smartux/play,MSA/On-Premise 간 API를 통한 연동 필요,R,R,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_065,,MIMS,IPTV,1차,2차 → 3차,2023-03-02,4차,2023-03-02,API,IPTV 서비스,플레이리스트,개인화,서비스,플레이리스트 폴더 등록,/smartux/play,MSA/On-Premise 간 API를 통한 연동 필요,C,RC,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_066,,MIMS,IPTV,1차,2차 → 3차,2023-03-02,4차,2023-03-02,API,IPTV 서비스,플레이리스트,개인화,서비스,플레이리스트 폴더 삭제,/smartux/play,MSA/On-Premise 간 API를 통한 연동 필요,RD,RD,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_067,,MIMS,IPTV,1차,2차 → 3차,2023-03-02,4차,2023-03-02,API,IPTV 서비스,플레이리스트,개인화,서비스,플레이리스트 폴더 이름변경,/smartux/playname,MSA/On-Premise 간 API를 통한 연동 필요,U,RU,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_068,,MIMS,IPTV,1차,2차 → 3차,2023-03-02,4차,2023-03-02,API,IPTV 서비스,플레이리스트,개인화,서비스,플레이리스트 조회,/smartux/playlist,MSA/On-Premise 간 API를 통한 연동 필요,R,R,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_069,,MIMS,IPTV,1차,2차 → 3차,2023-03-02,4차,2023-03-02,API,IPTV 서비스,플레이리스트,개인화,서비스,플레이리스트 여부 조회,/smartux/playlistme,MSA/On-Premise 간 API를 통한 연동 필요,R,R,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_070,,MIMS,IPTV,1차,2차 → 3차,2023-03-02,4차,2023-03-02,API,IPTV 서비스,플레이리스트,개인화,서비스,플레이리스트 등록,/smartux/playlist,MSA/On-Premise 간 API를 통한 연동 필요,C,RC,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_071,,MIMS,IPTV,1차,2차 → 3차,2023-03-02,4차,2023-03-02,API,IPTV 서비스,플레이리스트,개인화,서비스,플레이리스트 삭제,/smartux/playlist,MSA/On-Premise 간 API를 통한 연동 필요,D,RD,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_072,반영완료,MIMS,IPTV,1차,2차,2022-05-25,2차,,API,IPTV 서비스,플레이리스트,편성,서비스,가이드채널 링크정보 조회,/smartux/getGuideLink,,R,-,,,1,상,,,,IMCS,,,,,,IPTV,
+,MIMS_IPTV_073,,MIMS,IPTV,1차,2차 → 3차,2023-03-02,4차,2023-03-02,API,IPTV 서비스,플레이리스트,개인화,서비스,페어링가번 플레이리스트 조회,/smartux/playlist/pairing,MSA/On-Premise 간 API를 통한 연동 필요,R,R,,실시간,1,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_074,,MIMS,IPTV,2차,2차 → 3차,2023-02-01,3차,2023-02-01,API,IPTV 서비스,알림,개인화,서비스,실시간 알리미 등록,/nmims/addAlarm,"역동기화 기능 필요
+PT_UX_SBC_ALARM (CRU)",C,CU,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_075,,MIMS,IPTV,2차,2차 → 3차,2023-02-01,3차,2023-02-01,API,IPTV 서비스,알림,개인화,서비스,실시간 알리미 부분삭제,/nmims/removeAlarm,"역동기화 기능 필요
+PT_UX_SBC_ALARM (D)",D,D,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_076,,MIMS,IPTV,2차,2차 → 3차,2023-02-01,3차,2023-02-01,API,IPTV 서비스,알림,개인화,서비스,실시간 알리미 전체삭제,/nmims/removeAlarmAll,"역동기화 기능 필요
+PT_UX_SBC_ALARM (RD)",D,D,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_077,,MIMS,IPTV,2차,2차 → 3차,2023-02-01,3차,2023-02-01,API,IPTV 서비스,알림,개인화,서비스,실시간 알리미 정보 조회,/nmims/getAlarmList,"역동기화 기능 필요
+PT_UX_SBC_ALARM (R)",R,R,,실시간,1,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_078,,MIMS,IPTV,2차,2차 → 3차,2023-02-01,3차,2023-02-01,API,IPTV 서비스,알림,개인화,서비스,실시간 알리미 ON설정 목록 조회,/nmims/getAlarmOnList,"역동기화 기능 필요
+PT_UX_SBC_ALARM (R)",R,R,,실시간,1,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_079,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"PG Pay
+ (IPTV)","PG Pay
+(IPTV)",결제,서비스,복합 선불결제 인증요청,/pgpay/pg/authorization,,,-,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_080,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"PG Pay
+ (IPTV)","PG Pay
+(IPTV)",결제,서비스,복합 선불결제승인요청,/pgpay/pg/approval,,,RCU,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_081,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"TVPay
+ (IPTV)","TVPay
+(IPTV)",결제,서비스,TV Pay 결제 요청(STB->MIMS),/tvpay/v1/payrequest,,,RC,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_082,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"TVPay
+ (IPTV)","TVPay
+(IPTV)",결제,서비스,TV Pay 결제 승인 요청(TVHUB->MIMS),/tvpay/v1/payresponse,,,RU,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_083,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"TVPay
+ (IPTV)","TVPay
+(IPTV)",결제,서비스,TV Pay 결제 취소 요청(TVHUB->MIMS),/tvpay/v1/paycancel,,,-,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_084,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"TVPay
+ (IPTV)","TVPay
+(IPTV)",결제,서비스,TV Pay 부가서비스 가입 요청(STB->MIMS),/tvpay/v1/ppm/payrequest,,,RC,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_085,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"TVPay
+ (IPTV)","TVPay
+(IPTV)",결제,서비스,TV Pay 부가서비스 승인 요청(TVHUB->MIMS),/tvpay/v1/ppm/payresponse,,,RU,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_086,내부API,MIMS,IPTV,2차,3차,,5차,2023-04-2차,배치,"TVPay
+ (IPTV)","TVPay
+(IPTV)",결제,운영,결제내역 개인정보 삭제,결제내역 개인정보 삭제,,,RU,,,,중,,,,,,,배치,,,IPTV,
+,MIMS_IPTV_087,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"청구서 복합 결제
+ (IPTV)","청구서 복합 결제
+(IPTV)",결제,서비스,청구서 복합 결제 요청,/simplepaytv/payrequest,,,RCU,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_088,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"청구서 복합 결제
+ (IPTV)","청구서 복합 결제
+(IPTV)",결제,서비스,Membership 포인트 조회,/simplepaytv/membership/point/auth,,,-,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_089,비전환,MIMS,IPTV,2차,3차,,5차,2023-04-2차,API,"페이나우 복합 결제
+ (IPTV)","페이나우 복합 결제
+(IPTV)",결제,서비스,Paynow 복합 결제 요청,/nowpaytv/payrequest,,,RC,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_090,비전환,MIMS,IPTV,2차,3차,,5차,2023-04-2차,API,"페이나우 복합 결제
+ (IPTV)","페이나우 복합 결제
+(IPTV)",결제,서비스,Paynow 복합 결제 상태 조회,/nowpaytv/status,,,R,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_091,비전환,MIMS,IPTV,2차,3차,,5차,2023-04-2차,API,"페이나우 복합 결제
+ (IPTV)","페이나우 복합 결제
+(IPTV)",결제,서비스,Paynow 복합 결제 취소,/nowpaytv/cancel,,,RU,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_092,비전환,MIMS,IPTV,2차,3차,,5차,2023-04-2차,API,"페이나우 복합 결제
+ (IPTV)","페이나우 복합 결제
+(IPTV)",결제,서비스,Paynow 설치 SMS 발송,/nowpaytv/sendsms,,,-,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_093,내부API,MIMS,IPTV,2차,3차,,5차,2023-04-2차,배치,"페이나우 복합 결제
+ (IPTV)","페이나우 복합 결제
+(IPTV)",결제,운영,결제 키 정보 삭제,결제 키 정보 삭제,,,-,,,,중,,,,,,,배치,,,IPTV,
+,MIMS_IPTV_094,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,자동쿠폰 발급 요청,/cpm/comm/coupon,,,RU,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_095,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,쿠폰번호를 통한 쿠폰발급 요청,/cpm/comm/coupon/no,,,RU,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_096,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,쿠폰함 목록 조회,/cpm/comm/coupon/list,,,R,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_097,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,쿠폰 사용 요청,/cpm/comm/coupon/use,,,R,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_098,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,쿠폰 사용 구매 요청,/cpm/comm/coupon/buy,,,RU,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_099,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,스탬프 발급 요청,/cpm/comm/stamp,,,RCU,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_100,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,스탬프함 상세 정보 조회,/cpm/comm/stamp/info,,,R,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_101,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,스탬프 대상 리스트,/cpm/comm/stamp/contents,,,-,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_102,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,N-Screen 요금제 쿠폰정보 조회,/cpm/comm/coupon/getNSProdCpInfo,,,R,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_103,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,스마트페이퍼용 쿠폰이미지 조회,/cpm/comm/coupon/image,,,-,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_104,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,선불권 안내 메세지 조회,/cpm/comm/prepay/mainComment,,,-,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_105,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,선불권 쿠폰 상품 조회,/cpm/comm/prepay/contents,,,-,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_106,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,선불권 쿠폰 구매,/cpm/comm/prePayCoupon,,,RU,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_107,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,무기명 쿠폰 발급 요청,/cpm/comm/coupon/issue/no,,,R,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_108,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,사용 가능 쿠폰 리스트 정보 조회,/cpm/comm/coupon/use/possible,,,R,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_109,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,발급 가능 쿠폰 리스트 정보 조회,/cpm/comm/coupon/reg/possible,,,R,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_110,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,발급 가능 스탬프 정보 조회,/cpm/comm/stamp/reg/possible,,,R,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_111,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,월정액 쿠폰 사용요청,/cpm/comm/coupon/monthuse,,,R,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_112,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,월정액 캠페인 정보 조회,/cpm/comm/campaign/info,,,-,,,,중,,,,,,,,,,IPTV,
+,MIMS_IPTV_113,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,월정액 캠페인 혜택등록 요청,/cpm/comm/campaign,,,-,,,,상,,,,,,,,,,IPTV,
+,MIMS_IPTV_114,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,월정액 캠페인 혜택해지 요청,/cpm/comm/campaign,,,-,,,,상,,,,,,,,,,IPTV,
+,MIMS_IPTV_115,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[쿠폰Enabler] Offer 정보 동기화,/cpm/comm/coupon/offer,,,CU,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_116,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[쿠폰Enabler] 쿠폰 사용 결과,/cpm/comm/coupon/use/result,,,RCU,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_117,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[쿠폰Enabler] 기명 쿠폰 발급,/cpm/comm/coupon/issue,,,RU,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_118,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[쿠폰Enabler] 기명 쿠폰 발급 취소,/cpm/comm/coupon/cancel,,,RD,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_119,비전환,MIMS,IPTV,2차,3차,,,,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[쿠폰Enabler] 선불권 쿠폰 환불,/cpm/comm/coupon/use/refund,,,RU,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_120,내부API,MIMS,IPTV,2차,3차,,5차,2023-03-1차,배치,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,운영,쿠폰 캐시 생성,쿠폰 캐시 생성,,,-,,,,중,,,내부연동,,,,배치,,,IPTV,
+,MIMS_IPTV_121,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,[GET] TV 포인트 조회 (STB),/mims/point,,,-,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_122,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,[POST] TV 포인트결제 (STB),/mims/point,,,-,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_123,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,TV 포인트 조회 (MIMS),/mims/tvpoint/point,,,-,,,,상,,,내부연동,외부연동,,,,,,"IPTV, 모바일",
+,MIMS_IPTV_124,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,TV 포인트 결제 내역 조회 (MIMS),/mims/tvpoint/list,,,-,,,,상,,,내부연동,외부연동,,,,,,"IPTV, 모바일",
+,MIMS_IPTV_125,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,TV 포인트 결제 (MIMS),/mims/tvpoint/point,,,RCUD,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_126,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,TV 포인트 결제 취소 (MIMS),/mims/tvpoint/point,,,RU,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_127,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,통합포인트조회,/mims/total/point,,,-,,,,상,,,내부연동,외부연동,,,,,,"IPTV, 모바일",
+,MIMS_IPTV_128,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,TV포인트의 전체 제휴 포인트 조회,/mims/tvpoint/partnerpoint,,,-,,,,상,,,내부연동,외부연동,,,,,,"IPTV, 모바일",
+,MIMS_IPTV_129,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"PG Agent
+ (IPTV & 모바일tv)","PG Agent
+(IPTV & 모바일tv)",결제,서비스,선불결제 요청,/pgagent/pg/authorization,,,-,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_130,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"PG Agent
+ (IPTV & 모바일tv)","PG Agent
+(IPTV & 모바일tv)",결제,서비스,선불결제 승인,/pgagent/pg/approval,,,C,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_131,,MIMS,IPTV,2차,3차,2023-03-29,5차,2023-03-29,API,"PG Agent
+ (IPTV & 모바일tv)","PG Agent
+(IPTV & 모바일tv)",결제,서비스,선불결제 승인(쿠폰정보포함),/pgagent/pg/approvalCoupon,,,C,,,,상,,,내부연동,외부연동,,,,,,IPTV,
+,MIMS_IPTV_132,내부API,MIMS,IPTV,2차,2차 → 3차,,,,API,"Push G/W Agent
+ (IPTV & 모바일tv)",푸시,알림,서비스,단건푸시등록,/pushagent/v1/push,,,-,,,,상,,,,외부연동,,,,,,"IPTV, 세컨드TV",
+,MIMS_IPTV_133,내부API,MIMS,IPTV,2차,2차 → 3차,,,,API,"Push G/W Agent
+ (IPTV & 모바일tv)",푸시,알림,서비스,공지푸시등록,/pushagent/v1/announcement,,,-,,,,상,,,,외부연동,,,,,,"IPTV, 세컨드TV",
+,MIMS_IPTV_134,내부API,MIMS,IPTV,2차,2차 → 3차,,,,API,"Push G/W Agent
+ (IPTV & 모바일tv)",푸시,알림,서비스,멀티푸시등록,/pushagent/v1/push/multi,,,-,,,,상,,,,외부연동,,,,,,"IPTV, 세컨드TV",
+,MIMS_IPTV_135,내부API,MIMS,IPTV,2차,2차 → 3차,,,,API,"Push G/W Agent
+ (IPTV & 모바일tv)",푸시,알림,서비스,단건푸시등록,/pushagent_op/v1/push,,,-,,,,상,,,,외부연동,,,,,,"IPTV, 모바일",
+,MIMS_IPTV_136,내부API,MIMS,IPTV,2차,2차 → 3차,,,,API,"Push G/W Agent
+ (IPTV & 모바일tv)",푸시,알림,서비스,공지푸시등록,/pushagent_op/v1/announcement,,,-,,,,상,,,,외부연동,,,,,,"IPTV, 모바일",
+,MIMS_IPTV_137,내부API,MIMS,IPTV,2차,2차 → 3차,,,,API,"Push G/W Agent
+ (IPTV & 모바일tv)",푸시,알림,서비스,멀티푸시등록,/pushagent_op/v1/push/multi,,,-,,,,상,,,,외부연동,,,,,,"IPTV, 모바일",
+,MIMS_IPTV_138,내부API,MIMS,IPTV,2차,2차 → 3차,,,,API,SMS Agent,SMS,알림,서비스,SMS 전송,/smsagent/sms,,,-,,,,상,,,,외부연동,,,,,,IPTV,
+,MIMS_IPTV_139,비전환,MIMS,IPTV,2차,2차 → 3차,비전환,,,API,로그,통계로그,모니터링,운영,CTC 로그데이터 전송,CTC 로그데이터 전송 (18종),,R,R,,,,중,,,,외부연동,,,배치,,,모바일tv,
+,MIMS_IPTV_140,반영완료,MIMS,IPTV,2차,2차,2022-05-25,2차,,API,,,컨텐츠,서비스,왓챠 댓글 목록 조회,/mims/v1/watcha/comment/lists,,R,-,,,1,,,,,,,,,,,,
+,MIMS_IPTV_141,반영완료,MIMS,IPTV,2차,2차,2022-05-25,2차,,API,,,컨텐츠,서비스,Watch 댓글 리스트 조회,/mims/watcha/comment/lists,,R,-,,,1,,,,,,,,,,,,
+,MIMS_IPTV_142,반영완료,MIMS,IPTV,,2차,2022-07-05,2차,,API,,,VOD 프로모션,서비스,팩 카테고리 정보 조회,/smartux/gpack/getPackCategory,,R,RCUD,,,,,,,,,,,,,,,
+,MIMS_IPTV_143,반영완료,MIMS,IPTV,,2차,2022-07-05,2차,,API,,,VOD 프로모션,서비스,"팩정보 및 프로모션ID, 카테고리ID 조회",/smartux/gpack/getPackInfo,,R,-,,,1,,,,,,,,,,,,
+,MIMS_IPTV_144,반영완료,MIMS,IPTV,,2차,2022-07-05,2차,,API,,,VOD 프로모션,서비스,팩 프로모션 정보 조회,/smartux/gpack/getPackPromotion,,U,R,,,1,,,,,,,,,,,,
+,MIMS_IPTV_145,반영완료,MIMS,IPTV,,2차,2022-07-05,2차,,API,,,VOD 프로모션,서비스,팩 버전 가져오기,/smartux/gpack/getPackVersion,,R,R,,,1,,,,,,,,,,,,
+,MIMS_IPTV_146,,MIMS,IPTV,3차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,쿠폰OfferList 조회(CMS),/cpm/cms/v1/coupon/getofferlist,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_147,,MIMS,IPTV,3차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,쿠폰Offer 상세정보 조회(CMS),/cpm/cms/v1/coupon/getofferdetail,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_148,,MIMS,IPTV,3차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,월정액캠페인List조회(CMS),/cpm/cms/v1/coupon/getmonthcmplist,,R,,,,,,,,,,,,,,,,
+,MIMS_IPTV_149,,MIMS,IPTV,3차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,월정액캠페인상세정보조회(CMS),/cpm/cms/v1/coupon/getmonthcmpdetail,,R,,,,,,,,,,,,,,,,
+,MIMS_IPTV_150,,MIMS,IPTV,3차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,월정액캠페인타겟등록(CMS),/cpm/cms/v1/coupon/setmonthcmp,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_151,,MIMS,IPTV,3차,3차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,쿠폰 발급(CMS),/cpm/cms/v1/coupon,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_152,,MIMS,IPTV,3차,3차,2023-03-29,5차,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,복합결제 (단말) - 결제 내역,/tpagent/tvpoint/list,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_153,,MIMS,IPTV,3차,3차,2023-03-29,5차,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,TV 포인트 결제,/tpagent/point,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_154,,MIMS,IPTV,3차,3차,2023-03-29,5차,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,포인트 조회,/tpagent/point,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_155,,MIMS,IPTV,3차,3차,2023-03-29,5차,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,복합결제 (MIMS) - 포인트 결제,/tpagent/tvpoint/point,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_156,,MIMS,IPTV,3차,3차,2023-03-29,5차,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,복합결제 (MIMS) - 포인트 결제 취소,/tpagent/tvpoint/point,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_157,,MIMS,IPTV,3차,3차,2023-03-29,5차,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,복합결제 (단말) - 포인트 조회,/tpagent/tvpoint/point,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_158,,MIMS,IPTV,3차,3차,2023-03-29,5차,2023-03-29,API,"PG Pay
+ (IPTV)","PG Pay
+(IPTV)",결제,서비스,IPTV 소액 결제 요청,/mims/pg/approval,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_159,,MIMS,IPTV,3차,3차,2023-03-29,5차,2023-03-29,API,"PG Pay
+ (IPTV)","PG Pay
+(IPTV)",결제,서비스,IPTV 소액 결제 & 쿠폰 사용,/mims/pg/approvalCoupon,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_160,,MIMS,IPTV,3차,3차,2023-03-29,5차,2023-03-29,API,"PG Pay
+ (IPTV)","PG Pay
+(IPTV)",결제,서비스,IPTV 소액 결제 인증,/mims/pg/authorization,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_161,,MIMS,IPTV,,,2023-03-29,5차,2023-03-29,API,,,결제,서비스,라이브공연 구매 취소,/simplepaytv/cancel,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_162,,MIMS,IPTV,,,2023-02-15,4차,2023-02-15,API,,,개인화,서비스,프로필 정보 조회(TV),/profile/tv/v1/profile/list,,"R, P",,,,,,,,,,,,,,,,3팀
+,MIMS_IPTV_163,,MIMS,IPTV,,,2023-02-15,4차,2023-02-15,API,,,개인화,서비스,프로필 정보 등록(TV),/profile/tv/v1/profile,,"CU, P",,,,,,,,,,,,,,,,3팀
+,MIMS_IPTV_164,,MIMS,IPTV,,,2023-02-15,4차,2023-02-15,API,,,개인화,서비스,프로필 정보 수정(TV),/profile/tv/v1/profile,,"U, P",,,,,,,,,,,,,,,,3팀
+,MIMS_IPTV_165,,MIMS,IPTV,,,2023-02-15,4차,2023-02-15,API,,,개인화,서비스,프로필 정보 삭제(TV),/profile/tv/v1/profile,,"D, P",,,,,,,,,,,,,,,,3팀
+,MIMS_IPTV_166,,MIMS,IPTV,,,2023-02-15,4차,2023-02-15,API,,,개인화,서비스,프로필 페어링 처리 (공통),/profile/mb/v1/pairing,,CU,,,,,,,,,,,,,,,,3팀
+,MIMS_IPTV_167,,MIMS,IPTV,,,2023-02-15,4차,2023-02-15,,,,개인화,서비스,인증토큰 발급,/profile/cm/v1/token,,,,,,,,,,,,,,,,,,3팀
+,MIMS_IPTV_168,,MIMS,IPTV,,,2023-02-15,4차,2023-02-15,API,,,편성,서비스,프로필이미지조회(TV),/smartux/v1/profile/image,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_169,,MIMS,IPTV,,,2023-03-02,4차,2023-03-02,API,,,개인화,서비스,플레이리스트 폴더 선택,/smartux/playSelect,,"R, U",,,,,,,,,,,,,,,,
+,MIMS_IPTV_170,,MIMS,IPTV,,,2023-02-15,4차,2023-02-15,API,,,개인화,서비스,프로필 정보조회(아이들나라),/profile/cm/v1/profile/listToSvr,,R,,,,,,,,,,,,,,,,3팀
+,MIMS_IPTV_171,내부API,MIMS,IPTV,,,,,,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,쿠폰 사용 취소,/cpm/multiple/coupon/cancel,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_172,내부API,MIMS,IPTV,,,,,,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,쿠폰 사용(가처리),/cpm/multiple/coupon/buy,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_173,내부API,MIMS,IPTV,,,,,,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,쿠폰 사용(최종처리),/cpm/multiple/coupon/buy/result,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_174,내부API,MIMS,IPTV,,,,,,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,쿠폰이미지 조회,/cpm/v1/coupon/image,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_175,내부API,MIMS,IPTV,,,,,,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,쿠폰사용 취소(최종결과),/cpm/comm/coupon/use/cancel/result,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_176,내부API,MIMS,IPTV,,,,,,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,기명쿠폰발급 취소요청,/cpm/comm/coupon/issuecancel,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_177,비전환,MIMS,IPTV,,,,,,API,"페이나우 복합 결제
+ (IPTV)","페이나우 복합 결제
+(IPTV)",결제,서비스,Paynow 결제 취소,/mims/paynow/cancel,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_178,비전환,MIMS,IPTV,,,,,,API,"페이나우 복합 결제
+ (IPTV)","페이나우 복합 결제
+(IPTV)",결제,서비스,Paynow 결제,/mims/paynow/request,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_179,비전환,MIMS,IPTV,,,,,,API,"페이나우 복합 결제
+ (IPTV)","페이나우 복합 결제
+(IPTV)",결제,서비스,Paynow Sendsms,/mims/paynow/sendsms,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_180,비전환,MIMS,IPTV,,,,,,API,"페이나우 복합 결제
+ (IPTV)","페이나우 복합 결제
+(IPTV)",결제,서비스,Paynow 상태조회,/mims/paynow/status,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_181,비전환,MIMS,IPTV,,,,,,API,"페이나우 복합 결제
+ (IPTV)","페이나우 복합 결제
+(IPTV)",결제,서비스,Paynow 결제 취소,/mims/v1/paynow/cancel,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_182,비전환,MIMS,IPTV,,,,,,API,"페이나우 복합 결제
+ (IPTV)","페이나우 복합 결제
+(IPTV)",결제,서비스,Paynow 결제,/mims/v1/paynow/request,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_183,비전환,MIMS,IPTV,,,,,,API,"페이나우 복합 결제
+ (IPTV)","페이나우 복합 결제
+(IPTV)",결제,서비스,Paynow Sendsms,/mims/v1/paynow/sendsms,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_184,비전환,MIMS,IPTV,,,,,,API,"페이나우 복합 결제
+ (IPTV)","페이나우 복합 결제
+(IPTV)",결제,서비스,Paynow 상태조회,/mims/v1/paynow/status,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_185,,MIMS,IPTV,,,2023-03-29,,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,파트너 포인트 조회,/tpagent/tvpoint/partnerpoint,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_186,,MIMS,IPTV,,,2023-03-29,,2023-03-29,API,Inapp(IPTV),Inapp(IPTV),결제,서비스,iOS In-App 결제,/mims/inapp,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_187,비전환,MIMS,IPTV,,,,5차,2023-04-2차,API,"KB포인트
+ (IPTV)","KB포인트
+ (IPTV)",결제,서비스,KLU포인트조회 / 사용 / 사용취소,/mims/klu/point,,,,,,,,,,,,,,,,,,
+,MIMS_IPTV_188,비전환,MIMS,IPTV,,,,5차,2023-04-2차,API,"KB포인트
+ (IPTV)","KB포인트
+ (IPTV)",결제,서비스,KLU포인트사용내역조회,/mims/klu/point/list,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_001,,MIMS,MOBILE,,5차,2023-02-15,4차,2023-02-15,API,모바일tv 서비스,인증,개인화,서비스,CTN 가입자 정보 조회,/videolte/v1/ctninfo,,R,R,,,,중,,,,,,,,,,모바일,3팀
+,MIMS_MOBILE_002,,MIMS,MOBILE,,5차,2023-02-01,4차,2023-02-01,API,모바일tv 서비스,설정,설정,서비스,Config 설정정보 CDN IP 갱신,/videolte/comm/setting/cdnip,,RCU,RCU,,,,중,,,,,,,,,,모바일,
+,MIMS_MOBILE_003,,MIMS,MOBILE,,4차,2023-01-16,4차,2023-01-16,API,모바일tv 서비스,설정,설정,서비스,Configuration 설정정보 조회,/hdtv/v1/setting,MIMS_MOBILE_003(Configuration 설정정보 조회),,R,,,,중,,,,,,,,아이들나라,,"모바일tv, 아이들나라",
+,MIMS_MOBILE_004,,MIMS,MOBILE,,5차,2023-01-16,5차,2023-01-16,API,모바일tv 서비스,채팅,편성,서비스,Live 채팅 채널 정보 조회,/videolte/v1/livechat/meta,,,-,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_005,,MIMS,MOBILE,,5차,2023-01-16,3차,2023-01-16,API,모바일tv 서비스,채팅,편성,서비스,Live 채팅방 설정 조회,/videolte/v1/livechat/conf,,R,-,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_006,비전환,MIMS,MOBILE,,5차,,4차,2022-11-2차,API,모바일tv 서비스,푸시,알림,서비스,PUSH 고객 반응 통계 등록,/videolte/v1/push/statsinfo,,,-,,,,중,,,,,,,,,,모바일,
+,MIMS_MOBILE_007,,MIMS,MOBILE,,5차,2023-02-01,4차,2023-02-01,API,모바일tv 서비스,푸시,알림,서비스,PUSH 발송을위한단말정보등록,/hdtv/v1/push/deviceinfo,,RCU,RCU,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_008,,MIMS,MOBILE,,5차,2023-02-01,4차,2023-02-01,API,모바일tv 서비스,푸시,알림,서비스,PUSH 발송을위한단말정보삭제,/hdtv/v1/push/deviceinfo,,D,D,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_009,,MIMS,MOBILE,,5차,2023-02-01,4차,2023-02-01,API,모바일tv 서비스,푸시,알림,서비스,PUSH 발송을위한단말정보수정,/hdtv/v1/push/deviceinfo,,U,U,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_010,내부API,MIMS,MOBILE,,5차,,4차,2022-12-1차,API,모바일tv 서비스,푸시,알림,운영,푸시 로그 생성,푸시 로그 생성,,,-,,,,중,,,,,,,배치,,,모바일tv,
+,MIMS_MOBILE_011,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,컨텐츠,컨텐츠,서비스,UFLIX 가상채널 목록 조회,/hdtv/uflix/vchannel/lists,,,-,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_012,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,컨텐츠,컨텐츠,서비스,UFLIX 가상채널 컨텐츠목록 조회,/hdtv/uflix/vchannel/content,,,-,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_013,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,컨텐츠,편성,서비스,UFLIX 개인화 지면 조회,/uflix/personal/paper,,,R,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_014,,MIMS,MOBILE,,5차,2023-01-26,3차,2023-01-26,API,모바일tv 서비스,UI,편성,서비스,UFLIX 메인화면 편성정보 조회,/hdtv/uflix/main/program,,R,R,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_015,,MIMS,MOBILE,,5차,2023-01-18,3차,2023-01-18,API,모바일tv 서비스,배너,컨텐츠,서비스,UFLIX 배너 그룹 목록 조회,/hdtv/uflix/banner/group/lists,,,R,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_016,,MIMS,MOBILE,,5차,2023-01-26,5차,2023-01-26,API,모바일tv 서비스,배너,컨텐츠,서비스,UFLIX 배너 목록 조회,/hdtv/uflix/banner/lists,,,R,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_017,,MIMS,MOBILE,,5차,2023-01-26,3차,2023-01-26,API,모바일tv 서비스,배너,컨텐츠,서비스,UFLIX 배너추천 조회,/uflix/linkbanner,,,-,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_018,,MIMS,MOBILE,,5차,2023-01-18,,2023-01-18,API,모바일tv 서비스,별점,개인화,서비스,UFLIX 별점 조회,/uflix/starRating/getPoint,,R,R,,,,중,,,,,,,,,,영화월정액,3팀
+,MIMS_MOBILE_019,,MIMS,MOBILE,,5차,2023-01-18,,2023-01-18,API,모바일tv 서비스,별점,개인화,서비스,UFLIX 별점내역 등록,/uflix/starRating/regPoint,,RCU,RCU,,,,중,,,,,,,,,,영화월정액,3팀
+,MIMS_MOBILE_020,,MIMS,MOBILE,,5차,2023-01-18,,2023-01-18,API,모바일tv 서비스,별점,개인화,서비스,UFLIX 별점목록 조회,/uflix/starRating/getList,,R,-,,,,중,,,,,,,,,,영화월정액,3팀
+,MIMS_MOBILE_021,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,별점,개인화,운영,UFLIX 별점 캐시 갱신,별점 캐시 갱신,,,-,,,,중,,,내부연동,,,,배치,,,영화월정액,
+,MIMS_MOBILE_022,,MIMS,MOBILE,,5차,2023-01-16,3차,2023-01-16,API,모바일tv 서비스,인증,개인화,서비스,UFLIX 성인인증 저장,/hdtv/uflix/adult/adultauthset,,RCU,RCU,,,,중,,,,,,,,,,영화월정액,3팀
+,MIMS_MOBILE_023,,MIMS,MOBILE,,5차,2023-01-16,3차,2023-01-16,API,모바일tv 서비스,인증,개인화,서비스,UFLIX 성인인증 조회,/hdtv/uflix/adult/adultauthinfo,,R,R,,,,중,,,,,,,,,,영화월정액,3팀
+,MIMS_MOBILE_024,,MIMS,MOBILE,,5차,2023-01-26,3차,2023-01-26,API,모바일tv 서비스,UI,편성,서비스,UFLIX 시즌 조회,/uflix/season/category,,R,R,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_025,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,배너,컨텐츠,서비스,UFLIX 신규 랜딩 배너,/uflix/banner/landing,,,-,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_026,,MIMS,MOBILE,,5차,2023-01-16,3차,2023-01-16,API,모바일tv 서비스,약관,약관,서비스,UFLIX 약관 내용 조회,/hdtv/uflix/terms,,R,-,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_027,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,이벤트,공지,서비스,UFLIX 이벤트 내용 조회,/uflix/event/{게시글 번호},,,R,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_028,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,이벤트,공지,서비스,UFLIX 이벤트 당첨자 조회,/uflix/event/winner,,,-,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_029,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,이벤트,공지,서비스,UFLIX 이벤트 목록 조회,/uflix/event,,,R,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_030,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,이벤트,공지,서비스,UFLIX 이벤트 참여통계 등록,/uflix/event/stat,,,-,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_031,,MIMS,MOBILE,,5차,2023-01-16,3차,2023-01-16,API,모바일tv 서비스,이용권,약관,서비스,UFLIX 이용권 저장,/hdtv/uflix/accessinfo/setaccess,,RCU,RCU,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_032,,MIMS,MOBILE,,5차,2023-01-16,3차,2023-01-16,API,모바일tv 서비스,이용권,약관,서비스,UFLIX 이용권 조회,/hdtv/uflix/accessinfo/getaccess,,R,R,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_033,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,키워드,검색어,서비스,UFLIX 인기 검색어 조회,/uflix/hotkeyword,,,R,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_034,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,개인화,편성,서비스,UFLIX 추천 POC 그룹 조회,/uflix/recommend/group,,,-,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_035,,MIMS,MOBILE,,5차,2023-01-16,3차,2023-01-16,API,모바일tv 서비스,키워드,검색어,서비스,UFLIX 추천 검색어 조회,/hdtv/uflix/search/keyword,,R,-,,,,중,,,,,,,,,,영화월정액,3팀
+,MIMS_MOBILE_036,,MIMS,MOBILE,,5차,2023-01-26,5차,2023-01-26,API,모바일tv 서비스,카테고리,컨텐츠,서비스,UFLIX 카테고리 조회,/hdtv/uflix/category/{카테고리 구분},,,R,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_037,,MIMS,MOBILE,,5차,2023-01-26,5차,2023-01-26,API,모바일tv 서비스,컨텐츠,컨텐츠,서비스,UFLIX 컨텐츠 조회,/hdtv/uflix/content/{컨텐츠구분},,,R,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_038,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,켄텐츠,컨텐츠,서비스,UFLIX 큐레이션 목록 조회,/uflix/curation,,,R,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_039,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,켄텐츠,컨텐츠,서비스,UFLIX 큐레이션 조회수 저장,/uflix/curation,,,-,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_040,,MIMS,MOBILE,,5차,2023-01-26,5차,2023-01-26,API,모바일tv 서비스,테마,편성,서비스,UFLIX 테마 컨텐츠 조회,/hdtv/uflix/theme/content,,R,-,,,,중,,,,,,,,,,영화월정액,3팀
+,MIMS_MOBILE_041,,MIMS,MOBILE,,5차,2023-01-26,5차,2023-01-26,API,모바일tv 서비스,테마,편성,서비스,UFLIX 테마목록 조회,/hdtv/uflix/theme/lists,,R,-,,,,중,,,,,,,,,,영화월정액,3팀
+,MIMS_MOBILE_042,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,푸시,알림,서비스,UFLIX 푸시결과 트래킹 등록,/uflix/push/tracking,,,-,,,,중,,,,,,,,,,영화월정액,
+,MIMS_MOBILE_043,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,개인화,개인화,서비스,Video LTE MyCut 가능여부 조회,/videolte/v1/myCut/info,,,-,,,,중,,,,,,,,,,단말호출안함,
+,MIMS_MOBILE_044,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,개인화,개인화,서비스,Video LTE MyCut 등록,/videolte/v1/myCut/info,,,-,,,,중,,,,,,,,,,단말호출안함,
+,MIMS_MOBILE_045,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,개인화,개인화,서비스,Video LTE MyCut 목록 조회,/videolte/v1/myCut/,,,R,,,,중,,,,,,,,,,단말호출안함,
+,MIMS_MOBILE_046,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,개인화,개인화,서비스,Video LTE MyCut 삭제,/videolte/v1/myCut,,,D,,,,중,,,,,,,,,,단말호출안함,
+,MIMS_MOBILE_047,비전환,MIMS,MOBILE,,5차,,5차,2022-11-2차,API,모바일tv 서비스,컨텐츠,컨텐츠,서비스,Video LTE 연관 하이라이트 목록 조회,/hdtv/v1/highlight,,,-,,,,중,,,,,,,,,,모바일,
+,MIMS_MOBILE_048,비전환,MIMS,MOBILE,,5차,,5차,2022-11-2차,API,모바일tv 서비스,컨텐츠,컨텐츠,서비스,Video LTE 하이라이트 상세 조회,/hdtv/v1/highlight/view,,,-,,,,중,,,,,,,,,,모바일,
+,MIMS_MOBILE_049,,MIMS,MOBILE,,5차,2023-02-15,4차,2023-02-15,API,모바일tv 서비스,개인화,개인화,서비스,Video Potal 개인화 프로필 수정,/videolte/v1/profile,,CU,CU,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_050,,MIMS,MOBILE,,5차,2023-02-15,4차,2023-02-15,API,모바일tv 서비스,개인화,개인화,서비스,Video Potal 개인화 프로필 조회,/videolte/v1/profile,,R,R,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_051,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,컨텐츠,편성,서비스,Video Today 데이터(다이제스트) 조회,/hdtv/v1/videotoday,,,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_052,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,컨텐츠,편성,서비스,Video Today 지난 기사 일자 리스트 조회,/hdtv/v1/videotoday/list,,,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_053,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,개인화,개인화,서비스,WHY,/videolte/v1/why,,,R,,,,중,,,,,,,,,,단말호출안함,
+,MIMS_MOBILE_054,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,UI,편성,서비스,videolte GNB 메뉴 목록 조회,/videolte/v1/gnb,,,-,,,,중,,,,,,,,,,단말호출안함,
+,MIMS_MOBILE_055,,MIMS,MOBILE,,5차,2023-01-16,4차,2023-01-16,API,모바일tv 서비스,게시판,공지,서비스,게시판 분류타입조회,/hdtv/v2/notice/{게시판아이디}/type,,R,R,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_056,,MIMS,MOBILE,,5차,2023-01-26,4차,2023-01-26,API,모바일tv 서비스,게시판,공지,서비스,게시판 이벤트 참여,/hdtv/v1/event/member,,C,RU,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_057,,MIMS,MOBILE,,5차,2023-01-18,4차,2023-01-18,API,모바일tv 서비스,공유,개인화,서비스,공유하기 등록,/videolte/musicshow/share,,"C, M",-,,,,중,,,,,,,,,,아이돌Live,3팀
+,MIMS_MOBILE_058,비전환,MIMS,MOBILE,,4차,,,,API,모바일tv 서비스,공지,공지,서비스,공지내용 조회,/hdtv/v1/notice/{게시판아이디}/{게시물 번호},MIMS_MOBILE_058(공지내용 조회),,R,,,,중,,,,,,,,아이들나라,,"모바일tv, 아이들나라",
+,MIMS_MOBILE_059,,MIMS,MOBILE,,4차,2023-01-18,4차,2023-01-18,API,모바일tv 서비스,공지,공지,서비스,공지내용 조회(Phase3),/hdtv/v2/notice/{게시판아이디}/{게시물 번호},MIMS_MOBILE_059(공지내용 조회(Phase3)),,R,,,,중,,,,,,,,아이들나라,,"모바일tv, 아이들나라",
+,MIMS_MOBILE_060,비전환,MIMS,MOBILE,,4차,,,,API,모바일tv 서비스,공지,공지,서비스,공지목록 조회,/hdtv/v1/notice/{게시판아이디},MIMS_MOBILE_060(공지목록 조회),,R,,,,중,,,,,,,,아이들나라,,"모바일tv, 아이들나라",
+,MIMS_MOBILE_061,,MIMS,MOBILE,,4차,2023-01-18,4차,2023-01-18,API,모바일tv 서비스,공지,공지,서비스,공지목록 조회(Phase3),/hdtv/v2/notice/{게시판ID},MIMS_MOBILE_061(공지목록 조회(Phase3)),,R,,,,중,,,,,,,,아이들나라,,"모바일tv, 아이들나라",
+,MIMS_MOBILE_062,,MIMS,MOBILE,,5차,2023-01-18,5차,2023-01-18,API,모바일tv 서비스,광고,컨텐츠,서비스,광고라이브 리스트,/hdtv/v1/ad,,,R,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_063,비전환,MIMS,MOBILE,,5차,,4차,2022-11-2차,API,모바일tv 서비스,개인화,개인화,서비스,그룹 수정,/videolte/v1/group,,CU,CU,,,,중,,,,,,,,,,단말호출안함,3팀
+,MIMS_MOBILE_064,비전환,MIMS,MOBILE,,5차,,4차,2022-11-2차,API,모바일tv 서비스,개인화,개인화,서비스,그룹 조회,/videolte/v1/group,,R,R,,,,중,,,,,,,,,,단말호출안함,3팀
+,MIMS_MOBILE_065,,MIMS,MOBILE,,4차,2023-01-18,4차,2023-01-18,API,모바일tv 서비스,공지,공지,서비스,긴급(비상)팝업공지및품질수집정보조회,/hdtv/v1/startup/noti,MIMS_MOBILE_065(긴급(비상)팝업공지및품질수집정보조회),,R,,,,중,,,,,,,,아이들나라,,"모바일tv, 아이들나라",
+,MIMS_MOBILE_066,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,컨텐츠,편성,서비스,맛집|여행지 목록 조회,/videolte/v1/hotplace,,,-,,,,중,,,,,,,,,,단말호출안함,
+,MIMS_MOBILE_067,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,컨텐츠,편성,운영,맛집/여행지 캐시 갱신,맛집/여행지 캐시 갱신,,,-,,,,중,,,내부연동,,,,배치,,,모바일,
+,MIMS_MOBILE_068,,MIMS,MOBILE,,4차,2023-01-16,3차,2023-01-16,API,모바일tv 서비스,UI,편성,서비스,메뉴 목록 조회,/videolte/v1/menu,MIMS_MOBILE_068(메뉴 목록 조회),,R,,,,중,,,,,,,,아이들나라,,"모바일tv,아이들나라,아이돌Live,VR,골프",
+,MIMS_MOBILE_069,비전환,MIMS,MOBILE,,5차,,5차,,API,모바일tv 서비스,UI,편성,서비스,메인화면정보조회,/hdtv/v1/main,,,-,,,,중,,,,,,,,,,hdtv,
+,MIMS_MOBILE_070,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,UI,편성,서비스,모드 목록 조회,/videolte/v1/mode,,,R,,,,중,,,,,,,,,,비디오포털,
+,MIMS_MOBILE_071,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,쿠폰,쿠폰,서비스,무료이용 쿠폰 리스트,/hdtv/v1/coupon + [send | receive],,,R,,,,중,,,,,,,,,,단말호출안함,
+,MIMS_MOBILE_072,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,쿠폰,쿠폰,서비스,무료이용 쿠폰 발급,/hdtv/v1/coupon,,,R,,,,중,,,,,,,,,,단말호출안함,
+,MIMS_MOBILE_073,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,쿠폰,쿠폰,서비스,무료이용 쿠폰 사용,/hdtv/v1/coupon,,,RU,,,,중,,,,,,,,,,단말호출안함,
+,MIMS_MOBILE_074,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,쿠폰,쿠폰,서비스,무료이용 쿠폰 삭제,/hdtv/v1/coupon,,,D,,,,중,,,,,,,,,,단말호출안함,
+,MIMS_MOBILE_075,,MIMS,MOBILE,,5차,2023-02-01,4차,2023-02-01,API,모바일tv 서비스,알림,알림,서비스,뮤직공연 콘서트 LIVE 알람 등록,/videolte/musicshow/push,,,RCUD,,,,중,,,,,,,,,,아이돌Live,
+,MIMS_MOBILE_076,,MIMS,MOBILE,,5차,2023-02-01,4차,2023-02-01,API,모바일tv 서비스,알림,알림,서비스,뮤직공연 콘서트 LIVE 알람 삭제,/videolte/musicshow/push,,,RCUD,,,,중,,,,,,,,,,아이돌Live,
+,MIMS_MOBILE_077,,MIMS,MOBILE,,5차,2023-02-01,4차,2023-02-01,API,모바일tv 서비스,알림,알림,서비스,뮤직공연 콘서트 LIVE 알람 여부 조회,/videolte/musicshow/push,,,R,,,,중,,,,,,,,,,아이돌Live,
+,MIMS_MOBILE_078,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,통계,모니터링,서비스,미디어커머스 통합통계,/videolte/v1/media/hit,,,-,,,,중,,,,,,,,,,모바일,
+,MIMS_MOBILE_079,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,별점,개인화,서비스,별점 등록,/videolte/v1/star,,,RCU,,,,중,,,,,,,,,,단말호출안함,
+,MIMS_MOBILE_080,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,별점,개인화,서비스,별점 리스트 조회,/videolte/v1/star,,,R,,,,중,,,,,,,,,,단말호출안함,
+,MIMS_MOBILE_081,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,별점,개인화,서비스,별점목록등록,/videolte/v1/starRating,,,RCU,,,,중,,,,,,,,,,단말호출안함,
+,MIMS_MOBILE_082,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,별점,개인화,서비스,별점목록조회,/videolte/v1/starRating,,,R,,,,중,,,,,,,,,,단말호출안함,
+,MIMS_MOBILE_083,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,별점,개인화,운영,별점 캐시 갱신,별점 캐시 갱신,,,-,,,,중,,,,,,,,,,단말호출안함,
+,MIMS_MOBILE_084,,MIMS,MOBILE,,5차,2023-01-18,5차,2023-01-18,API,모바일tv 서비스,컨텐츠,개인화,서비스,비슷한 콘텐츠 조회,/videolte/similar,,,R,,,,상,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_085,,MIMS,MOBILE,,5차,2023-02-01,5차,2023-02-01,API,모바일tv 서비스,UI,편성,서비스,빅스비 패널 조회,/videolte/v1/bixby/panel,,R,R,,,,상,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_086,비전환,MIMS,MOBILE,,5차,,3차,2022-11-2차,API,모바일tv 서비스,이미지,컨텐츠,서비스,상품 이미지 캐시갱신 요청,/videolte/product/image,,,R,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_087,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,스토리텔링,스토리텔링 / 시니어TV,서비스,스토리텔링 Follow 신청_해지,/videolte/v1/storytelFollow,,,R,,,,중,,,,,,,,,,"모바일tv,프로야구",
+,MIMS_MOBILE_088,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,스토리텔링,스토리텔링 / 시니어TV,서비스,스토리텔링 Follow 신청_해지 조회,/videolte/v1/storytelFollow,,,RCD,,,,중,,,,,,,,,,"모바일tv,프로야구",
+,MIMS_MOBILE_089,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,스토리텔링,스토리텔링 / 시니어TV,서비스,스토리텔링 그룹 목록 조회,/videolte/v1/storytelGroupView,,,R,,,,상,,,,,,,,,,"모바일tv,프로야구",
+,MIMS_MOBILE_090,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,스토리텔링,스토리텔링 / 시니어TV,서비스,스토리텔링 상세조회,/videolte/v1/storytelView,,,R,,,,상,,,,,,,,,,"모바일tv,프로야구",
+,MIMS_MOBILE_091,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,스토리텔링,스토리텔링 / 시니어TV,서비스,스토리텔링 이벤트 횟수 저장,/videolte/v1/storytelEvent,,,R,,,,중,,,,,,,,,,"모바일tv,프로야구",
+,MIMS_MOBILE_092,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,스토리텔링,스토리텔링 / 시니어TV,운영,스토리텔링 이벤트 공유/좋아요/조회수 갱신,스토리텔링 이벤트 공유/좋아요/조회수 갱신,,,-,,,,중,,,내부연동,,,,배치,,,"모바일tv,프로야구",
+,MIMS_MOBILE_093,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,스토리텔링,스토리텔링 / 시니어TV,서비스,스토리텔링 추천_관련영상,/videolte/v1/storytelContents,,,R,,,,중,,,,,,,,,,"모바일tv,프로야구",
+,MIMS_MOBILE_094,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,스토리텔링,스토리텔링 / 시니어TV,서비스,스토리텔링 투표결과,/videolte/v1/storytelVoteResult,,,R,,,,중,,,,,,,,,,"모바일tv,프로야구",
+,MIMS_MOBILE_095,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,스토리텔링,스토리텔링 / 시니어TV,서비스,스토리텔링 투표하기,/videolte/v1/storytelVote,,,RC,,,,중,,,,,,,,,,"모바일tv,프로야구",
+,MIMS_MOBILE_096,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,스토리텔링,스토리텔링 / 시니어TV,운영,스토리텔링 투표수 캐시 갱신,스토리텔링 투표수 캐시 갱신,,,-,,,,중,,,내부연동,,,,배치,,,"모바일tv,프로야구",
+,MIMS_MOBILE_097,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,컨텐츠,편성,서비스,시즌 목록 조회,/videolte/v1/season/category,,,R,,,,중,,,,,,,,,,모바일,
+,MIMS_MOBILE_098,,MIMS,MOBILE,,5차,2023-01-18,4차,2023-01-18,API,모바일tv 서비스,이벤트,공지,서비스,시청 응모하기 여부 조회,/videolte/musicshow/entry,,R,R,,,,중,,,,,,,,,,아이돌Live,3팀
+,MIMS_MOBILE_099,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,신고,컨텐츠,서비스,신고 내역 등록,/videolte/v1/report,,,C,,,,중,,,,,,,,,,모바일,
+,MIMS_MOBILE_100,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,신고,컨텐츠,서비스,신고 목록 조회,/videolte/v1/report,,,-,,,,중,,,,,,,,,,모바일,
+,MIMS_MOBILE_101,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,약관,약관,서비스,"약관 동의, 미동의 상태 조회",/videolte/v1/agree,,,R,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_102,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,약관,약관,서비스,약관 등록,/videolte/v1/agree,,,RC,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_103,비전환,MIMS,MOBILE,,5차,,4차,2022-11-1차,API,모바일tv 서비스,약관,약관,서비스,약관동의삭제,/hdtv/v1/terms,,,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_104,비전환,MIMS,MOBILE,,5차,,4차,2022-11-1차,API,모바일tv 서비스,약관,약관,서비스,약관동의여부조회,/hdtv/v1/terms,,,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_105,비전환,MIMS,MOBILE,,5차,,4차,2022-11-1차,API,모바일tv 서비스,약관,약관,서비스,약관동의저장,/hdtv/v1/terms,,,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_106,,MIMS,MOBILE,,5차,2023-01-16,3차,2023-01-16,API,모바일tv 서비스,컨텐츠,컨텐츠,서비스,왓챠 댓글 목록 조회 (모바일),/mims/v1/watcha/comment/lists,,R,R,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_107,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,컨텐츠,컨텐츠,운영,왓차 댓글 캐시 초기화,왓차 댓글 캐시 초기화,,,-,,,,중,,,내부연동,,,,배치,,,모바일tv,
+,MIMS_MOBILE_108,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,배너,컨텐츠,서비스,월정액 배너 조회,/uflix/comm/ad,,,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_109,,MIMS,MOBILE,,5차,2023-02-01,5차,2023-02-01,API,모바일tv 서비스,UI,편성,서비스,위젯 정보 조회,/videolte/v3/panel/widget,,R,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_110,내부API,MIMS,MOBILE,,5차,,5차,2022-11-1차,API,모바일tv 서비스,UI,편성,운영,위젯 캐시 갱신,위젯 캐시 갱신,,,-,,,,중,,,내부연동,,,,배치,,,모바일tv,
+,MIMS_MOBILE_111,,MIMS,MOBILE,,4차,2023-01-18,4차,2023-01-18,API,모바일tv 서비스,이벤트,공지,서비스,이벤트 당첨자 조회,/videolte/v1/event/winner,MIMS_MOBILE_111(이벤트 당첨자 조회),RM,R,,,,중,,,,,,,,아이들나라,,"모바일tv, 아이들나라",
+,MIMS_MOBILE_112,비전환,MIMS,MOBILE,,4차,,4차,2022-11-1차,API,모바일tv 서비스,이벤트,공지,서비스,이벤트 참여통계 등록,/hdtv/v1/stat,MIMS_MOBILE_112(이벤트 참여통계 등록),,-,,,,중,,,,,,,,아이들나라,,"모바일tv, 아이들나라",
+,MIMS_MOBILE_113,,MIMS,MOBILE,,4차,2023-01-18,4차,2023-01-18,API,모바일tv 서비스,이벤트,공지,서비스,이벤트내용 조회,/hdtv/v1/event/{게시판아이디}/{글아이디},MIMS_MOBILE_113(이벤트내용 조회),R,R,,,,중,,,,,,,,아이들나라,,"모바일tv, 아이들나라",
+,MIMS_MOBILE_114,,MIMS,MOBILE,,4차,2023-01-18,4차,2023-01-18,API,모바일tv 서비스,이벤트,공지,서비스,이벤트목록 조회,/hdtv/v1/event/{게시판아이디},MIMS_MOBILE_114(이벤트목록 조회),R,-,,,,중,,,,,,,,아이들나라,,"모바일tv, 아이들나라",
+,MIMS_MOBILE_115,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,키워드,검색어,서비스,이슈키워드 조회,/hdtv/v1/keyword/naver,,,R,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_116,,MIMS,MOBILE,,5차,2023-01-18,4차,2023-01-18,API,모바일tv 서비스,약관,약관,서비스,약관동의 리스트 (모바일),/mims/access/getAccess,,R,R,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_117,,MIMS,MOBILE,,5차,2023-01-26,4차,2023-01-26,API,모바일tv 서비스,약관,약관,서비스,약관동의 상세조회 (모바일),/mims/access/getAccessDetail,,R,R,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_118,,MIMS,MOBILE,,5차,2023-01-18,4차,2023-01-18,API,모바일tv 서비스,약관,약관,서비스,약관동의 정보 저장 (모바일),/mims/access/setAccess,,RCU,RCU,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_119,,MIMS,MOBILE,,5차,2023-01-16,3차,2023-01-16,API,모바일tv 서비스,키워드,검색어,서비스,인기검색어 목록 조회,/videolte/v1/hotkeyword,,R,-,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_120,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,통계,모니터링,서비스,입점관 통계 등록,/videolte/storehouse/stat,,,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_121,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,UI,편성,서비스,전체 카테고리 목록 조회,/hdtv/v1/category/youtube,,,R,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_122,,MIMS,MOBILE,,5차,2023-01-16,3차,2023-01-16,API,모바일tv 서비스,UI,편성,서비스,주요장르 조회,/videolte/v1/genre,,R,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_123,,MIMS,MOBILE,,5차,2023-02-01,5차,2023-02-01,API,모바일tv 서비스,UI,편성,서비스,지면 조회,/videolte/v1/paper,,R,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_124,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,찜,개인화,서비스,찜 목록 조회,/videolte/v1/wish,,,R,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_125,,MIMS,MOBILE,,5차,2023-03-02,4차,2023-03-02,API,모바일tv 서비스,찜,개인화,서비스,찜 평가 여부 조회,/videolte/getLikeAndFavorite,,R,R,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_126,,MIMS,MOBILE,,5차,2023-03-02,4차,2023-03-02,API,모바일tv 서비스,찜,개인화,서비스,찜목록 조회,/videolte/getFavoriteList,,R,R,,,,상,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_127,,MIMS,MOBILE,,5차,2023-03-02,4차,2023-03-02,API,모바일tv 서비스,찜,개인화,서비스,찜하기,/videolte/setFavorite,,"RCD, P",RCD,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_128,,MIMS,MOBILE,,5차,2023-02-01,4차,2023-02-01,API,모바일tv 서비스,알림,알림,서비스,최신회차 알림 등록,/hdtv/v1/latest,,RCD,RC,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_129,,MIMS,MOBILE,,5차,2023-02-01,4차,2023-02-01,API,모바일tv 서비스,알림,알림,서비스,최신회차 알림 삭제,/hdtv/v1/latest,,D,D,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_130,,MIMS,MOBILE,,5차,2023-02-01,4차,2023-02-01,API,모바일tv 서비스,알림,알림,서비스,최신회차 알림 조회,/hdtv/v1/latest,,R,R,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_131,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,약관,약관,서비스,추천BMT 개인정보 이용동의 저장,/uflix/poc/privacy,,,RCU,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_132,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,약관,약관,서비스,추천BMT 개인정보 이용동의 조회,/uflix/linkbanner,,,R,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_133,,MIMS,MOBILE,,5차,2023-01-16,3차,2023-01-16,API,모바일tv 서비스,키워드,검색어,서비스,추천검색어 조회,/videolte/v1/searchkeyword,,R,-,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_134,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,컨텐츠,컨텐츠,서비스,컨텐츠 상품메타 조회,/videolte/v1/media/product,,,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_135,비전환,MIMS,MOBILE,,5차,,,,API,모바일tv 서비스,컨텐츠,컨텐츠,서비스,컨텐츠 상품메타 캐시삭제,/videolte/v1/media/product,,,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_136,내부API,MIMS,MOBILE,,5차,,5차,2022-10-1차,API,모바일tv 서비스,컨텐츠,컨텐츠,운영,VOD 메타 캐시 파일저장,VOD 메타 캐시 파일저장,,-,-,,,,중,,,,,,,배치,,,모바일tv,
+,MIMS_MOBILE_137,,MIMS,MOBILE,,5차,2023-02-01,5차,2023-02-01,API,모바일tv 서비스,컨텐츠,편성,서비스,컨텐츠 조회 수 저장,/videolte/v1/content/page/count,,,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_138,,MIMS,MOBILE,,5차,2023-02-01,5차,2023-02-01,API,모바일tv 서비스,컨텐츠,편성,서비스,컨텐츠 조회 수 조회,/videolte/v1/content/page/count,,,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_139,내부API,MIMS,MOBILE,,5차,,5차,2022-10-1차,API,모바일tv 서비스,컨텐츠,컨텐츠,운영,컨텐츠 조회수 캐시 갱신,컨텐츠 조회수 캐시 갱신,,,-,,,,중,,,내부연동,,,,배치,,,모바일tv,
+,MIMS_MOBILE_140,,MIMS,MOBILE,,5차,2023-02-01,4차,2023-02-01,API,모바일tv 서비스,알림,공지,서비스,콘서트 LIVE 알람 & 시청 응모하기 여부 조회,/videolte/musicshow/pushentry,,R,R,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_141,,MIMS,MOBILE,,5차,2023-03-02,4차,2023-03-02,API,모바일tv 서비스,별점,개인화,서비스,평가하기,/videolte/setLike,,"RCUD, P",RCUD,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_142,비전환,MIMS,MOBILE,,5차,,5차,2022-10-2차,API,모바일tv 서비스,UI,편성,서비스,"홈,서브 패널 조회(v1)",/videolte/v1/panel,,,-,,,,상,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_143,비전환,MIMS,MOBILE,,5차,,5차,2022-11-2차,API,모바일tv 서비스,UI,편성,서비스,"홈,서브 패널 조회(v2)",/videolte/v2/panel,,,-,,,,상,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_144,,MIMS,MOBILE,,5차,2023-02-01,5차,2023-02-01,API,모바일tv 서비스,UI,편성,서비스,"홈,서브 패널 조회(v3)",/videolte/v3/panel,,R,-,,,,최상,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_145,내부API,MIMS,MOBILE,,5차,,5차,2022-10-2차,API,모바일tv 서비스,UI,편성,운영,패널 캐시 갱신,패널 캐시 갱신,,,,,,,중,,,내부연동,,,,배치,,,모바일tv,
+,MIMS_MOBILE_146,,MIMS,MOBILE,,4차,2023-02-01,5차,2023-02-01,API,모바일tv 서비스,컨텐츠,컨텐츠,서비스,화제동영상내역조회,/hdtv/v1/hotvod,MIMS_MOBILE_146(화제동영상내역조회),,R,,,,상,,,,,,,,아이들나라,,"모바일tv, 아이들나라",
+,MIMS_MOBILE_147,,MIMS,MOBILE,,4차,2023-02-01,5차,2023-02-01,API,모바일tv 서비스,컨텐츠,컨텐츠,서비스,화제동영상조회수저장,/hdtv/v1/hotvod,MIMS_MOBILE_147(화제동영상조회수저장),,-,,,,중,,,,,,,,아이들나라,,"모바일tv, 아이들나라",
+,MIMS_MOBILE_148,내부API,MIMS,MOBILE,,4차,,5차,2022-10-1차,API,모바일tv 서비스,컨텐츠,컨텐츠,운영,대박영상 조회수 캐시 갱신,대박영상 조회수 캐시 갱신,MIMS_MOBILE_148(대박영상 조회수 캐시 갱신),,R,,,,중,,,내부연동,,,,배치,아이들나라,,"모바일tv, 아이들나라",
+,MIMS_MOBILE_149,,MIMS,MOBILE,,5차,2023-03-02,5차,2023-03-02,API,모바일tv 서비스,찜,컨텐츠,서비스,화제동영상찜등록,/hdtv/v1/hotvod/favor,,,RC,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_150,,MIMS,MOBILE,,5차,2023-03-02,5차,2023-03-02,API,모바일tv 서비스,찜,컨텐츠,서비스,화제동영상찜목록,/hdtv/v1/hotvod/favor,,,R,,,,상,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_151,,MIMS,MOBILE,,5차,2023-03-02,5차,2023-03-02,API,모바일tv 서비스,찜,컨텐츠,서비스,화제동영상찜삭제,/hdtv/v1/hotvod/favor,,,RD,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_152,,MIMS,MOBILE,,4차,2023-01-16,3차,2023-01-16,API,모바일tv 서비스,키워드,편성,서비스,메뉴별노티정보조회(말풍선),/videolte/getMenuNoti,MIMS_MOBILE_152(메뉴별노티정보조회(말풍선)),,-,,,,중,,,,,,,,아이들나라,,"모바일tv, 아이들나라",
+,MIMS_MOBILE_153,,MIMS,MOBILE,,5차,2023-03-02,4차,2023-03-02,API,모바일tv 서비스,플레이리스트,개인화,서비스,플레이리스트 폴더 조회,/videolte/play,,R,R,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_154,,MIMS,MOBILE,,5차,2023-03-02,4차,2023-03-02,API,모바일tv 서비스,플레이리스트,개인화,서비스,플레이리스트 폴더 등록,/videolte/play,,RC,RC,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_155,,MIMS,MOBILE,,5차,2023-03-02,4차,2023-03-02,API,모바일tv 서비스,플레이리스트,개인화,서비스,플레이리스트 폴더 삭제,/videolte/play,,RD,RD,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_156,,MIMS,MOBILE,,5차,2023-03-02,4차,2023-03-02,API,모바일tv 서비스,플레이리스트,개인화,서비스,플레이리스트 폴더 이름변경,/videolte/playname,,RU,RU,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_157,,MIMS,MOBILE,,5차,2023-03-02,4차,2023-03-02,API,모바일tv 서비스,플레이리스트,개인화,서비스,플레이리스트 조회,/videolte/playlist,,R,R,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_158,,MIMS,MOBILE,,5차,2023-03-02,4차,2023-03-02,API,모바일tv 서비스,플레이리스트,개인화,서비스,플레이리스트 여부조회,/videolte/playlistme,,R,R,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_159,,MIMS,MOBILE,,5차,2023-03-02,4차,2023-03-02,API,모바일tv 서비스,플레이리스트,개인화,서비스,플레이리스트 등록,/videolte/playlist,,RCU,RCU,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_160,,MIMS,MOBILE,,5차,2023-03-02,4차,2023-03-02,API,모바일tv 서비스,플레이리스트,개인화,서비스,플레이리스트 삭제,/videolte/playlist,,D,RD,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_161,,MIMS,MOBILE,,5차,2023-03-02,4차,2023-03-02,API,모바일tv 서비스,플레이리스트,개인화,서비스,플레이리스트 순서변경,/videolte/playlistOrder,,"RU, P",RU,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_162,,MIMS,MOBILE,,5차,2023-01-16,3차,2023-01-16,API,모바일tv 서비스,키워드,검색어,서비스,키워드조회,/videolte/getKeywordList,,R,-,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_163,비전환,MIMS,MOBILE,,5차,,5차,2022-10-2차,API,모바일tv 서비스,컨텐츠,편성,서비스,대회상세조회,/videolte/golfgame,,,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_164,,MIMS,MOBILE,,5차,2023-01-16,3차,2023-01-16,API,모바일tv 서비스,개인화,편성,서비스,프로필이미지조회,/videolte/v1/profile/image,,R,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_165,,MIMS,MOBILE,,5차,2023-03-02,4차,2023-03-02,API,모바일tv 서비스,개인화,개인화,서비스,페어링가번 플레이리스트 조회,/videolte/playlist/pairing,,R,R,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_166,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"CardPay
+ (모바일tv)","CardPay
+(모바일tv)",결제,서비스,신용카드 기본 결제 요청,/cardpay/single/payrequest,,,-,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_167,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"CardPay
+ (모바일tv)","CardPay
+(모바일tv)",결제,서비스,신용카드 복합 결제 요청,/cardpay/multi/payrequest,,,-,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_168,내부API,MIMS,MOBILE,,5차,,5차,2023-04-2차,API,"CardPay
+ (모바일tv)","CardPay
+(모바일tv)",결제,운영,결제내역 개인정보 삭제,결제내역 개인정보 삭제,,,-,,,,중,,,배치,,,,,,,모바일tv,
+,MIMS_MOBILE_169,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,Inapp(모바일tv),Inapp(모바일tv),결제,서비스,iOS In-App 결제 API,/mims/inapp,,,-,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_170,비전환,MIMS,MOBILE,,5차,,5차,2023-04-2차,API,"KB포인트
+ (모바일tv)","KB포인트
+(모바일tv)",결제,서비스,KLU포인트조회 / 사용 / 사용취소,/mims/klu/point,,,-,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_171,비전환,MIMS,MOBILE,,5차,,5차,2023-04-2차,API,"KB포인트
+ (모바일tv)","KB포인트
+(모바일tv)",결제,서비스,KLU포인트사용내역조회,/mims/klu/point/list,,,-,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_172,비전환,MIMS,MOBILE,,5차,,5차,2023-04-2차,API,"페이나우 복합 결제
+ (모바일tv)","페이나우 복합 결제
+(모바일tv)",결제,서비스,Paynow 복합 결제 요청,/nowpay/payrequest,,,-,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_173,비전환,MIMS,MOBILE,,5차,,5차,2023-04-2차,API,"페이나우 복합 결제
+ (모바일tv)","페이나우 복합 결제
+(모바일tv)",결제,서비스,Paynow 복합 결제 상태 조회,/nowpay/status,,,R,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_174,비전환,MIMS,MOBILE,,5차,,5차,2023-04-2차,API,"페이나우 복합 결제
+ (모바일tv)","페이나우 복합 결제
+(모바일tv)",결제,서비스,Paynow 복합 결제 취소,/nowpay/cancel,,,R,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_175,비전환,MIMS,MOBILE,,5차,,5차,2023-04-2차,API,"페이나우 복합 결제
+ (모바일tv)","페이나우 복합 결제
+(모바일tv)",결제,서비스,Paynow 설치 SMS 발송,/nowpay/sendsms,,,-,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_176,비전환,MIMS,MOBILE,,5차,,5차,2023-04-2차,API,"페이나우 복합 결제
+ (모바일tv)","페이나우 복합 결제
+(모바일tv)",결제,운영,결제 키 정보 삭제,결제 키 정보 삭제,,,-,,,,중,,,,,,,배치,,,모바일tv,
+,MIMS_MOBILE_177,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"간편 결제
+ (모바일tv)","간편 결제
+(모바일tv)",결제,서비스,신용카드 간편결제 등록 요청,/easypay/v1/card/register,,,-,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_178,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"간편 결제
+ (모바일tv)","간편 결제
+(모바일tv)",결제,서비스,신용카드 간편결제 조회 요청,/easypay/v1/card/list,,,R,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_179,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"간편 결제
+ (모바일tv)","간편 결제
+(모바일tv)",결제,서비스,신용카드 간편결제 삭제 요청,/easypay/v1/card/remove,,,D,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_180,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"간편 결제
+ (모바일tv)","간편 결제
+(모바일tv)",결제,서비스,신용카드 간편결제 요청,/easypay/v1/card/payrequest,,,RC,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_181,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"청구서 복합 결제
+ (모바일tv)","청구서 복합 결제
+(모바일tv)",결제,서비스,기본복합결제요청(멤버쉽전용),/simplepay/payrequest,,,-,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_182,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"청구서 복합 결제
+ (모바일tv)","청구서 복합 결제
+(모바일tv)",결제,서비스,기본복합결제요청,/simplepay/v1/payrequest,,,-,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_183,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"청구서 복합 결제
+ (모바일tv)","청구서 복합 결제
+(모바일tv)",결제,서비스,Membership포인트조회및유효성체크,/simplepay/membership/point/auth,,,-,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_184,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"청구서 복합 결제
+ (모바일tv)","청구서 복합 결제
+(모바일tv)",결제,서비스,Membership포인트사용내역조회,/simplepay/membership/point,,,-,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_185,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"청구서 복합 결제
+ (모바일tv)","청구서 복합 결제
+(모바일tv)",결제,서비스,Membership카드번호조회,/simplepay/membership/card,,,-,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_186,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"청구서 복합 결제
+ (모바일tv)","청구서 복합 결제
+(모바일tv)",결제,서비스,Membership월정액차감요청,/simplepay/membership/regular/approve,,,-,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_187,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"청구서 복합 결제
+ (모바일tv)","청구서 복합 결제
+(모바일tv)",결제,서비스,Membership월정액 차감 요청,/simplepay/membership/ppm/approve,,,-컨트롤러 없음,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_188,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"청구서 복합 결제
+ (모바일tv)","청구서 복합 결제
+(모바일tv)",결제,서비스,Membership월정액 차감 취소,/simplepay/membership/ppm/cancel,,,-컨트롤러 없음,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_189,비전환,MIMS,MOBILE,,5차,,4차,2022-11-2차,API,외부 푸시발송 요청,푸시,알림,서비스,골프서버 푸시 발송,/relay/comm/sendpush,,,RC,,,,중,,,,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_190,비전환,MIMS,MOBILE,,5차,,4차,2022-11-2차,API,외부 푸시삭제 요청,푸시,알림,서비스,골프서버 푸시 삭제,/relay/comm/delpush,,,RD,,,,중,,,,외부연동,,,,,,모바일tv,
+,MIMS_MOBILE_191,비전환,MIMS,MOBILE,,5차,,,,API,로그,통계로그,모니터링,운영,CTC 로그데이터 전송,CTC 로그데이터 전송 (8종),,,-,,,,중,,,,외부연동,,,배치,,,모바일tv,
+,MIMS_MOBILE_192,,MIMS,MOBILE,,,2023-02-15,4차,2023-02-15,,,,개인화,서비스,인증토큰 발급,/profile/cm/v1/token,,,,,,,,,,,,,,,,,,3팀
+,MIMS_MOBILE_193,,MIMS,MOBILE,,,2023-02-15,4차,2023-02-15,,,,개인화,서비스,프로필 정보 조회(모바일),/profile/mb/v1/profile/list,,R,,,,,,,,,,,,,,,,3팀
+,MIMS_MOBILE_194,,MIMS,MOBILE,,,2023-02-15,4차,2023-02-15,,,,개인화,서비스,프로필 정보 등록(모바일),/profile/mb/v1/profile,,"CU, P",,,,,,,,,,,,,,,,3팀
+,MIMS_MOBILE_195,,MIMS,MOBILE,,,2023-02-15,4차,2023-02-15,,,,개인화,서비스,프로필 정보 수정(모바일),/profile/mb/v1/profile,,"U, P",,,,,,,,,,,,,,,,3팀
+,MIMS_MOBILE_196,,MIMS,MOBILE,,,2023-02-15,4차,2023-02-15,,,,개인화,서비스,프로필 정보 삭제(모바일),/profile/mb/v1/profile,,"D, P",,,,,,,,,,,,,,,,3팀
+,MIMS_MOBILE_197,,MIMS,MOBILE,,,2023-02-01,4차,2023-02-01,,,,약관,서비스,모바일서비스 동의 조회,/mims/serviceagree/getAgree,,R,,,,,,,,,,,,,,,,3팀
+,MIMS_MOBILE_198,,MIMS,MOBILE,,,2023-02-01,4차,2023-02-01,,,,약관,서비스,모바일서비스 동의 설정,/mims/serviceagree/setAgree,,CU,,,,,,,,,,,,,,,,3팀
+,MIMS_MOBILE_199,,MIMS,MOBILE,,,2023-03-29,5차,2023-03-29,,,,결제,서비스,구글인앱결제 API,/mims/inapp-android,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_200,,MIMS,MOBILE,,,2023-03-02,4차,2023-03-02,,,,개인화,서비스,플레이리스트 폴더 선택,/videolte/playSelect,,"R, U",,,,,,,,,,,,,,,,
+,MIMS_MOBILE_201,,MIMS,MOBILE,,,2023-01-16,3차,2023-01-16,API,,,컨텐츠,서비스,Watch 댓글 리스트 조회 (모바일),/mims/watcha/comment/lists,,R,-,,,1,,,,,,,,,,,,3팀
+,MIMS_MOBILE_202,,MIMS,MOBILE,,5차,2023-01-16,5차,2023-01-16,API,모바일tv 서비스,채팅,편성,서비스,Live 채팅 채널 정보 조회,/videolte/comm/livechat/meta,,,-,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_203,,MIMS,MOBILE,,5차,2023-01-16,3차,2023-01-16,API,모바일tv 서비스,채팅,편성,서비스,Live 채팅방 설정 조회,/videolte/comm/livechat/conf,,R,-,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_204,,MIMS,MOBILE,,5차,2023-01-18,4차,2023-01-18,API,모바일tv 서비스,약관,약관,서비스,약관동의삭제,/hdtv/comm/terms,,,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_205,,MIMS,MOBILE,,5차,2023-01-18,4차,2023-01-18,API,모바일tv 서비스,약관,약관,서비스,약관동의여부조회,/hdtv/comm/terms,,,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_206,,MIMS,MOBILE,,5차,2023-01-18,4차,2023-01-18,API,모바일tv 서비스,약관,약관,서비스,약관동의저장,/hdtv/comm/terms,,,-,,,,중,,,,,,,,,,모바일tv,
+,MIMS_MOBILE_207,,MIMS,MOBILE,,4차,2023-01-18,,2023-01-18,API,모바일tv 서비스,공지,공지,서비스,공지내용 조회,/hdtv/comm/notice/{게시판아이디}/{게시물 번호},,,R,,,,중,,,,,,,,아이들나라,,"모바일tv, 아이들나라",
+,MIMS_MOBILE_208,,MIMS,MOBILE,,4차,2023-01-18,,2023-01-18,API,모바일tv 서비스,공지,공지,서비스,공지목록 조회,/hdtv/comm/notice/{게시판아이디},,,R,,,,중,,,,,,,,아이들나라,,"모바일tv, 아이들나라",
+,MIMS_MOBILE_209,,MIMS,MOBILE,,4차,2023-01-16,4차,2023-01-16,API,모바일tv 서비스,설정,설정,서비스,Configuration 설정정보 조회,/hdtv/comm/setting,,,R,,,,중,,,,,,,,아이들나라,,"모바일tv, 아이들나라",
+,MIMS_MOBILE_210,,MIMS,MOBILE,,5차,2023-01-26,,2023-01-26,API,모바일tv 서비스,UI,편성,서비스,모드 목록 조회,/videolte/comm/mode,,R,R,,,,중,,,,,,,,,,비디오포털,3팀
+,MIMS_MOBILE_211,비전환,MIMS,MOBILE,,,,,,API,모바일tv 서비스,,공지,서비스,공지 내용 조회,/hdtv/noticontent,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_212,비전환,MIMS,MOBILE,,,,,,API,모바일tv 서비스,,공지,서비스,공지 목록 조회,/hdtv/notilist,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_213,,MIMS,MOBILE,,5차,2023-02-01,4차,2023-02-01,API,모바일tv 서비스,알림,알림,서비스,최신회차 알림 등록,/hdtv/comm/latest,,RC,RC,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_214,,MIMS,MOBILE,,5차,2023-02-01,4차,2023-02-01,API,모바일tv 서비스,알림,알림,서비스,최신회차 알림 삭제,/hdtv/comm/latest,,D,D,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_215,,MIMS,MOBILE,,5차,2023-02-01,4차,2023-02-01,API,모바일tv 서비스,알림,알림,서비스,최신회차 알림 조회,/hdtv/comm/latest,,RC,R,,,,중,,,,,,,,,,모바일tv,3팀
+,MIMS_MOBILE_216,,MIMS,MOBILE,,5차,2023-03-29,,2023-03-29,API,모바일tv 서비스,결제,결제,서비스,신용카드 복합 결제 서비스 진행후 응답 수신,/cardpay/multi/payresponse.do,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_217,,MIMS,MOBILE,,5차,2023-03-29,,2023-03-29,API,모바일tv 서비스,결제,결제,서비스,신용카드 기본 결제 서비스 진행후 응답 수신,/cardpay/single/payresponse.do,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_218,,MIMS,MOBILE,,5차,2023-03-29,,2023-03-29,API,모바일tv 서비스,결제,결제,서비스,아이돌Live 유료콘서트 결제취소,/cardpay/comm/pg/cancel.do,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_219,,MIMS,MOBILE,,5차,2023-03-29,,2023-03-29,API,모바일tv 서비스,결제,결제,서비스,카카오페이 복합 결제 요청,/kakaopay/v1/payrequest,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_220,,MIMS,MOBILE,,5차,2023-03-29,,2023-03-29,API,모바일tv 서비스,결제,결제,서비스,카카오페이 복합 결제 후 응답 수신,/kakaopay/v1/payresponse.do/{pa_key},,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_221,,MIMS,MOBILE,,5차,2023-03-29,,2023-03-29,API,모바일tv 서비스,결제,결제,서비스,카카오페이 복합 결제 취소,/kakaopay/v1/paycancel.do/{pa_key},,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_222,,MIMS,MOBILE,,5차,2023-03-29,,2023-03-29,API,모바일tv 서비스,결제,결제,서비스,카카오페이 복합 결제 취소,/kakaopay/v1/payfail.do/{pa_key},,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_223,,MIMS,MOBILE,,5차,2023-03-29,,2023-03-29,API,모바일tv 서비스,결제,결제,서비스,간편결제 카드등록 리턴 URL ,/easypay/v1/card/register/result,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_224,비전환,MIMS,MOBILE,,,,,,API,모바일tv 서비스,컨텐츠,컨텐츠,서비스,Video LTE 연관 하이라이트 목록 조회,/hdtv/comm/highlight,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_225,비전환,MIMS,MOBILE,,,,,,API,모바일tv 서비스,컨텐츠,컨텐츠,서비스,Video LTE 하이라이트 상세 조회,/hdtv/comm/highlight/view,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_226,,MIMS,MOBILE,,4차,2023-02-01,5차,2023-02-01,API,모바일tv 서비스,컨텐츠,컨텐츠,서비스,화제동영상내역조회,/hdtv/comm/hotvod,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_227,,MIMS,MOBILE,,4차,2023-02-01,5차,2023-02-01,API,모바일tv 서비스,컨텐츠,컨텐츠,서비스,화제동영상조회수저장,/hdtv/comm/hotvod,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_228,,MIMS,MOBILE,,5차,2023-01-18,5차,2023-01-18,API,모바일tv 서비스,광고,컨텐츠,서비스,광고라이브 리스트,/hdtv/comm/ad,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_229,,MIMS,MOBILE,,4차,2023-01-18,4차,2023-01-18,API,모바일tv 서비스,이벤트,공지,서비스,이벤트내용 조회,/hdtv/comm/event/{게시판아이디}/{글아이디},,R,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_230,,MIMS,MOBILE,,4차,2023-01-18,4차,2023-01-18,API,모바일tv 서비스,이벤트,공지,서비스,이벤트목록 조회,/hdtv/comm/event/{게시판아이디},,R,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_231,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]명의 변경,/cpm/comm/coupon/convert,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_232,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]월정액 캠페인 혜택등록 요청,/cpm/comm/campaign,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_233,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]월정액 캠페인 혜택해지 요청,/cpm/comm/campaign,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_234,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]월정액 캠페인 정보 조회,/cpm/comm/campaign/info,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_235,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]자동쿠폰 발급 요청,/cpm/comm/coupon,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_236,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]쿠폰 사용 구매 요청,/cpm/comm/coupon/buy,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_237,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일][쿠폰Enabler] 기명 쿠폰 발급 취소,/cpm/comm/coupon/cancel,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_238,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]N-screen 요금제 쿠폰정보 조회,/cpm/comm/coupon/getNSProdCpInfo,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_239,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]스마트페이퍼용 쿠폰이미지 조회,/cpm/comm/coupon/image,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_240,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일][쿠폰Enabler] 기명 쿠폰 발급,/cpm/comm/coupon/issue,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_241,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]무기명 쿠폰 발급 요청,/cpm/comm/coupon/issue/no,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_242,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]쿠폰함 목록 조회,/cpm/comm/coupon/list,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_243,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]쿠폰번호를 통한 쿠폰발급 요청,/cpm/comm/coupon/no,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_244,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일][쿠폰Enabler] Offer 정보 동기화,/cpm/comm/coupon/offer,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_245,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]1개월 월정액 쿠폰 사용 요청 (모바일tv용),/cpm/comm/coupon/onceuse,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_246,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]발급 가능 쿠폰 리스트 정보 조회,/cpm/comm/coupon/reg/possible,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_247,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]쿠폰 사용 요청,/cpm/comm/coupon/use,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_248,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]사용 가능 쿠폰 리스트 정보 조회,/cpm/comm/coupon/use/possible,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_249,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일][쿠폰Enabler] 선불권 쿠폰 환불,/cpm/comm/coupon/use/refund,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_250,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일][쿠폰Enabler] 쿠폰 사용 결과,/cpm/comm/coupon/use/result,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_251,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]선불권 쿠폰 상품 조회,/cpm/comm/prepay/contents,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_252,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]선불권 안내 메세지 조회,/cpm/comm/prepay/mainComment,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_253,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]선불권 쿠폰 구매,/cpm/comm/prePayCoupon,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_254,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]스탬프 발급 요청,/cpm/comm/stamp,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_255,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]스탬프 대상 리스트,/cpm/comm/stamp/contents,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_256,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]스탬프함 상세 정보 조회,/cpm/comm/stamp/info,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_257,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]발급 가능 스탬프 정보 조회,/cpm/comm/stamp/reg/possible,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_258,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]쿠폰OfferList 조회(CMS),/cpm/cms/v1/coupon/getofferlist,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_259,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]쿠폰Offer 상세정보 조회(CMS),/cpm/cms/v1/coupon/getofferdetail,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_260,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]월정액캠페인List조회(CMS),/cpm/cms/v1/coupon/getmonthcmplist,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_261,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]월정액캠페인상세정보조회(CMS),/cpm/cms/v1/coupon/getmonthcmpdetail,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_262,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]월정액캠페인타겟등록(CMS),/cpm/cms/v1/coupon/setmonthcmp,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_263,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]쿠폰 발급(CMS),/cpm/cms/v1/coupon,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_264,,MIMS,MOBILE,,5차,2023-03-29,5차,2023-03-29,API,"쿠폰
+ (IPTV & 모바일tv)","쿠폰
+(IPTV & 모바일tv)",쿠폰,서비스,[모바일]대량 쿠폰 발급,대량 쿠폰 발급,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_265,,MIMS,MOBILE,,4차,2023-01-18,4차,2023-01-18,API,모바일tv 서비스,공지,공지,서비스,긴급(비상)팝업공지및품질수집정보조회,/hdtv/comm/startup/noti,,,R,,,,,,,,,,,,,,,
+,MIMS_MOBILE_266,,MIMS,MOBILE,,,2023-02-15,,2023-02-15,API,,,개인화,서비스,모바일tv 실시간 개인 액션 이력 전달,/recm/v1/action,,"C, U",,,,,,,,,,,,,,,,3팀
+,MIMS_MOBILE_267,,MIMS,MOBILE,,,2023-02-01,,2023-02-01,API,,,편성,서비스,상품 이미지 정보 조회,/videolte/v1/productImage/list,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_268,,MIMS,MOBILE,,,2023-01-26,,2023-01-26,API,모바일tv 서비스,약관,약관,서비스,약관동의 목록리스트 (모바일),/mims/access/getAccessList,,"R, M",,,,,,,,,,,,,,,,3팀
+,MIMS_MOBILE_269,,MIMS,MOBILE,,,2023-01-18,,2023-01-18,API,모바일tv 서비스,약관,약관,서비스,약관동의여부 조회 (모바일),/mims/access/getAccessAgree,,"R, M",,,,,,,,,,,,,,,,3팀
+,MIMS_MOBILE_270,,MIMS,MOBILE,,,2023-03-29,,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,[GET] TV 포인트 조회 (모바일),/mims/point,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_271,,MIMS,MOBILE,,,2023-03-29,,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,[POST] TV 포인트결제 (모바일),/mims/point,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_272,,MIMS,MOBILE,,,2023-03-29,,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,"KB, TV, Membership 포인트 통합 조회",/mims/total/point,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_273,,MIMS,MOBILE,,,2023-03-29,,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,TV 포인트 조회 (모바일),/mims/tvpoint/point,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_274,,MIMS,MOBILE,,,2023-03-29,,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,TV 포인트 결제 내역 조회 (모바일),/mims/tvpoint/list,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_275,,MIMS,MOBILE,,,2023-03-29,,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,TV 포인트 결제 (모바일),/mims/tvpoint/point,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_276,,MIMS,MOBILE,,,2023-03-29,,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,TV 포인트 결제 취소 (모바일),/mims/tvpoint/point,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_277,,MIMS,MOBILE,,,2023-03-29,,2023-03-29,API,"TV포인트
+ (IPTV & 모바일tv)","TV포인트
+(IPTV & 모바일tv)",결제,서비스,TV포인트의 전체 제휴 포인트 조회 (모바일),/mims/tvpoint/partnerpoint,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_278,,MIMS,MOBILE,,,2023-03-29,,2023-03-29,API,네이버페이,네이버페이,결제,서비스,네이버페이 복합 결제 요청,/naverpay/v1/payrequest,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_279,,MIMS,MOBILE,,,2023-03-29,,2023-03-29,API,네이버페이,네이버페이,결제,서비스,네이버페이 복합 결제 후 응답 수신,/naverpay/v1/{pa_key}/payresponse.do,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_280,비전환,MIMS,MOBILE,,5차,,5차,2022-10-2차,API,모바일tv 서비스,UI,편성,서비스,메인화면정보조회,/hdtv/comm/main,,,-,,,,중,,,,,,,,,,hdtv,
+,MIMS_MOBILE_281,,MIMS,MOBILE,,,2023-03-29,,2023-03-29,API,모바일tv 서비스,redirect,설정,서비스,앱 호출 혹은 스토어 이동 URL(모바일tv 디자인),/redirect/action/{앱 코드}?data=[값],,-,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_282,,MIMS,MOBILE,,,2023-03-29,,2023-03-29,API,모바일tv 서비스,redirect,설정,서비스,앱 호출(Intent URL) 혹은 스토어 이동 URL,/redirect/gw/{앱 코드}?data=[값],,-,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_283,비전환,MIMS,MOBILE,,,,,,API,"페이나우 복합 결제
+ (IPTV)","페이나우 복합 결제
+(IPTV)",결제,서비스,Paynow 결제 취소,/mims/paynow/cancel,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_284,비전환,MIMS,MOBILE,,,,,,API,"페이나우 복합 결제
+ (모바일tv)","페이나우 복합 결제
+(모바일tv)",결제,서비스,Paynow 결제,/mims/paynow/request,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_285,비전환,MIMS,MOBILE,,,,,,API,"페이나우 복합 결제
+ (모바일tv)","페이나우 복합 결제
+(모바일tv)",결제,서비스,Paynow Sendsms,/mims/paynow/sendsms,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_286,비전환,MIMS,MOBILE,,,,,,API,"페이나우 복합 결제
+ (모바일tv)","페이나우 복합 결제
+(모바일tv)",결제,서비스,Paynow 상태조회,/mims/paynow/status,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_287,비전환,MIMS,MOBILE,,,,,,API,"페이나우 복합 결제
+ (모바일tv)","페이나우 복합 결제
+(모바일tv)",결제,서비스,Paynow 결제 취소,/mims/v1/paynow/cancel,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_288,비전환,MIMS,MOBILE,,,,,,API,"페이나우 복합 결제
+ (모바일tv)","페이나우 복합 결제
+(모바일tv)",결제,서비스,Paynow 결제,/mims/v1/paynow/request,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_289,비전환,MIMS,MOBILE,,,,,,API,"페이나우 복합 결제
+ (모바일tv)","페이나우 복합 결제
+(모바일tv)",결제,서비스,Paynow Sendsms,/mims/v1/paynow/sendsms,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_290,비전환,MIMS,MOBILE,,,,,,API,"페이나우 복합 결제
+ (모바일tv)","페이나우 복합 결제
+(모바일tv)",결제,서비스,Paynow 상태조회,/mims/v1/paynow/status,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_291,,MIMS,MOBILE,,,2023-03-29,,2023-03-29,API,"PG Pay
+ (IPTV)","PG Pay
+(IPTV)",결제,서비스,IPTV 소액 결제 요청,/mims/pg/approval,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_292,,MIMS,MOBILE,,,2023-03-29,,2023-03-29,API,"PG Pay
+ (IPTV)","PG Pay
+(IPTV)",결제,서비스,IPTV 소액 결제 & 쿠폰 사용,/mims/pg/approvalCoupon,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_293,,MIMS,MOBILE,,,2023-03-29,,2023-03-29,API,"PG Pay
+ (IPTV)","PG Pay
+(IPTV)",결제,서비스,IPTV 소액 결제 인증,/mims/pg/authorization,,,,,,,,,,,,,,,,,,
+,MIMS_MOBILE_294,,MIMS,MOBILE,,,2023-02-01,,2023-02-01,API,IPTV 서비스,SMS,알림,서비스,SMS발송요청,/mims/sendSms,,,,,,,,,,,,,,,,,,3팀
+,MIMS_ADMIN_001,,MIMS,ADMIN_IPTV,4차,2차,,4차,,관리페이지,IPTV 관리자,관리자,Admin_관리,운영,관리자 리스트,관리자,,,,,,1,중,,,내부연동,,,,,,,IPTV,
+,MIMS_ADMIN_363,추가,MIMS,ADMIN_IPTV,,,,,,관리페이지,IPTV 관리자,로그인,Admin_관리,운영,로그인,관리자,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_002,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,세컨드TV 관리,공지,운영,긴급(비상)공지,세컨드TV 관리,,,,,,,중,,,,,,,,,,세컨드TV,
+,MIMS_ADMIN_003,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,세컨드TV 관리,공지,운영,긴급(비상)공지(아이들나라),세컨드TV 관리,,,,,,,중,,,,,,,,,,아이들나라,
+,MIMS_ADMIN_004,제외,MIMS,ADMIN_IPTV,4차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,세컨드TV 관리,설정,운영,품질대상단말정보,세컨드TV 관리,,,,,,,중,,,,,,,,,,세컨드TV,
+,MIMS_ADMIN_005,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,세컨드TV 관리,공지,운영,공지 게시판 마스터,세컨드TV 관리,,,,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 포터블IPTV, 세컨드TV",
+,MIMS_ADMIN_006,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,세컨드TV 관리,공지,운영,팝업공지/이벤트,세컨드TV 관리,,,,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 포터블IPTV, 세컨드TV",
+,MIMS_ADMIN_007,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,세컨드TV 관리,공지,운영,공지/이벤트 게시판,세컨드TV 관리,,,,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 포터블IPTV, 세컨드TV",
+,MIMS_ADMIN_008,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,세컨드TV 관리,설정,운영,단말정보,세컨드TV 관리,,,,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 포터블IPTV, 세컨드TV",
+,MIMS_ADMIN_009,제외,MIMS,ADMIN_IPTV,4차,2차 → 3차,,5차,,관리페이지,IPTV 관리자,세컨드TV 관리,개인화,운영,참여통계 리스트,세컨드TV 관리,,,,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 포터블IPTV, 세컨드TV",
+,MIMS_ADMIN_010,제외,MIMS,ADMIN_IPTV,4차,2차 → 3차,,5차,,관리페이지,IPTV 관리자,세컨드TV 관리,개인화,운영,참여이력 리스트,세컨드TV 관리,,,,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 포터블IPTV, 세컨드TV",
+,MIMS_ADMIN_011,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,3차,2022-10-2차,관리페이지,IPTV 관리자,코드,설정,운영,코드목록 조회,코드,,,,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 브라보라이프",
+,MIMS_ADMIN_012,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,3차,2022-10-2차,관리페이지,IPTV 관리자,코드,설정,운영,코드아이템 목록 조회,코드,,,,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 브라보라이프",
+,MIMS_ADMIN_013,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,트리거,편성,운영,트리거 정보 조회,트리거,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_014,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,트리거,설정,운영,시작채널 설정,트리거,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_015,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,트리거,설정,운영,가격버튼하단문구설정,트리거,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_016,,MIMS,ADMIN_IPTV,3차,2차,,3차,2022-10-2차,관리페이지,IPTV 관리자,패널/지면,편성,운영,패널목록 조회,패널/지면,,,,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 브라보라이프, 포터블IPTV",
+,MIMS_ADMIN_017,,MIMS,ADMIN_IPTV,3차,2차,,3차,2022-10-2차,관리페이지,IPTV 관리자,패널/지면,편성,운영,지면목록 조회,패널/지면,,,,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 브라보라이프, 포터블IPTV",
+,MIMS_ADMIN_018,제외,MIMS,ADMIN_IPTV,3차,2차 → 3차,,,,관리페이지,IPTV 관리자,패널/지면,설정,운영,Contingency Mode,패널/지면,,,,,,,중,,,,,,,,,,IPTV,FadeOut
+,MIMS_ADMIN_019,,MIMS,ADMIN_IPTV,3차,2차,,3차,2022-10-2차,관리페이지,IPTV 관리자,패널/지면,편성,운영,UI타입 관리,패널/지면,,,,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 브라보라이프, 포터블IPTV",
+,MIMS_ADMIN_020,,MIMS,ADMIN_IPTV,3차,2차,,3차,2022-10-2차,관리페이지,IPTV 관리자,패널/지면,편성,운영,말풍선 관리,패널/지면,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_334,추가,MIMS,ADMIN_IPTV,,2차,,3차,2022-10-2차,관리페이지,IPTV 관리자,패널/지면,편성,운영,상단메뉴변경,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_021,제외,MIMS,ADMIN_IPTV,4차,2차 → 3차,,,,관리페이지,IPTV 관리자,Cache,Admin_관리,운영,Cache Size 조회,Cache,,,,,,,중,,,,,,,,,,IPTV,FadeOut
+,MIMS_ADMIN_022,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,5차,,관리페이지,IPTV 관리자,Cache,컨텐츠,운영,(S) 자체편성 정보 캐시 갱신,Cache,,,,,,,중,,,내부연동,,,,배치,,,IPTV,기능으로 구현되어 있어 제외하기로 함
+,MIMS_ADMIN_023,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,5차,,관리페이지,IPTV 관리자,Cache,약관,운영,(S) 추천 이용동의 약관 캐시 갱신,Cache,,,,,,,중,,,내부연동,,,,배치,,,IPTV,기능으로 구현되어 있어 제외하기로 함
+,MIMS_ADMIN_024,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,5차,,관리페이지,IPTV 관리자,Cache,공지,운영,(S) 공지/이미지 캐시 갱신,Cache,,,,,,,중,,,내부연동,,,,배치,,,IPTV,기능으로 구현되어 있어 제외하기로 함
+,MIMS_ADMIN_025,제외,MIMS,ADMIN_IPTV,4차,2차 → 3차,,5차,,관리페이지,IPTV 관리자,Cache,개인화,운영,(S) 참여통계 캐시 갱신,Cache,,,,,,,중,,,내부연동,,,,배치,,,IPTV,기능으로 구현되어 있어 제외하기로 함
+,MIMS_ADMIN_026,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,5차,,관리페이지,IPTV 관리자,Cache,편성,운영,(S) 패널/지면 캐시 갱신,Cache,,,,,,,중,,,내부연동,,,,배치,,,IPTV,기능으로 구현되어 있어 제외하기로 함
+,MIMS_ADMIN_027,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,5차,,관리페이지,IPTV 관리자,Cache,설정,운영,(S) 설정정보 캐시 갱신,Cache,,,,,,,중,,,내부연동,,,,배치,,,IPTV,기능으로 구현되어 있어 제외하기로 함
+,MIMS_ADMIN_028,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,5차,,관리페이지,IPTV 관리자,Cache,공지,운영,(S) 긴급공지 캐시 갱신,Cache,,,,,,,중,,,내부연동,,,,배치,,,IPTV,기능으로 구현되어 있어 제외하기로 함
+,MIMS_ADMIN_029,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,5차,,관리페이지,IPTV 관리자,Cache,설정,운영,(S) 품질대상단말 캐시 갱신,Cache,,,,,,,중,,,내부연동,,,,배치,,,IPTV,기능으로 구현되어 있어 제외하기로 함
+,MIMS_ADMIN_030,,MIMS,ADMIN_IPTV,3차,2차,,3차,2022-10-2차,관리페이지,IPTV 관리자,BestVOD 관리,편성,운영,랭킹 데이터 관리,BestVOD 관리,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_031,,MIMS,ADMIN_IPTV,3차,2차,,3차,2022-10-2차,관리페이지,IPTV 관리자,BestVOD 관리,편성,운영,랭킹 룰 관리,BestVOD 관리,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_032,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,5차,,관리페이지,IPTV 관리자,BestVOD 관리,편성,운영,(S) 장르별 Best VOD 캐시 갱신,BestVOD 관리,,,,,,,중,,,내부연동,,,,배치,,,IPTV,
+,MIMS_ADMIN_033,제외,MIMS,ADMIN_IPTV,3차,2차 → 3차,,5차,,관리페이지,IPTV 관리자,Youtube,검색어,운영,Youtube 검색어 관리,Youtube,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_034,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,약관 관리,약관,운영,(추천이용동의)약관 관리,약관 관리,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_035,,MIMS,ADMIN_IPTV,3차,2차,,3차,2022-10-2차,관리페이지,IPTV 관리자,자체편성관리,컨텐츠,운영,자체편성 목록조회,자체편성관리,,,,,,,중,,,,,,,,,,"IPTV, 브라보라이프",
+,MIMS_ADMIN_036,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,약관 관리,약관,운영,약관 마스터 관리,약관 관리,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_037,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,약관 관리,약관,운영,약관 항목 관리,약관 관리,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_038,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,공지 관리,공지,운영,공지/이미지 정보 관리,공지 관리,,,,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라",
+,MIMS_ADMIN_039,제외,MIMS,ADMIN_IPTV,4차,2차 → 3차,,,,관리페이지,IPTV 관리자,Push 관리,알림,운영,새소식 리스트,Push 관리,,,,,,,중,,,,,,,,,,IPTV,FadeOut
+,MIMS_ADMIN_040,제외,MIMS,ADMIN_IPTV,4차,2차 → 3차,,5차,,관리페이지,IPTV 관리자,Push 관리,알림,운영,(S) 최신회 알림,Push 관리,,,,,,,중,,,,외부연동,,,배치,,,IPTV,
+,MIMS_ADMIN_041,제외,MIMS,ADMIN_IPTV,4차,2차 → 3차,,5차,,관리페이지,IPTV 관리자,Push 관리,알림,운영,(S) 새소식 알림,Push 관리,,,,,,,중,,,,외부연동,,,배치,,,IPTV,FadeOut
+,MIMS_ADMIN_042,,MIMS,ADMIN_IPTV,4차,2차 → 3차,,5차,,관리페이지,IPTV 관리자,Push 관리,알림,운영,(S) 예약구매 알림 (NextUi),Push 관리,,,,,,,중,,,,외부연동,,,배치,,,IPTV,
+,MIMS_ADMIN_043,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,HDTV,설정,운영,HDTV STARTUP 설정,HDTV,,,,,,,중,,,,,,,,,,세컨드TV,
+,MIMS_ADMIN_044,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,VOD 프로모션,VOD 프로모션,운영,TV다시보기 - 템플릿 관리,VOD 프로모션,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_045,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,VOD 프로모션,VOD 프로모션,운영,TV다시보기 - 프로모션 관리,VOD 프로모션,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_046,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,VOD 프로모션,VOD 프로모션,운영,TV다시보기 - 카테고리 관리,VOD 프로모션,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_047,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,VOD 프로모션,VOD 프로모션,운영,영화/애니 - 템플릿 관리,VOD 프로모션,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_048,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,VOD 프로모션,VOD 프로모션,운영,영화/애니 - 프로모션 관리,VOD 프로모션,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_049,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,VOD 프로모션,VOD 프로모션,운영,영화/애니 - 카테고리 관리,VOD 프로모션,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_050,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,VOD 프로모션,VOD 프로모션,운영,키즈교육 - 템플릿 관리,VOD 프로모션,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_051,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,VOD 프로모션,VOD 프로모션,운영,키즈교육 - 프로모션 관리,VOD 프로모션,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_052,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,VOD 프로모션,VOD 프로모션,운영,키즈교육 - 카테고리 관리,VOD 프로모션,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_053,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,VOD 프로모션,VOD 프로모션,운영,특집이벤트 - 템플릿 관리,VOD 프로모션,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_054,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,VOD 프로모션,VOD 프로모션,운영,특집이벤트 - 프로모션 관리,VOD 프로모션,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_055,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,VOD 프로모션,VOD 프로모션,운영,특집이벤트 - 카테고리 관리,VOD 프로모션,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_056,제외,MIMS,ADMIN_IPTV,4차,3차,,,,관리페이지,IPTV 관리자,Paynow,결제,운영,Paynow 결제 정보,Paynow,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_057,제외,MIMS,ADMIN_IPTV,4차,3차,,,,관리페이지,IPTV 관리자,Paynow,결제,운영,Paynow 배너 조회,Paynow,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_058,제외,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,시즌 관리,편성,운영,(?) 시즌 관리,시즌 관리,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_059,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,5차,,관리페이지,IPTV 관리자,별점 관리,개인화,운영,별점 목록 조회,별점 관리,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_060,,MIMS,ADMIN_IPTV,4차,3차,,5차,,관리페이지,IPTV 관리자,구매내역,결제,운영,구매내역 리스트,구매내역,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_061,,MIMS,ADMIN_IPTV,4차,3차,,5차,,관리페이지,IPTV 관리자,구매내역,결제,운영,다회선 구매내역 리스트,구매내역,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_062,,MIMS,ADMIN_IPTV,4차,3차,,5차,,관리페이지,IPTV 관리자,구매내역,결제,운영,구매내역 리스트(아이들나라),구매내역,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_364,추가,MIMS,ADMIN_IPTV,4차,3차,,5차,,관리페이지,IPTV 관리자,구매내역,결제,운영,구매내역 리스트(라이브),구매내역,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_063,제외,MIMS,ADMIN_IPTV,4차,3차,,5차,,관리페이지,IPTV 관리자,구매내역,결제,운영,(?) 포인트결제 취소 재처리,구매내역,,,,,,,중,,,내부연동,외부연동,,,배치,,,IPTV,
+,MIMS_ADMIN_064,,MIMS,ADMIN_IPTV,3차,2차,,3차,2022-10-2차,관리페이지,IPTV 관리자,배너 관리,컨텐츠,운영,배너 마스터,배너 관리,,,,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 포터블TV",
+,MIMS_ADMIN_065,,MIMS,ADMIN_IPTV,3차,2차,,3차,2022-10-2차,관리페이지,IPTV 관리자,배너 관리,컨텐츠,운영,배너 리스트,배너 관리,,,,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라, 포터블TV",
+,MIMS_ADMIN_066,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,,,관리페이지,IPTV 관리자,전용포스터 관리,컨텐츠,운영,전용포스터 목록,전용포스터 관리,,,,,,,중,,,,,,,,,,"IPTV, 브라보라이프",FadeOut
+,MIMS_ADMIN_067,제외,MIMS,ADMIN_IPTV,3차,2차 → 3차,,,,관리페이지,IPTV 관리자,Senior,스토리텔링 / 시니어TV,운영,순간이동 관리,Senior,,,,,,,중,,,,,,,,,,브라보라이프,FadeOut
+,MIMS_ADMIN_068,제외,MIMS,ADMIN_IPTV,3차,2차 → 3차,,,,관리페이지,IPTV 관리자,Senior,스토리텔링 / 시니어TV,운영,갤러리 관리,Senior,,,,,,,중,,,,,,,,,,브라보라이프,FadeOut
+,MIMS_ADMIN_069,제외,MIMS,ADMIN_IPTV,3차,2차 → 3차,,,,관리페이지,IPTV 관리자,Senior,스토리텔링 / 시니어TV,운영,일별정보 관리,Senior,,,,,,,중,,,,,,,,,,브라보라이프,FadeOut
+,MIMS_ADMIN_070,제외,MIMS,ADMIN_IPTV,3차,2차 → 3차,,,,관리페이지,IPTV 관리자,Senior,스토리텔링 / 시니어TV,운영,인사말 관리,Senior,,,,,,,중,,,,,,,,,,브라보라이프,FadeOut
+,MIMS_ADMIN_071,제외,MIMS,ADMIN_IPTV,3차,2차 → 3차,,,,관리페이지,IPTV 관리자,Senior,스토리텔링 / 시니어TV,운영,생활지수 문구 관리,Senior,,,,,,,중,,,,,,,,,,브라보라이프,FadeOut
+,MIMS_ADMIN_072,제외,MIMS,ADMIN_IPTV,3차,2차 → 3차,,,,관리페이지,IPTV 관리자,Senior,스토리텔링 / 시니어TV,운영,배경영상 관리,Senior,,,,,,,중,,,,,,,,,,브라보라이프,FadeOut
+,MIMS_ADMIN_073,,MIMS,ADMIN_IPTV,3차,2차,,3차,2022-10-2차,관리페이지,IPTV 관리자,화제동영상 관리,컨텐츠,운영,사이트 리스트,화제동영상 관리,,,,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라",
+,MIMS_ADMIN_074,,MIMS,ADMIN_IPTV,3차,2차,,3차,2022-10-2차,관리페이지,IPTV 관리자,화제동영상 관리,컨텐츠,운영,컨텐츠 리스트,화제동영상 관리,,,,,,,상,,,,,,,,아이들나라,,"IPTV, 아이들나라",
+,MIMS_ADMIN_075,,MIMS,ADMIN_IPTV,3차,2차,,3차,2022-10-2차,관리페이지,IPTV 관리자,화제동영상 관리,컨텐츠,운영,조회수 통계,화제동영상 관리,,,,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라",
+,MIMS_ADMIN_076,,MIMS,ADMIN_IPTV,3차,2차,,3차,2022-10-2차,관리페이지,IPTV 관리자,화제동영상 관리,컨텐츠,운영,필터링 사이트,화제동영상 관리,,,,,,,중,,,,,,,,아이들나라,,"IPTV, 아이들나라",
+,MIMS_ADMIN_077,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,포터블 TV관리,설정,운영,품질대상단말정보,포터블 TV관리,,,,,,,중,,,,,,,,,,포터블TV,
+,MIMS_ADMIN_078,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,고객 관리,편성,운영,가입자 그룹 관리,고객 관리,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_079,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,5차,,관리페이지,IPTV 관리자,IPTV 관리,검색어,운영,발화어 관리,IPTV 관리,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_080,,MIMS,ADMIN_IPTV,3차,2차 → 3차,,4차,,관리페이지,IPTV 관리자,가이드채널,편성,운영,가이드채널 링크관리,가이드채널,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_330,추가,MIMS,ADMIN_IPTV,,2차,,3차,2022-10-2차,관리페이지,IPTV 관리자,프로필이미지 관리,편성,운영,프로필이미지 마스터,프로필이미지 관리,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_331,추가,MIMS,ADMIN_IPTV,,2차,,3차,2022-10-2차,관리페이지,IPTV 관리자,프로필이미지 관리,편성,운영,프로필이미지 관리,프로필이미지 관리,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_332,추가,MIMS,ADMIN_IPTV,,2차,,3차,2022-10-2차,관리페이지,IPTV 관리자,AB테스트관리,편성,운영,AB테스트 목록 관리,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_333,추가,MIMS,ADMIN_IPTV,,2차,,3차,2022-10-2차,관리페이지,IPTV 관리자,AB테스트관리,편성,운영,BPAS 편성 관리,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_365,추가,MIMS,ADMIN_MOBILE,,4차,,4차,,관리페이지,모바일tv 관리자,로그인,Admin_관리,운영,로그인,관리자,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_081,,MIMS,ADMIN_MOBILE,,4차,,4차,,관리페이지,모바일tv 관리자,관리자,Admin_관리,운영,관리자 리스트,관리자,,,,,,,중,,,,,,,,,,"모바일tv,골프,아이들나라,프로야구,아이돌Live,게임방송,VR",
+,MIMS_ADMIN_082,,MIMS,ADMIN_MOBILE,,4차,,4차,,관리페이지,모바일tv 관리자,관리자,Admin_관리,운영,메뉴 관리,관리자,,,,,,,중,,,,,,,,,,"모바일tv,골프,아이들나라,프로야구,아이돌Live,게임방송,VR",
+,MIMS_ADMIN_083,,MIMS,ADMIN_MOBILE,,4차,,4차,,관리페이지,모바일tv 관리자,관리자,Admin_관리,운영,권한 관리,관리자,,,,,,,중,,,,,,,,,,"모바일tv,골프,아이들나라,프로야구,아이돌Live,게임방송,VR",
+,MIMS_ADMIN_084,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,HDTV 관리,공지,운영,긴급(비상) 공지,HDTV 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_085,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,HDTV 관리,공지,운영,공지 게시판 마스터,HDTV 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_086,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,HDTV 관리,공지,운영,팝업 공지,HDTV 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_087,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,HDTV 관리,공지,운영,이벤트 공지,HDTV 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_088,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,HDTV 관리,공지,운영,배너형 이벤트공지,HDTV 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_089,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,HDTV 관리,설정,운영,단말정보,HDTV 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_090,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,HDTV 관리,공지,운영,긴급(비상) 메시지,HDTV 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_091,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,HDTV 관리,공지,운영,긴급(비상) 룰관리,HDTV 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_092,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,HDTV 관리,공지,운영,게시판 분류관리,HDTV 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_093,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,HDTV 관리,공지,운영,(?) 긴급(비상) 메시지_AI,HDTV 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_094,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,HDTV 관리,공지,운영,(?) 긴급(비상) 룰관리_AI,HDTV 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_095,,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,HDTV 관리,알림,운영,(S) 최신회 알림,HDTV 관리,,,,,,,중,,,,외부연동,,,배치,,,모바일tv,
+,MIMS_ADMIN_096,,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,HDTV 관리,알림,운영,(S) 새소식 알림,HDTV 관리,,,,,,,중,,,,외부연동,,,배치,,,모바일tv,
+,MIMS_ADMIN_097,,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,HDTV 관리,검색어,운영,(S) 인기검색어 수집,HDTV 관리,,,,,,,중,,,,외부연동,,,배치,,,모바일tv,
+,MIMS_ADMIN_098,,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,HDTV 관리,Admin_관리,운영,(S) 메뉴로그 삭제,HDTV 관리,,,,,,,중,,,,,,,배치,,,모바일tv,
+,MIMS_ADMIN_099,,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,HDTV 관리,알림,운영,(S) 업데이트 알림,HDTV 관리,,,,,,,중,,,,외부연동,,,배치,,,모바일tv,
+,MIMS_ADMIN_100,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,HDTV 관리,개인화,운영,(?) 참여통계 추출,HDTV 관리,,,,,,,중,,,,,,,배치,,,모바일tv,
+,MIMS_ADMIN_101,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,HDTV 관리,컨텐츠,운영,(?) IMCS 카테고리 캐시 갱신,HDTV 관리,,,,,,,중,,,,외부연동,,,배치,,,모바일tv,
+,MIMS_ADMIN_102,,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,HDTV 관리,편성,운영,(S) 테마 메타파일 전송,HDTV 관리,,,,,,,중,,,,외부연동,,,배치,,,모바일tv,
+,MIMS_ADMIN_103,,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,HDTV 관리,알림,운영,(S) 스토리텔링 예약 알림,HDTV 관리,,,,,,,중,,,,외부연동,,,배치,,,모바일tv,
+,MIMS_ADMIN_104,,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,HDTV 관리,편성,운영,(S) 실시간채팅 메타 캐시 갱신,HDTV 관리,,,,,,,중,,,내부연동,외부연동,,,배치,,,모바일tv,
+,MIMS_ADMIN_105,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,HDTV 관리,컨텐츠,운영,(?) 이미지 메타 갱신,HDTV 관리,,,,,,,중,,,,,,,배치,,,모바일tv,
+,MIMS_ADMIN_106,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,HDTV 관리,개인화,운영,(?) 가입자 전환,HDTV 관리,,,,,,,중,,,,,,,배치,,,모바일tv,
+,MIMS_ADMIN_107,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,편성,운영,홈 화면 조회(패널),VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_108,,MIMS,ADMIN_MOBILE,,5차,,3차,2022-10-2차,관리페이지,모바일tv 관리자,VIDEOLTE 관리,편성,운영,지면/프레임 타입관리,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_109,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,편성,운영,메뉴 카테고리 관리,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_110,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,편성,운영,GNB 마스터,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_111,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,편성,운영,GNB 메뉴,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_112,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,편성,운영,지면 그룹 관리,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_113,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,편성,운영,지면 요금제 관리,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_114,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,편성,운영,지면 관리,VIDEOLTE 관리,,,,,,,상,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_115,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,편성,운영,지면 검색,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_116,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,편성,운영,지면 스케줄 관리,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_117,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,편성,운영,지면 스케줄 캘린더,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_118,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,편성,운영,지면 이벤트 관리,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_119,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,편성,운영,추천연동 현황판,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_120,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,개인화,운영,My Cut 정책 조회,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_121,,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,검색어,운영,인기 검색어 관리,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_122,,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,검색어,운영,추천 검색어 관리,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_123,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,컨텐츠,운영,실시간 채널 마스터,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_124,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,컨텐츠,운영,실시간 채널 리스트,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_125,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,컨텐츠,운영,신고관리,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_126,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,편성,운영,Live 채팅방 관리,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_127,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,편성,운영,모드 관리,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_128,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,개인화,운영,별점 관리,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_129,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,스토리텔링 / 시니어TV,운영,스토리텔링 투표 관리,VIDEOLTE 관리,,,,,,,상,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_130,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,스토리텔링 / 시니어TV,운영,스토리텔링 게시판 관리,VIDEOLTE 관리,,,,,,,상,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_131,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,스토리텔링 / 시니어TV,운영,스토리텔링 에디터 관리,VIDEOLTE 관리,,,,,,,상,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_132,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,알림,운영,Push 통계,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_133,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,편성,운영,샌드버드 관리,VIDEOLTE 관리,,,,,,,중,,,,외부연동,,,,,,모바일tv,
+,MIMS_ADMIN_134,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,컨텐츠,운영,상품이미지 관리,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_135,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,편성,운영,신규 지면 관리,VIDEOLTE 관리,,,,,,,상,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_ADMIN_136,,MIMS,ADMIN_MOBILE,,4차,,4차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,편성,운영,말풍선 관리,VIDEOLTE 관리,,,,,,,중,,,,,,,,아이들나라,,아이들나라,
+,MIMS_ADMIN_137,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,VIDEOLTE 관리,검색어,운영,키워드 관리,VIDEOLTE 관리,,,,,,,중,,,,,,,,,,골프,
+,MIMS_ADMIN_138,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,주요장르 관리,편성,운영,주요장르 마스터,주요장르 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_139,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,주요장르 관리,편성,운영,주요장르 리스트,주요장르 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_140,,MIMS,ADMIN_MOBILE,,4차,,4차,,관리페이지,모바일tv 관리자,배너관리,컨텐츠,운영,배너 아이디,배너관리,,,,,,,중,,,,,,,,아이들나라,,"모바일tv,아이들나라,VR",
+,MIMS_ADMIN_141,,MIMS,ADMIN_MOBILE,,4차,,4차,,관리페이지,모바일tv 관리자,배너관리,컨텐츠,운영,배너 리스트,배너관리,,,,,,,중,,,,,,,,아이들나라,,"모바일tv,아이들나라,VR",
+,MIMS_ADMIN_142,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,선불 결제 관리,결제,운영,선불 결제 내역,선불 결제 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_143,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,참여통계 관리,개인화,운영,참여통계 리스트,참여통계 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_144,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,참여통계 관리,개인화,운영,(?) 참여통계 추출,참여통계 관리,,,,,,,중,,,,,,,배치,,,모바일tv,
+,MIMS_ADMIN_145,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,앱 푸쉬 관리,알림,운영,앱 푸쉬 리스트,앱 푸쉬 관리,,,,,,,중,,,내부연동,외부연동,,,,,,모바일tv,
+,MIMS_ADMIN_146,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,앱 푸쉬 관리,알림,운영,테스트 푸쉬 수신자 관리,앱 푸쉬 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_147,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,앱 푸쉬 관리,알림,운영,(?) 유휴 연결 삭제,앱 푸쉬 관리,,,,,,,중,,,,,,,배치,,,모바일tv,
+,MIMS_ADMIN_148,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,SmartTV 관리,공지,운영,공지 게시판 마스터,SmartTV 관리,,,,,,,중,,,,,,,,,,SmartTV,
+,MIMS_ADMIN_149,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,SmartTV 관리,공지,운영,일반 공지,SmartTV 관리,,,,,,,중,,,,,,,,,,SmartTV,
+,MIMS_ADMIN_150,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,SmartTV 관리,설정,운영,단말 정보,SmartTV 관리,,,,,,,중,,,,,,,,,,SmartTV,
+,MIMS_ADMIN_151,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,공지,운영,공지 게시판 마스터,UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_152,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,공지,운영,긴급(비상) 메시지,UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_153,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,공지,운영,긴급(비상) 룰관리,UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_154,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,공지,운영,"팝업공지 관리(M,T,P)",UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_155,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,공지,운영,"공지사항 게시판 관리(M,T,P)",UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_156,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,공지,운영,"이벤트 게시판 관리(M,T,P)",UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_157,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,알림,운영,모바일 Push메시지 관리,UFLIX 관리,,,,,,,중,,,내부연동,외부연동,,,,,,영화월정액,
+,MIMS_ADMIN_158,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,편성,운영,"메인 관리(M,T,P)",UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_159,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,편성,운영,"대체지면 관리(M,T,P)",UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_160,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,컨텐츠,운영,이미지/텍스트 배너 관리,UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_161,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,컨텐츠,운영,"신규 랜딩 배너 관리(M,T,P)",UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_162,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,컨텐츠,운영,프로모션 배너 관리,UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_163,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,컨텐츠,운영,미니 배너 관리,UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_164,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,편성,운영,PC 배경이미지 관리,UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_165,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,편성,운영,"테마추천 관리(M,T,P)",UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_166,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,편성,운영,"개인화 지면 관리(M,T,P)",UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_167,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,개인화,운영,"추천검색어 관리(M,T,P)",UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_168,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,편성,운영,ON AIR 관리,UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_169,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,컨텐츠,운영,큐레이션 관리,UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_170,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,UFLIX 관리,검색어,운영,인기검색어 관리,UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_171,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,컨텐츠,운영,IMCS 콘텐츠 편성 현황,UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_172,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,편성,운영,추천 POC 관리,UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_173,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,컨텐츠,운영,배너 그룹 관리,UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_174,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,컨텐츠,운영,월정액 배너 리스트,UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_175,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,컨텐츠,운영,인기순위 조회,UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_176,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,설정,운영,단말정보,UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_177,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,약관,운영,이용동의정보 출력,UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_178,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,컨텐츠,운영,"배너형 이벤트 관리(M,P)",UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_179,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,UFLIX 관리,개인화,운영,별점 관리,UFLIX 관리,,,,,,,중,,,,,,,,,,영화월정액,
+,MIMS_ADMIN_180,,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,UFLIX 관리,알림,운영,(S) UFLIX 알림,UFLIX 관리,,,,,,,중,,,,외부연동,,,배치,,,영화월정액,
+,MIMS_ADMIN_181,,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,UFLIX 관리,검색어,운영,(S) UFLIX 인기검색어 수집,UFLIX 관리,,,,,,,중,,,,외부연동,,,배치,,,영화월정액,
+,MIMS_ADMIN_182,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,UFLIX 관리,컨텐츠,운영,(S) UFLIX 큐레이션 캐시 갱신,UFLIX 관리,,,,,,,중,,,내부연동,,,,배치,,,영화월정액,
+,MIMS_ADMIN_183,,MIMS,ADMIN_MOBILE,,4차,,4차,,관리페이지,모바일tv 관리자,화제동영상 관리,컨텐츠,운영,사이트 리스트,화제동영상 관리,,,,,,,중,,,,,,,,아이들나라,,"모바일tv,골프,아이들나라,아이돌Live,VR",
+,MIMS_ADMIN_184,,MIMS,ADMIN_MOBILE,,4차,,4차,,관리페이지,모바일tv 관리자,화제동영상 관리,컨텐츠,운영,컨텐츠 리스트,화제동영상 관리,,,,,,,상,,,,,,,,아이들나라,,"모바일tv,골프,아이들나라,아이돌Live,VR",
+,MIMS_ADMIN_185,,MIMS,ADMIN_MOBILE,,4차,,4차,,관리페이지,모바일tv 관리자,화제동영상 관리,컨텐츠,운영,조회수 통계,화제동영상 관리,,,,,,,중,,,,,,,,아이들나라,,"모바일tv,골프,아이들나라,아이돌Live,VR",
+,MIMS_ADMIN_186,,MIMS,ADMIN_MOBILE,,4차,,4차,,관리페이지,모바일tv 관리자,화제동영상 관리,컨텐츠,운영,필터링 사이트,화제동영상 관리,,,,,,,중,,,,,,,,아이들나라,,"모바일tv,골프,아이들나라,아이돌Live,VR",
+,MIMS_ADMIN_187,,MIMS,ADMIN_MOBILE,,4차,,5차,,관리페이지,모바일tv 관리자,화제동영상 관리,컨텐츠,운영,(S) 대박영상 메타파일 전송,화제동영상 관리,,,,,,,중,,,,외부연동,,,배치,아이들나라,,"모바일tv,골프,아이들나라,아이돌Live,VR",
+,MIMS_ADMIN_188,,MIMS,ADMIN_MOBILE,,4차,,4차,,관리페이지,모바일tv 관리자,품질/개인액션 수집 관리,컨텐츠,운영,품질/개인액션 수집관리,품질/개인액션 수집 관리,,,,,,,중,,,,,,,,아이들나라,,"모바일tv,골프,아이들나라,아이돌Live,VR",
+,MIMS_ADMIN_189,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,컨텐츠,운영,프로야구 신 배너,프로야구 관리,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_190,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,편성,운영,지면관리,프로야구 관리,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_191,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,공지,운영,프로야구 게시판 마스터,프로야구 관리,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_192,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,공지,운영,팝업 공지,프로야구 관리,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_193,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,공지,운영,게임 팝업 공지,프로야구 관리,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_194,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,공지,운영,이벤트 공지,프로야구 관리,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_195,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,컨텐츠,운영,배너형 이벤트,프로야구 관리,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_196,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,설정,운영,단말 정보,프로야구 관리,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_197,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,편성,운영,오늘의 경기 광고,프로야구 관리,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_198,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,편성,운영,이용권 안내 광고,프로야구 관리,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_199,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,편성,운영,프로야구 광고(구),프로야구 관리,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_200,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,설정,운영,Config 설정정보 리스트,프로야구 관리,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_201,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,편성,운영,메뉴카테고리 관리,프로야구 관리,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_202,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,편성,운영,스토리텔링 게시판 관리,프로야구 관리,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_203,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,편성,운영,스토리텔링 에디터 관리,프로야구 관리,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_204,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,공지,운영,긴급(비상) 메시지,프로야구 관리,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_205,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,공지,운영,긴급(비상) 룰관리,프로야구 관리,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_206,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,편성,운영,URL 링크,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_207,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,공지,운영,이벤트 리스트,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_208,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,공지,운영,특정 이벤트 상세,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_209,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,편성,운영,MIMS메뉴링크,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_210,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,편성,운영,카드뉴스 리스트,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_211,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,편성,운영,카드뉴스 컨텐츠,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_212,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,편성,운영,해외야구관,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_213,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,편성,운영,게임관,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_214,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,편성,운영,무반응타입,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_215,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,편성,운영,KBO경기,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_216,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,편성,운영,포지션별영상,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_217,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,편성,운영,특별중계,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_218,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,편성,운영,MLB경기,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_219,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,편성,운영,KBO채팅방,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_220,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,편성,운영,하이라이트 컨텐츠 1개,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_221,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,편성,운영,하이라이트 리스트 페이지,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_222,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,편성,운영,특별 VOD 리스트 페이지,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_223,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,편성,운영,5G홈밀착,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_224,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,프로야구 배너,편성,운영,경기장줌인,프로야구 배너,,,,,,,중,,,,,,,,,,프로야구,
+,MIMS_ADMIN_225,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,비디오투데이 관리,편성,운영,카테고리 관리,비디오투데이 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_226,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,비디오투데이 관리,편성,운영,H/L 완료 조회,비디오투데이 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_227,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,비디오투데이 관리,알림,운영,매핑 발송,비디오투데이 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_228,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,비디오투데이 관리,알림,운영,발송 설정,비디오투데이 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_229,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,결제 정보,결제,운영,결제 정보,결제 정보,,,,,,,중,,,,,,,,,,모바일,
+,MIMS_ADMIN_230,,MIMS,ADMIN_MOBILE,,4차,,4차,,관리페이지,모바일tv 관리자,Config 설정 정보,설정,운영,Config 설정마스터 관리,Config 설정 정보,,,,,,,중,,,,,,,,아이들나라,,"모바일tv,골프,아이들나라,프로야구,아이돌Live,게임방송,VR",
+,MIMS_ADMIN_231,,MIMS,ADMIN_MOBILE,,4차,,4차,,관리페이지,모바일tv 관리자,Config 설정 정보,설정,운영,Config 설정정보 리스트,Config 설정 정보,,,,,,,중,,,,,,,,아이들나라,,"모바일tv,골프,아이들나라,프로야구,아이돌Live,게임방송,VR",
+,MIMS_ADMIN_232,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,쿠폰 관리,쿠폰,운영,발급 쿠폰리스트,쿠폰 관리,,,,,,,중,,,,,,,,,,모바일,
+,MIMS_ADMIN_233,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,쿠폰 관리,쿠폰,운영,쿠폰 상품리스트,쿠폰 관리,,,,,,,중,,,,,,,,,,모바일,
+,MIMS_ADMIN_234,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,유튜브,편성,운영,카테고리,유튜브,,,,,,,중,,,,,,,,,,모바일,
+,MIMS_ADMIN_235,제외,MIMS,ADMIN_MOBILE,,5차,,,,관리페이지,모바일tv 관리자,Paynow,결제,운영,Paynow 결제 정보,Paynow,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_236,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,미디어커머스 관리,컨텐츠,운영,컨텐츠 목록,미디어커머스 관리,,,,,,,중,,,,,,,,,,모바일,
+,MIMS_ADMIN_237,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,관리자UI,설정,운영,IPTV Management System,관리자UI,,,,,,,중,,,,,,,,,,모바일,
+,MIMS_ADMIN_238,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,약관관리,약관,운영,약관 마스터 관리,약관관리,,,,,,,중,,,,,,,,,,모바일,
+,MIMS_ADMIN_239,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,약관관리,약관,운영,약관 항목 관리,약관관리,,,,,,,중,,,,,,,,,,모바일,
+,MIMS_ADMIN_354,추가,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,약관관리,약관,운영,모바일 정보동의 조회,약관관리,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_240,,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,구매내역,결제,운영,구매내역 리스트,구매내역,,,,,,,중,,,,,,,,,,모바일,
+,MIMS_ADMIN_241,,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,구매내역,결제,운영,(S) 예약구매 알림,구매내역,,,,,,,중,,,,외부연동,,,배치,,,모바일,
+,MIMS_ADMIN_242,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,구매내역,알림,운영,(S) 선물 SMS 발송,구매내역,,,,,,,중,,,,외부연동,,,배치,,,모바일,
+,MIMS_ADMIN_243,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,골프,공지,운영,골프 게시판 마스터,골프,,,,,,,중,,,,,,,,,,골프,
+,MIMS_ADMIN_244,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,골프,공지,운영,이벤트 공지,골프,,,,,,,중,,,,,,,,,,골프,
+,MIMS_ADMIN_245,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,골프,컨텐츠,운영,배너형 이벤트,골프,,,,,,,중,,,,,,,,,,골프,
+,MIMS_ADMIN_246,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,골프,검색어,운영,골프 추천검색어,골프,,,,,,,중,,,,,,,,,,골프,
+,MIMS_ADMIN_247,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,골프,공지,운영,긴급(비상) 메시지,골프,,,,,,,중,,,,,,,,,,골프,
+,MIMS_ADMIN_248,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,골프,공지,운영,긴급(비상) 룰관리,골프,,,,,,,중,,,,,,,,,,골프,
+,MIMS_ADMIN_249,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,골프,알림,운영,Push 관리,골프,,,,,,,중,,,내부연동,외부연동,,,,,,골프,
+,MIMS_ADMIN_250,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,골프,공지,운영,팝업공지,골프,,,,,,,중,,,,,,,,,,골프,
+,MIMS_ADMIN_251,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,골프,컨텐츠,운영,배너 마스터,골프,,,,,,,중,,,,,,,,,,골프,
+,MIMS_ADMIN_252,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,골프,컨텐츠,운영,배너 리스트,골프,,,,,,,중,,,,,,,,,,골프,
+,MIMS_ADMIN_253,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,골프,편성,운영,대회 상세관리,골프,,,,,,,상,,,내부연동,외부연동,,,,,,골프,
+,MIMS_ADMIN_254,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,골프,알림,운영,골프 알림,골프,,,,,,,중,,,,외부연동,,,배치,,,골프,
+,MIMS_ADMIN_255,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,뮤직공연 관리,알림,운영,Push 관리,뮤직공연 관리,,,,,,,중,,,내부연동,외부연동,,,,,,아이돌Live,
+,MIMS_ADMIN_256,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,뮤직공연 관리,컨텐츠,운영,배너 마스터,뮤직공연 관리,,,,,,,중,,,,,,,,,,아이돌Live,
+,MIMS_ADMIN_257,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,뮤직공연 관리,컨텐츠,운영,배너 리스트,뮤직공연 관리,,,,,,,중,,,,,,,,,,아이돌Live,
+,MIMS_ADMIN_258,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,뮤직공연 관리,공지,운영,뮤직공연 게시판 마스터,뮤직공연 관리,,,,,,,중,,,,,,,,,,아이돌Live,
+,MIMS_ADMIN_259,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,뮤직공연 관리,공지,운영,팝업 공지,뮤직공연 관리,,,,,,,중,,,,,,,,,,아이돌Live,
+,MIMS_ADMIN_260,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,뮤직공연 관리,설정,운영,단말정보,뮤직공연 관리,,,,,,,중,,,,,,,,,,아이돌Live,
+,MIMS_ADMIN_261,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,뮤직공연 관리,공지,운영,이벤트 공지,뮤직공연 관리,,,,,,,중,,,,,,,,,,아이돌Live,
+,MIMS_ADMIN_262,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,뮤직공연 관리,컨텐츠,운영,배너형 이벤트공지,뮤직공연 관리,,,,,,,중,,,,,,,,,,아이돌Live,
+,MIMS_ADMIN_263,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,뮤직공연 관리,알림,운영,타겟 푸시 관리,뮤직공연 관리,,,,,,,중,,,내부연동,외부연동,,,,,,아이돌Live,
+,MIMS_ADMIN_264,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,뮤직공연 관리,공지,운영,공유이벤트,뮤직공연 관리,,,,,,,중,,,,,,,,,,아이돌Live,
+,MIMS_ADMIN_265,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,뮤직공연 관리,공지,운영,긴급(비상) 메시지,뮤직공연 관리,,,,,,,중,,,,,,,,,,아이돌Live,
+,MIMS_ADMIN_266,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,뮤직공연 관리,공지,운영,긴급(비상) 룰관리,뮤직공연 관리,,,,,,,중,,,,,,,,,,아이돌Live,
+,MIMS_ADMIN_267,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,뮤직공연 관리,검색어,운영,인기 검색어 관리,뮤직공연 관리,,,,,,,중,,,,,,,,,,아이돌Live,
+,MIMS_ADMIN_268,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,뮤직공연 관리,컨텐츠,운영,화제동영상 컨텐츠,뮤직공연 관리,,,,,,,중,,,,,,,,,,아이돌Live,
+,MIMS_ADMIN_269,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,뮤직공연 관리,알림,운영,뮤직공연 알림,뮤직공연 관리,,,,,,,중,,,,외부연동,,,배치,,,모바일,
+,MIMS_ADMIN_270,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,뮤직공연 관리,알림,운영,뮤직공연 아티스트 구독 알림,뮤직공연 관리,,,,,,,중,,,,외부연동,,,배치,,,모바일,
+,MIMS_ADMIN_271,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,뮤직공연 관리,검색어,운영,뮤직공연 인기검색어 수집,뮤직공연 관리,,,,,,,중,,,,외부연동,,,배치,,,모바일,
+,MIMS_ADMIN_272,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,참여통계 관리,개인화,운영,(S) 참여통계 리스트,참여통계 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_273,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,비디오포털 홈화면 관리,편성,운영,(S) 비디오포털 영화홈,비디오포털 홈화면 관리,,,,,,,중,,,,,,,,,,모바일,
+,MIMS_ADMIN_274,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VR 관리,알림,운영,푸쉬 관리,VR 관리,,,,,,,중,,,내부연동,외부연동,,,,,,VR,
+,MIMS_ADMIN_275,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VR 관리,공지,운영,긴급(비상) 메시지,VR 관리,,,,,,,중,,,,,,,,,,VR,
+,MIMS_ADMIN_276,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,VR 관리,공지,운영,긴급(비상) 룰관리,VR 관리,,,,,,,중,,,,,,,,,,VR,
+,MIMS_ADMIN_277,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,VR 관리,결제,운영,구매내역 리스트,VR 관리,,,,,,,중,,,,,,,,,,VR,
+,MIMS_ADMIN_278,,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,VR 관리,알림,운영,(S) VR 알림,VR 관리,,,,,,,중,,,,외부연동,,,배치,,,VR,
+,MIMS_ADMIN_279,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,EmergecyMode,설정,운영,EmergencyMode 설정,EmergecyMode,,,,,,,중,,,,,,,,,,모바일,
+,MIMS_ADMIN_280,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,게임방송,공지,운영,게시판 마스터,게임방송,,,,,,,중,,,,,,,,,,게임방송,
+,MIMS_ADMIN_281,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,게임방송,공지,운영,이벤트 공지,게임방송,,,,,,,중,,,,,,,,,,게임방송,
+,MIMS_ADMIN_282,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,게임방송,컨텐츠,운영,배너형 이벤트,게임방송,,,,,,,중,,,,,,,,,,게임방송,
+,MIMS_ADMIN_283,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,게임방송,공지,운영,긴급(비상) 메시지,게임방송,,,,,,,중,,,,,,,,,,게임방송,
+,MIMS_ADMIN_284,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,게임방송,공지,운영,긴급(비상) 룰관리,게임방송,,,,,,,중,,,,,,,,,,게임방송,
+,MIMS_ADMIN_285,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,게임방송,컨텐츠,운영,배너 마스터,게임방송,,,,,,,중,,,,,,,,,,게임방송,
+,MIMS_ADMIN_286,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,게임방송,컨텐츠,운영,배너 리스트,게임방송,,,,,,,중,,,,,,,,,,게임방송,
+,MIMS_ADMIN_287,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,게임방송,알림,운영,Push 관리,게임방송,,,,,,,중,,,내부연동,외부연동,,,,,,게임방송,
+,MIMS_ADMIN_288,제외,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,게임방송,공지,운영,팝업공지,게임방송,,,,,,,중,,,,,,,,,,게임방송,
+,MIMS_ADMIN_289,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 관리자,게임방송,알림,운영,게임방송 알림,게임방송,,,,,,,중,,,,외부연동,,,배치,,,게임방송,
+,MIMS_ADMIN_290,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,서비스타입 관리,편성,운영,서비스타입 관리,서비스타입 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_291,,MIMS,ADMIN_MOBILE,,5차,,4차,,관리페이지,모바일tv 관리자,서비스타입 관리,편성,운영,기능별 상세 타입 관리,서비스타입 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_292,,MIMS,ADMIN_MOBILE,,4차,,5차,,관리페이지,모바일tv 관리자,모바일 아이들나라 관리,결제,운영,구매내역 리스트,모바일 아이들나라 관리,,,,,,,중,,,,,,,,아이들나라,,아이들나라,
+,MIMS_ADMIN_293,,MIMS,ADMIN_MOBILE,,4차,,4차,,관리페이지,모바일tv 관리자,모바일 아이들나라 관리,공지,운영,게시판마스터,모바일 아이들나라 관리,,,,,,,중,,,,,,,,아이들나라,,아이들나라,
+,MIMS_ADMIN_294,,MIMS,ADMIN_MOBILE,,4차,,4차,,관리페이지,모바일tv 관리자,모바일 아이들나라 관리,공지,운영,팝업공지,모바일 아이들나라 관리,,,,,,,중,,,,,,,,아이들나라,,아이들나라,
+,MIMS_ADMIN_295,,MIMS,ADMIN_MOBILE,,4차,,4차,,관리페이지,모바일tv 관리자,모바일 아이들나라 관리,공지,운영,이벤트 공지,모바일 아이들나라 관리,,,,,,,중,,,,,,,,아이들나라,,아이들나라,
+,MIMS_ADMIN_296,,MIMS,ADMIN_MOBILE,,4차,,4차,,관리페이지,모바일tv 관리자,모바일 아이들나라 관리,알림,운영,Push 관리,모바일 아이들나라 관리,,,,,,,중,,,내부연동,외부연동,,,,아이들나라,,아이들나라,
+,MIMS_ADMIN_357,추가,MIMS,ADMIN_MOBILE,,,,3차,2022-10-2차,관리페이지,모바일tv 관리자,모바일 아이들나라 관리,편성,운영,프로필이미지 마스터,모바일 아이들나라 관리,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_358,추가,MIMS,ADMIN_MOBILE,,,,3차,2022-10-2차,관리페이지,모바일tv 관리자,모바일 아이들나라 관리,편성,운영,프로필이미지 관리,모바일 아이들나라 관리,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_297,,MIMS,ADMIN_MOBILE,,5차,,3차,2022-10-2차,관리페이지,모바일tv 관리자,프로필이미지 관리,편성,운영,프로필이미지 마스터,프로필이미지 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_298,,MIMS,ADMIN_MOBILE,,5차,,3차,2022-10-2차,관리페이지,모바일tv 관리자,프로필이미지 관리,편성,운영,프로필이미지 관리,프로필이미지 관리,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_359,제외,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,고객 관리,,운영,가입자 그룹 관리,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_360,추가,MIMS,ADMIN_MOBILE,,,,3차,2022-10-2차,관리페이지,모바일tv 관리자,AB테스트 관리,편성,운영,AB테스트 목록 관리,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_361,추가,MIMS,ADMIN_MOBILE,,,,3차,2022-10-2차,관리페이지,모바일tv 관리자,AB테스트 관리,편성,운영,BPAS 편성 관리,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_362,추가,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,미디어 마케팅,,운영,메시지 템플릿 관리,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_366,추가,MIMS,ADMIN_MOBILE,,,,,,관리페이지,모바일tv 관리자,,,,(S) 뮤직공연 푸쉬연동,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_367,추가,MIMS,ADMIN_MOBILE,,,,,,관리페이지,모바일tv 관리자,,,,(S) (IPTV_뮤직공연) 인기검색어,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_368,추가,MIMS,ADMIN_MOBILE,,,,,,관리페이지,모바일tv 관리자,,,,(S) 골프 푸쉬연동,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_369,추가,MIMS,ADMIN_MOBILE,,,,,,관리페이지,모바일tv 관리자,,,,(S) 아이들나라 푸쉬연동,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_370,추가,MIMS,ADMIN_MOBILE,,,,,,관리페이지,모바일tv 관리자,,,,(S) 뮤직 아티스트 구독 push,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_371,추가,MIMS,ADMIN_MOBILE,,,,,,관리페이지,모바일tv 관리자,,,,(S) 골프 대회코드,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_372,추가,MIMS,ADMIN_MOBILE,,,,,,관리페이지,모바일tv 관리자,,,,(S) MMP 서버에 refresh notification,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_373,추가,MIMS,ADMIN_COUPON,1차,3차,,5차,,관리페이지,IPTV 쿠폰 관리자,로그인,Admin_관리,운영,로그인,관리자,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_299,,MIMS,ADMIN_COUPON,1차,3차,,5차,,관리페이지,IPTV 쿠폰 관리자,관리자,Admin_관리,운영,관리자 리스트,관리자,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_300,,MIMS,ADMIN_COUPON,1차,3차,,5차,,관리페이지,IPTV 쿠폰 관리자,쿠폰,쿠폰,운영,쿠폰 Enabler 관리,쿠폰,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_301,,MIMS,ADMIN_COUPON,1차,3차,,5차,,관리페이지,IPTV 쿠폰 관리자,쿠폰,쿠폰,운영,Offer 관리,쿠폰,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_302,,MIMS,ADMIN_COUPON,1차,3차,,5차,,관리페이지,IPTV 쿠폰 관리자,쿠폰,쿠폰,운영,쿠폰발급조건 관리,쿠폰,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_303,,MIMS,ADMIN_COUPON,1차,3차,,5차,,관리페이지,IPTV 쿠폰 관리자,쿠폰,쿠폰,운영,사용자별 쿠폰함,쿠폰,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_304,,MIMS,ADMIN_COUPON,1차,3차,,5차,,관리페이지,IPTV 쿠폰 관리자,쿠폰,쿠폰,운영,쿠폰발급요청 현황,쿠폰,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_305,,MIMS,ADMIN_COUPON,1차,3차,,5차,,관리페이지,IPTV 쿠폰 관리자,쿠폰,쿠폰,운영,선불권 쿠폰 메인 안내메세지 관리,쿠폰,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_306,,MIMS,ADMIN_COUPON,1차,3차,,5차,,관리페이지,IPTV 쿠폰 관리자,쿠폰,쿠폰,운영,선불권 쿠폰 하단 안내메세지 관리,쿠폰,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_307,,MIMS,ADMIN_COUPON,1차,3차,,5차,,관리페이지,IPTV 쿠폰 관리자,쿠폰,쿠폰,운영,선불권 쿠폰 리스트,쿠폰,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_308,,MIMS,ADMIN_COUPON,1차,3차,,5차,,관리페이지,IPTV 쿠폰 관리자,쿠폰,쿠폰,운영,(S) 쿠폰대량발급,쿠폰,,,,,,,중,,,,외부연동,,,배치,,,IPTV,
+,MIMS_ADMIN_309,,MIMS,ADMIN_COUPON,1차,3차,,5차,,관리페이지,IPTV 쿠폰 관리자,쿠폰,쿠폰,운영,(S) 쿠폰발급 재처리,쿠폰,,,,,,,중,,,,외부연동,,,배치,,,IPTV,
+,MIMS_ADMIN_310,제외,MIMS,ADMIN_COUPON,1차,3차,,5차,,관리페이지,IPTV 쿠폰 관리자,쿠폰,쿠폰,운영,(?) 쿠폰대량발급 재처리,쿠폰,,,,,,,중,,,,외부연동,,,배치,,,IPTV,
+,MIMS_ADMIN_311,,MIMS,ADMIN_COUPON,1차,3차,,5차,,관리페이지,IPTV 쿠폰 관리자,스탬프,쿠폰,운영,스탬프 리스트,스탬프,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_312,,MIMS,ADMIN_COUPON,1차,3차,,5차,,관리페이지,IPTV 쿠폰 관리자,스탬프,쿠폰,운영,사용자별 스탬프,스탬프,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_313,,MIMS,ADMIN_COUPON,1차,3차,,5차,,관리페이지,IPTV 쿠폰 관리자,스탬프,쿠폰,운영,스탬프발급요청 현황,스탬프,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_314,,MIMS,ADMIN_COUPON,1차,3차,,5차,,관리페이지,IPTV 쿠폰 관리자,스탬프,쿠폰,운영,스탬프 수동 발급 요청,스탬프,,,,,,,중,,,,,,,,,,IPTV,
+,MIMS_ADMIN_315,,MIMS,ADMIN_COUPON,1차,3차,,5차,,관리페이지,IPTV 쿠폰 관리자,스탬프,쿠폰,운영,(S) 스탬프발급 채저리,스탬프,,,,,,,중,,,,외부연동,,,배치,,,IPTV,
+,MIMS_ADMIN_335,추가,MIMS,ADMIN_COUPON,,,,5차,,관리페이지,IPTV 쿠폰 관리자,월정액 캠페인 관리,쿠폰,운영,캠페인 목록 (구),월정액,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_336,추가,MIMS,ADMIN_COUPON,,,,5차,,관리페이지,IPTV 쿠폰 관리자,월정액 캠페인 관리,쿠폰,운영,캠페인 목록 (신),월정액,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_337,추가,MIMS,ADMIN_COUPON,,,,5차,,관리페이지,IPTV 쿠폰 관리자,월정액 캠페인 관리,쿠폰,운영,월정액 오퍼 목록,월정액,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_374,추가,MIMS,ADMIN_COUPON,,,,,,관리페이지,IPTV 쿠폰 관리자,,,,(S) 캠페인 해지방어 혜택 처리,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_375,추가,MIMS,ADMIN_COUPON,,,,,,관리페이지,IPTV 쿠폰 관리자,,,,(S) 가입유도 처리,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_376,추가,MIMS,ADMIN_COUPON,,,,,,관리페이지,IPTV 쿠폰 관리자,,,,(S) 혜택취소 실패내역 처리,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_377,추가,MIMS,ADMIN_COUPON,,,,,,관리페이지,IPTV 쿠폰 관리자,,,,(S) 구매정보 가통계,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_316,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 쿠폰 관리자,관리자,Admin_관리,운영,관리자 리스트,관리자,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_317,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 쿠폰 관리자,쿠폰,쿠폰,운영,쿠폰 Enabler 관리,쿠폰,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_318,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 쿠폰 관리자,쿠폰,쿠폰,운영,Offer 관리,쿠폰,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_319,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 쿠폰 관리자,쿠폰,쿠폰,운영,쿠폰발급조건 관리,쿠폰,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_320,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 쿠폰 관리자,쿠폰,쿠폰,운영,사용자별 쿠폰함,쿠폰,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_321,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 쿠폰 관리자,쿠폰,쿠폰,운영,쿠폰발급요청 현황,쿠폰,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_322,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 쿠폰 관리자,쿠폰,쿠폰,운영,쿠폰대량발급,쿠폰,,,,,,,중,,,,외부연동,,,배치,,,모바일tv,
+,MIMS_ADMIN_323,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 쿠폰 관리자,쿠폰,쿠폰,운영,쿠폰발급 재처리,쿠폰,,,,,,,중,,,,외부연동,,,배치,,,모바일tv,
+,MIMS_ADMIN_324,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 쿠폰 관리자,쿠폰,쿠폰,운영,쿠폰대량발급 재처리,,,,,,,,중,,,,외부연동,,,배치,,,,
+,MIMS_ADMIN_325,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 쿠폰 관리자,스탬프,쿠폰,운영,스탬프 리스트,스탬프,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_326,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 쿠폰 관리자,스탬프,쿠폰,운영,사용자별 스탬프,스탬프,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_327,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 쿠폰 관리자,스탬프,쿠폰,운영,스탬프발급요청 현황,스탬프,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_328,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 쿠폰 관리자,스탬프,쿠폰,운영,스탬프 수동 발급 요청,스탬프,,,,,,,중,,,,,,,,,,모바일tv,
+,MIMS_ADMIN_329,제외,MIMS,ADMIN_MOBILE,,5차,,5차,,관리페이지,모바일tv 쿠폰 관리자,스탬프,쿠폰,운영,스탬프발급 채저리,관리자,,,,,,,중,,,,외부연동,,,배치,,,모바일tv,
+,MIMS_ADMIN_338,제외,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,,운영,긴급(비상)공지,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_339,제외,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,,운영,프로야구 배너01,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_340,제외,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,,운영,프로야구 배너02,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_341,제외,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,,운영,프로야구 배너03,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_342,제외,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,,운영,프로야구 배너04,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_343,제외,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,,운영,프로야구 배너05,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_344,제외,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,,운영,프로야구 배너06,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_345,제외,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,,운영,프로야구 배너07,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_346,제외,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,,운영,프로야구 배너08,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_347,제외,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,,운영,프로야구 배너09,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_348,제외,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,,운영,프로야구 배너10,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_349,제외,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,,운영,프로야구 배너11,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_350,제외,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,,운영,프로야구 배너12,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_351,제외,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,,운영,프로야구 배너13,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_352,제외,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,,운영,프로야구 배너14,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_353,제외,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,프로야구 관리,,운영,프로야구 배너15,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_355,제외,MIMS,ADMIN_MOBILE,,,,4차,,관리페이지,모바일tv 관리자,뮤직공연 관리,,운영,공지사항/FAQ,,,,,,,,,,,,,,,,,,,
+,MIMS_ADMIN_356,제외,MIMS,ADMIN_MOBILE,,,,5차,,관리페이지,모바일tv 관리자,뮤직공연 관리,,운영,구매내역 리스트,,,,,,,,,,,,,,,,,,,

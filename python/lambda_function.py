@@ -12,7 +12,7 @@ class Excel:
         self.file_name = event['Records'][0]['s3']['object']['key']
 
     def get_s3_object(self):
-        return boto3.client('s3').get_object(self.bucket_name, self.file_name)
+        return boto3.client('s3').get_object(Bucket=self.bucket_name, Key=self.file_name)
 
 
 def lambda_handler(event, _context):
