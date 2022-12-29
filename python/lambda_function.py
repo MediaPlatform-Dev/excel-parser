@@ -23,5 +23,4 @@ def lambda_handler(event, _context):
     print(excel.file_name)
 
     data = excel.get_s3_object()
-    df = pd.DataFrame(data)
-    print(df[:5, :])
+    print(type(data))
