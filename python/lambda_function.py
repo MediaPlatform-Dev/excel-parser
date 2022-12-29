@@ -23,4 +23,4 @@ def lambda_handler(event, _context):
     print(excel.file_name)
 
     data = excel.get_s3_object()
-    print(type(data))
+    print(len(list(data)))
