@@ -1,15 +1,15 @@
 module "iam_role" {
-  source = "./_module/iam/iam_role"
+  source = "./_module/iam/role"
 
   name = "iam-role-${var.function_name}"
   policy_arns = var.iam_policy
   tags = var.tags
 }
 
-#module "iam_policy_attachment" {
-#  source = "./_module/iam/iam_policy_attachment"
+#module "attachment" {
+#  source = "./_module/iam/attachment"
 #
-#  role_name = module.iam_role.name
+#  role_name = module.role.name
 #
 #  for_each    = var.iam_policy
 #  policy_name = each.key
@@ -17,7 +17,7 @@ module "iam_role" {
 #}
 
 module "s3" {
-  source  = "./_module/s3"
+  source  = "./_module/s3/bucket"
 
   bucket_name         = var.function_name
   lambda_function_arn = module.lambda.arn
@@ -26,7 +26,7 @@ module "s3" {
 }
 
 module "lambda" {
-  source  = "./_module/lambda"
+  source  = "./_module/lambda/function"
 
   function_name  = var.function_name
   iam_role_arn   = module.iam_role.arn
@@ -39,7 +39,7 @@ module "lambda" {
 }
 
 module "cloudwatch" {
-  source = "./_module/cloudwatch"
+  source = "./_module/cloudwatch/log_group"
 
   lambda_function_name = var.function_name
 
