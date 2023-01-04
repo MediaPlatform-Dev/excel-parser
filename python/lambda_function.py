@@ -24,7 +24,6 @@ LOGGER.setLevel(logging.INFO)
 class Data:
     bucket_name = ''
     file_name = ''
-    data = None
 
     def __init__(self, event):
         # s3에 저장된 excel 파일 읽기를 위한 필요 정보 추출
@@ -34,15 +33,22 @@ class Data:
         # 로컬에 저장된 excel 경로
         Data.file_name = event
 
+    def read_s3_object(bucket_name, file_name):
+        return boto3.client('s3').get_object(Bucket=bucket_name, Key=file_name)
+
 
 class CSV(Data):
+    data = None
+
     def __init__(self):
-        print(Data.file_name)
+        CSV.data = pd.read_csv(Data.file_name, header=None)
 
 
 class Excel(Data):
+    data = None
+
     def __init__(self):
-        print(Data.file_name)
+        Excel.data = pd.read_excel(Data.file_name, header=None, sheet_name=None)
 
 
 class DDD(CSV, Excel):
@@ -127,7 +133,19 @@ def parse_excel(data):
 
 
 def lambda_handler(event, _context):
-    data = Data(event)
+    obj = Data(event)
+
+    # 확장자가 csv인 경우
+    if obj['ContentType'] == 'text/csv':
+        data = pd.read_csv(obj['Body'])
+
+    # 확장자가 xls인 경우
+    elif obj['ContentType'] == 'application/vnd.ms-excel':
+        data = pd.read_excel(io.BytesIO(obj['Body'].read()))
+
+    # 확장자가 xlsx인 경우
+    elif obj['ContentType'] == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+        data = pd.read_excel(io.BytesIO(obj['Body'].read()))
 
     if '.csv' in data.file_name:
         f = CSV()
