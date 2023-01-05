@@ -25,7 +25,9 @@ with open('excel_format.json', 'r') as json_file:
     globals()['EXCEL_FORMAT'] = json.load(json_file)
 
 
-def parse_data(file_name, data):
+def parse_data(names, data):
+
+
     return data
 
 
@@ -81,16 +83,13 @@ def get_s3_object(bucket_name, file_name):
     return boto3.client('s3').get_object(Bucket=bucket_name, Key=file_name)
 
 
-def read_data(bucket_name, file_name):
+def read_data(bucket_name, file_name, extension):
     # obj 변수 초기화
     obj = None
 
     # s3에 저장된 excel 파일 읽기
     if bucket_name:
         obj = get_s3_object(bucket_name, file_name)
-
-    # 확장자 추출
-    extension, _ = extract_file_name(file_name)
 
     # 확장자가 csv인 경우
     if extension == 'csv':
@@ -127,14 +126,17 @@ def lambda_handler(event, _context):
     bucket_name = None
     file_name = event
 
+    # 확장자 및 시트 명 추출
+    extension, names = extract_file_name(file_name)
+
     # excel 파일 읽기
-    data = read_data(bucket_name, file_name)
+    data = read_data(bucket_name, file_name, extension)
 
     # excel 데이터 전처리
     data = preprocess_data(data)
 
     # excel 데이터 파싱
-    data = parse_data(file_name, data)
+    data = parse_data(names, data)
 
     #
     engine = create_engine(os.environ['DB_INFO'], echo=True).connect()
