@@ -7,7 +7,7 @@ import logging
 
 # DB Table 조회 후 class 생성
 os.system("sqlacodegen {} > tables.py".format(os.environ['DB_INFO']))
-import tables
+from tables import *
 
 # 서드파티 라이브러리 사용을 위한 경로 지정
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'packages'))
@@ -26,9 +26,22 @@ with open('excel_format.json', 'r') as json_file:
 
 
 def parse_data(names, data):
+    names = list(map(lambda x: '.'.join(x.split('.')[:-1]), names))
 
+    result = {}
+    if globals()['EXCEL_FORMAT'].get(names[0]):
+        excel_format = globals()['EXCEL_FORMAT'][names[0]]
 
-    return data
+        if names[1]:
+            excel_format = excel_format[names[1]]
+        else:
+            excel_format = list(excel_format.values())[0]
+
+        for k, v in excel_format.items():
+            if v != '':
+                result[v] = data.loc[:, data.iloc[0, :] == k]
+
+    return result
 
 
 def preprocess_data(data):
@@ -52,31 +65,6 @@ def preprocess_data(data):
             break
 
     return data
-
-
-def extract_file_name(file_name):
-    # 파일 명만 추출
-    file_name = file_name.split('/')[-1]
-
-    # 확장자 추출
-    extension = file_name.split('.')[-1]
-
-    # 시트 명 추출
-    split_name = file_name.split(' - ')
-    len_split_name = len(split_name)
-
-    if extension == 'csv' or 'xls' in extension:
-        if len_split_name == 1:
-            return extension, split_name + ['']
-
-        elif len_split_name == 2:
-            return extension, split_name
-
-        else:
-            return extension, [' - '.join(split_name[:-1]), split_name[-1]]
-
-    else:
-        return extension, [' - '.join(split_name), '']
 
 
 def get_s3_object(bucket_name, file_name):
@@ -117,6 +105,31 @@ def read_data(bucket_name, file_name, extension):
         return 0
 
 
+def extract_file_name(file_name):
+    # 파일 명만 추출
+    file_name = file_name.split('/')[-1]
+
+    # 확장자 추출
+    extension = file_name.split('.')[-1]
+
+    # 시트 명 추출
+    split_name = file_name.split(' - ')
+    len_split_name = len(split_name)
+
+    if extension == 'csv' or 'xls' in extension:
+        if len_split_name == 1:
+            return extension, split_name + ['']
+
+        elif len_split_name == 2:
+            return extension, split_name
+
+        else:
+            return extension, [' - '.join(split_name[:-1]), split_name[-1]]
+
+    else:
+        return extension, [' - '.join(split_name), '']
+
+
 def lambda_handler(event, _context):
     # s3에 저장된 excel 파일 위치 정보 추출
     # bucket_name = event['Records'][0]['s3']['bucket']['name']
@@ -141,12 +154,17 @@ def lambda_handler(event, _context):
     #
     engine = create_engine(os.environ['DB_INFO'], echo=True).connect()
 
-    #for i in range(3):
-    #    globals()['test{}'.format(i)] = tables.Api(api_num = i+4, api_name="test{}".format(i), service_num=i+1)
+    results = []
+    for k, v in data.items():
+        t_name, c_name = k.split('.')
+        results.append(globals()[t_name.capitalize()](api_name = n, service_num = i) for i, n in enumerate(v))
 
+    print(results)
     with Session(engine) as session:
-        api = session.query(tables.Api).filter_by(api_name="deleteList")
-        print(tables.Api.__dict__.keys())
+        session.bulk_save_objects(results[1:])
+    #    api = session.query(globals()[t_name.capitalize()]).all()
+    #    print(api)
+    #    print(Api.__dict__.keys())
 
         # deleteList = tables.Api(
         #     api_name = "deleteList",
@@ -155,7 +173,7 @@ def lambda_handler(event, _context):
 
     #    for i in range(3):
     #        session.saveorupdate(globals()['test{}'.format(i)], unique_key = "api_name")
-    #    session.commit()
+        session.commit()
 
     #
     engine.close()
