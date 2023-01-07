@@ -1,13 +1,13 @@
-import datetime
 import io
 import os
 import sys
+import json
 import boto3
 import logging
 
 # DB Table 조회 후 class 생성
 os.system("sqlacodegen {} > tables.py".format(os.environ['DB_INFO']))
-import tables
+from tables import *
 
 # 서드파티 라이브러리 사용을 위한 경로 지정
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'packages'))
@@ -20,89 +20,31 @@ from sqlalchemy.orm import Session
 LOGGER = logging.getLogger()
 LOGGER.setLevel(logging.INFO)
 
-
-class Data:
-    bucket_name = ''
-    file_name = ''
-
-    def __init__(self, event):
-        # s3에 저장된 excel 파일 읽기를 위한 필요 정보 추출
-        # Data.bucket_name = event['Records'][0]['s3']['bucket']['name']
-        # Data.file_name = event['Records'][0]['s3']['object']['key']
-
-        # 로컬에 저장된 excel 경로
-        Data.file_name = event
-
-    def read_s3_object(bucket_name, file_name):
-        return boto3.client('s3').get_object(Bucket=bucket_name, Key=file_name)
+# JSON 파일을 읽어서 전역 변수로 자동 생성
+with open('excel_format.json', 'r') as json_file:
+    globals()['EXCEL_FORMAT'] = json.load(json_file)
 
 
-class CSV(Data):
-    data = None
+def parse_data(names, data):
+    names = list(map(lambda x: '.'.join(x.split('.')[:-1]), names))
 
-    def __init__(self):
-        CSV.data = pd.read_csv(Data.file_name, header=None)
+    result = {}
+    if globals()['EXCEL_FORMAT'].get(names[0]):
+        excel_format = globals()['EXCEL_FORMAT'][names[0]]
+
+        if names[1]:
+            excel_format = excel_format[names[1]]
+        else:
+            excel_format = list(excel_format.values())[0]
+
+        for k, v in excel_format.items():
+            if v != '':
+                result[v] = data.loc[:, data.iloc[0, :] == k]
+
+    return result
 
 
-class Excel(Data):
-    data = None
-
-    def __init__(self):
-        Excel.data = pd.read_excel(Data.file_name, header=None, sheet_name=None)
-
-
-class DDD(CSV, Excel):
-    pass
-
-
-def read_s3_object(bucket_name, file_name):
-    #
-    obj = boto3.client('s3').get_object(Bucket=bucket_name, Key=file_name)
-
-    #
-    data = None
-
-    #
-    try:
-        # 확장자가 csv인 경우
-        if obj['ContentType'] == 'text/csv':
-            data = pd.read_csv(obj['Body'])
-
-        # 확장자가 xls인 경우
-        elif obj['ContentType'] == 'application/vnd.ms-excel':
-            data = pd.read_excel(io.BytesIO(obj['Body'].read()))
-
-        # 확장자가 xlsx인 경우
-        elif obj['ContentType'] == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-            data = pd.read_excel(io.BytesIO(obj['Body'].read()))
-
-    #
-    except Exception as e:
-        print(e)
-
-    return data
-
-def read_local_file(file_name):
-    #
-    data = None
-
-    #
-    try:
-        # 확장자가 csv인 경우
-        if '.csv' in file_name:
-            data = pd.read_csv(file_name, header=None)
-
-        # 확장자가 xls, xlsx인 경우
-        elif '.xls' in file_name:
-            data = pd.read_excel(file_name, header=None, sheet_name=None)
-
-    #
-    except Exception as e:
-        print(e)
-
-    return data
-
-def parse_excel(data):
+def preprocess_data(data):
     # 값 없는 컬럼 삭제
     for column in data.columns:
         # 컬럼 값이 모두 NaN인 경우 삭제
@@ -125,53 +67,104 @@ def parse_excel(data):
     return data
 
 
-# # JSON 파일을 읽어서 전역 변수로 자동 생성
-# for filename in os.listdir('json'):
-#     if filename.split('.')[0]:
-#         with open('json/{}'.format(filename), 'r') as json_file:
-#             globals()[filename.split('.')[0].upper()] = json.load(json_file)
+def get_s3_object(bucket_name, file_name):
+    return boto3.client('s3').get_object(Bucket=bucket_name, Key=file_name)
+
+
+def read_data(bucket_name, file_name, extension):
+    # obj 변수 초기화
+    obj = None
+
+    # s3에 저장된 excel 파일 읽기
+    if bucket_name:
+        obj = get_s3_object(bucket_name, file_name)
+
+    # 확장자가 csv인 경우
+    if extension == 'csv':
+        # s3에서 excel 파일 읽은 경우
+        if obj is not None:
+            return pd.read_csv(obj['Body'], header=None)
+
+        # 로컬에서 excel 파일 읽은 경우
+        else:
+            return pd.read_csv(file_name, header=None)
+
+    # 확장자가 xls 또는 xlsx인 경우
+    elif 'xls' in extension:
+        # s3에서 excel 파일 읽은 경우
+        if obj:
+            return pd.read_excel(io.BytesIO(obj['Body'].read()), header=None)
+
+        # 로컬에서 excel 파일 읽은 경우
+        else:
+            return pd.read_excel(file_name, header=None)
+
+    # 나머지 확장자의 경우
+    else:
+        print("This is NOT supported")
+        return 0
+
+
+def extract_file_name(file_name):
+    # 파일 명만 추출
+    file_name = file_name.split('/')[-1]
+
+    # 확장자 추출
+    extension = file_name.split('.')[-1]
+
+    # 시트 명 추출
+    split_name = file_name.split(' - ')
+    len_split_name = len(split_name)
+
+    if extension == 'csv' or 'xls' in extension:
+        if len_split_name == 1:
+            return extension, split_name + ['']
+
+        elif len_split_name == 2:
+            return extension, split_name
+
+        else:
+            return extension, [' - '.join(split_name[:-1]), split_name[-1]]
+
+    else:
+        return extension, [' - '.join(split_name), '']
 
 
 def lambda_handler(event, _context):
-    obj = Data(event)
+    # s3에 저장된 excel 파일 위치 정보 추출
+    # bucket_name = event['Records'][0]['s3']['bucket']['name']
+    # file_name = event['Records'][0]['s3']['object']['key']
 
-    # 확장자가 csv인 경우
-    if obj['ContentType'] == 'text/csv':
-        data = pd.read_csv(obj['Body'])
+    # 로컬에 저장된 excel 파일 경로
+    bucket_name = None
+    file_name = event
 
-    # 확장자가 xls인 경우
-    elif obj['ContentType'] == 'application/vnd.ms-excel':
-        data = pd.read_excel(io.BytesIO(obj['Body'].read()))
+    # 확장자 및 시트 명 추출
+    extension, names = extract_file_name(file_name)
 
-    # 확장자가 xlsx인 경우
-    elif obj['ContentType'] == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-        data = pd.read_excel(io.BytesIO(obj['Body'].read()))
+    # excel 파일 읽기
+    data = read_data(bucket_name, file_name, extension)
 
-    if '.csv' in data.file_name:
-        f = CSV()
-    elif '.xls' in data.file_name:
-        f = Excel()
+    # excel 데이터 전처리
+    data = preprocess_data(data)
 
-    print(f.file_name)
-
-
-    # s3에 저장된 excel 파일 읽기
-    #data = read_s3_object(bucket_name, file_name)
-    # 로컬에 저장된 excel 파일 읽기
-    data = read_local_file(f.file_name)
-
-    # excel 파일 파싱하기
-    data = parse_excel(data)
+    # excel 데이터 파싱
+    data = parse_data(names, data)
 
     #
     engine = create_engine(os.environ['DB_INFO'], echo=True).connect()
 
-    #for i in range(3):
-    #    globals()['test{}'.format(i)] = tables.Api(api_num = i+4, api_name="test{}".format(i), service_num=i+1)
+    results = []
+    for k, v in data.items():
+        t_name, c_name = k.split('.')
+        results.append(globals()[t_name.capitalize()](api_name = n, service_num = i) for i, n in enumerate(v))
 
+    print(results)
     with Session(engine) as session:
-        api = session.query(tables.Api).filter_by(api_name="deleteList")
-        print(tables.Api.__dict__.keys())
+        session.bulk_save_objects(results[1:])
+    #    api = session.query(globals()[t_name.capitalize()]).all()
+    #    print(api)
+    #    print(Api.__dict__.keys())
 
         # deleteList = tables.Api(
         #     api_name = "deleteList",
@@ -180,7 +173,7 @@ def lambda_handler(event, _context):
 
     #    for i in range(3):
     #        session.saveorupdate(globals()['test{}'.format(i)], unique_key = "api_name")
-    #    session.commit()
+        session.commit()
 
     #
     engine.close()
