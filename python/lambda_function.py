@@ -157,9 +157,8 @@ def lambda_handler(event, _context):
     results = []
     for k, v in data.items():
         t_name, c_name = k.split('.')
-        results.append(globals()[t_name.capitalize()](api_name = n, service_num = i) for i, n in enumerate(v))
+        results.append(globals()[t_name.capitalize()](api_name=n, service_num=i) for i, n in enumerate(v))
 
-    print(results)
     with Session(engine) as session:
         session.bulk_save_objects(results[1:])
     #    api = session.query(globals()[t_name.capitalize()]).all()
@@ -180,6 +179,7 @@ def lambda_handler(event, _context):
 
 
 if __name__ == '__main__':
-    event = ''
+    event = '/Users/mzc01-taehyun/k1m743hyun/excel-to-mysql/python/input/1. IPTV 미디어플랫폼 전환_DDD설계.xlsx - DDD설계 대상.csv'
+    #event = '/Users/mzc01-taehyun/k1m743hyun/excel-to-mysql/python/input/1. IPTV 미디어플랫폼 전환_DDD설계.xlsx'
     _context = ''
     lambda_handler(event, _context)
